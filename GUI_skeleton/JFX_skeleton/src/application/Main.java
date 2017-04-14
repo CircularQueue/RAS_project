@@ -14,7 +14,7 @@ public class Main extends Application {
 		// instatiate contoller as an object
 		SampleController sc = new SampleController();
 		// pass sc in as a scene parameter, since it extends borderpane
-		Scene scene = new Scene(sc, 400, 300);
+		Scene scene = new Scene(sc, 600, 500);
 		// set the scene, and display it
 		primaryStage.setScene(scene);
 		primaryStage.show();

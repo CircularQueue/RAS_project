@@ -13,7 +13,9 @@ import javafx.scene.text.TextFlow;
 // Note this is an extension of the container class BorderPane. The fxml must also have that as its root.
 public class SampleController extends BorderPane{
 
-	@FXML Button btn;
+	@FXML Button placeOrder;
+	@FXML Button viewOrder;
+	@FXML Button payOrder;
 	@FXML TextArea textDisplay;
 	
 	private int numClicks;

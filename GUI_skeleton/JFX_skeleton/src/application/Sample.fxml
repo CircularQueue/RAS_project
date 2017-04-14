@@ -6,14 +6,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-   <center>
-      <Pane prefHeight="300.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+<fx:root prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <Pane fx:id="back" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btn" layoutX="165.0" layoutY="182.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickButton" text="Click Me" />
-            <TextArea fx:id="textDisplay" layoutX="100.0" layoutY="41.0" prefHeight="122.0" prefWidth="200.0" />
+            <Button fx:id="placeOrder" layoutX="238.0" layoutY="250.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickButton" prefHeight="30.0" prefWidth="124.0" text="Place Order" />
+            <TextArea fx:id="textDisplay" layoutX="192.0" layoutY="64.0" prefHeight="57.0" prefWidth="216.0" text="Welcome Server ID#" />
+            <Button fx:id="updateOrder" layoutX="238.0" layoutY="304.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickButton" prefHeight="30.0" prefWidth="125.0" text="Update Order" />
+            <Button fx:id="payOrder" layoutX="239.0" layoutY="194.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickButton" prefHeight="32.0" prefWidth="122.0" text="Pay Order" />
          </children>
       </Pane>
-   </center>
+   </bottom>
 </fx:root>
