@@ -44,11 +44,11 @@ public class Manager extends Employee {
 			return new HashMap<Double, Double>();
 			
 		}
-		/*
-		 *  this method would allow the manager to find an employee either by their name or their employee id
-		 *  it will allow the manager to have access to more information on this person if is necessary.
-		 *  they will have access to the employees profile and information 
-		 */
+		/**
+		* --put description here (finds an employee’s information from the database)--
+		*@param name – The name of the employee to be found
+		*@return The Employee returned, so that their information can be displayed
+		*/
 	 public Employee findEmployeeInformation(string name);
-	 "return employee"
+	 "return null"
 }

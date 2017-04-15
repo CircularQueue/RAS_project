@@ -19,10 +19,10 @@ public class Employee {
 	private employeeID;
 	private employeeType;
 	private name;
-	private getAllTablesServed;
-	private getTablesCleaned;
-	private seatCustomers;
-	private getAllFoodReady;
+	public getAllTablesServed;
+	public getTablesCleaned;
+	public seatCustomers;
+	public getAllFoodReady;
 	private HashMap<String, Double[]> assignedHours;
 	private boolean workingNow;
 	
@@ -33,7 +33,9 @@ public class Employee {
 	 * this will allow access to the employees first and last name
 	 */
 	public Employee (String fname, String lname);
-		"return"
+	  public void setEmployee(String fname,lname){}
+	    public String getEmployee(){}
+	 
 	
 	
 	/**
@@ -42,16 +44,16 @@ public class Employee {
 	 * @param employeeid
 	 */
 	private getemployeeID(int employeeid);
-	"return employeeid";
-	public final void setemployeeid(int employeeid)
-	this.setemployeeid(employeeid); 
-	
+	  public void setEmployeeID(in employeeID){}
+	    public int getEmployeeID(){}
+	 
 	
 	/**
 	 * 
 	 */
 	private employeetype(String);
-	"returns employeetype";
+	public void setemployeetype(String employeetype){}
+    public String getemployeetype(){}
 	
 	/**
 	 * this method grabs the employees name and sets
@@ -59,49 +61,11 @@ public class Employee {
 	 * @param name
 	 */
 	private getname(String name);
-	"return";
-	public final viod setname(String name) 
+	public void setgetname(String getname){}
+    public String getname(){}
+	 
 	
-	/**
-	 * this has the server attend to all the table and layout their food after it has been cooked 
-	 * it also allows the server to take their orders and attend to all the cutomers needs when needed
-	 * the servers hands the food out to specific people
-	 * @param getAllTablesServed
-	 * 
-	 */
-	private getAllTablesServed;
-	"return service";
-		
-	/**
-	 * @param getTablesCleaned
-	 * the busboy cleans all the tables
-	 * the busboy has it set up for the next customer that is ready to be seated at the table
-	 *
-	 */
-	private getTablesCleaned;
-	"return"
-	Set<alltbalescleaned>
-	
-	/**
-	 * the hostess brings the customers to the empty table
-	 * the hostess then seat the customers at the table 
-	 * @param seatCustomer
-	 */
-	private seatCustomers;
-	"return seatCustomer"
-	/**
-	 * once the server takes the customers order 
-	 * they will then send the order back in to the kitchen for the cooks 
-	 * the cooks then will prepare the food for customers and alert the server when the food is ready
-	 * once the food is already the server then serves the food to the customer
-	 */
-	private getAllFoodReady;
-	"retun food"
-	/**
-	 * this allows the manager to assign the amount of hours to be worked by each employee 
-	 *they can be assigned a certain day with a certain amount of hours that they would be working for that day 
-	 *
-	 */
+
 	 private HashMap<String, Double[]> assignedHours;
 	"returns assignedhours";
 	 
@@ -109,9 +73,10 @@ public class Employee {
 	  * this method would allow the workers to know that they are working now on certain shifts
 	  *  it will also allow the managers to know which employees were assigned which shifts and 
 	  *  when they are suppose to be working 
+	  *  @param workingNow
 	  */
 	 private boolean workingNow;
-	 "returns workingnow";
+	 "returns null";
 	 	 
 	}
 	
