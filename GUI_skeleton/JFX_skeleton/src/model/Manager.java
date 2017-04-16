@@ -2,8 +2,8 @@ package model;
 
 import java.util.HashMap;
 /** 
- * A Child class of Employee
- * Contains some special functions reserved only for Managers
+ * A Child class of Employee.
+ * Contains some special functions regarding modifying other employees reserved only for Managers
  * @author Christina Sadhu.
 */
 

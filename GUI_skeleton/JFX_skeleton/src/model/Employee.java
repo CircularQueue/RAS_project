@@ -1,7 +1,7 @@
 package model;
 
 import java.util.HashMap;
-import java.util.Set;
+
 /**
  *  Base class for types of employees.
  * Contains employeeID, and the name of the employees first and last name 

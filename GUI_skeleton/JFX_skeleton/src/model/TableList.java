@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * 
- * @author Phillip Witkin
  * Contains all of the tables used. 
  * Serves as a container for the table layout in the restaurant
+ * @author Phillip Witkin
  */
 public class TableList {
 
-	HashMap<Integer, Table> tables;
+	/**
+	 * All tables in the restaurant observable layout
+	 */
+	private HashMap<Integer, Table> tableLayout;
+	/**
+	 * Any Tables combined together under a virtual tableID
+	 */
+	private HashMap<Integer, Table> tableCombinations;
 	
 	/**
 	 * Constructor
@@ -64,8 +70,33 @@ public class TableList {
 	public HashMap<Employee, Table[]> viewServerSections(){
 		return null;
 	}
-
 	
+	/**
+	 * This method Searches for a specific table from TableList, so that all of the details can be viewed, or the table updated
+	 * @param tableID The ID of the table to be retrieved
+	 * @return A Table with the matching tableID
+	 */
+	public Table searchTableDetails(int tableID){
+		return null;
+	}
+	
+	/**
+	 * This is used in order to modify seating. It links together many tables together through a virtual ID into one new table, with a combined number of seats for larger parties.
+	 * @param linkedTables An arrayList of tables which we want to combine together 
+	 * @return One Table aggregated from the  
+	 */
+	public Table combineTables(ArrayList<Table> linkedTables){
+		return null;
+	}
+
+	/**
+	 * This is used in order to modify seating. It splits up table linked together back into several smaller tables.
+	 * @param combinationTable The combined table that we want to split up
+	 * @return An ArrayList of individual tables 
+	 */
+	public ArrayList<Table> splitTable(Table combinationTable){
+		return null;
+	}
 	
 	
 }
