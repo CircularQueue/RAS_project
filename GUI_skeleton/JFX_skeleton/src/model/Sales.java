@@ -2,15 +2,16 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 
- * @author phillipwitkin
- * A container for a collection of checks
+ * A container for a collection of checks, which are paid orders
+ * @author phillip witkin
  */
 public class Sales {
 	
-	ArrayList<Check> checks;
+	ArrayList<Order> checks;
 	
 	/**
 	 * Constructor
@@ -25,7 +26,7 @@ public class Sales {
 	 * @param end The ending time
 	 * @return An arrayList of Checks which fall withina time period
 	 */
-	public ArrayList<Check> getSalesForTime(Date start, Date end){
+	public ArrayList<Order> getSalesForTime(Date start, Date end){
 		return null;
 	}
 	
@@ -34,7 +35,7 @@ public class Sales {
 	 * @param orderID The ID of the check to be modifies
 	 * @return The Check after it has been modified
 	 */
-	public Check modifyCheck(int orderID){
+	public Order modifyCheck(int orderID){
 		return null;
 	}
 	
@@ -43,7 +44,7 @@ public class Sales {
 	 * @param orderID The ID of the order for the check to be viewed
 	 * @return The check to be viewed
 	 */
-	public Check viewCheck(int orderID){
+	public HashMap<String, String> viewCheck(int orderID){
 		return null;
 	}
 	

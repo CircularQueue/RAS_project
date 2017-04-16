@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author phillipwitkin
+ * @author Phillip Witkin
  * Contains all of the tables used. 
  * Serves as a container for the table layout in the restaurant
  */

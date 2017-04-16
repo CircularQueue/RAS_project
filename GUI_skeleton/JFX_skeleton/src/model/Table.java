@@ -1,13 +1,24 @@
 package model;
-
-public class Table {
 /**
  * A single table in the restaurant
  */
-	
+public class Table {
+
+	/**
+	 *The ID associated with the table in the database 
+	 */
 	private int tableID;
-	private int serverSection;
+	/**
+	 * The employeeID of the server assigned to this table 
+	 */
+	private int employeeID;
+	/**
+	 * The maximum number of seats available at the table
+	 */
 	private int maxOccuppancy;
+	/**
+	 * The current status of the table (empty/seated/dirty,etc) 
+	 */
 	private String status;
 	
 	/**
@@ -20,16 +31,16 @@ public class Table {
 	}
 	
 	/**
-	 * Constructor
-	 * @param tableID The ID associated with the Table in the database
+	 * Constructor, to create a table with just the occupancy
+	 * @param occupany The maximum number of people that can be seated
 	 * Sets the tableID
 	 */
-	public Table(int tableID){
+	public Table(int occupancy){
 		
 	}
 	
 	/**
-	 * Constructor
+	 * Constructor, to create a table with both the ID and occupancy
 	 * @param tableID the ID associated with the Table in the database
 	 * @param occupancy the maximum number of people that can be seated at a table
 	 * Sets the tableID and maxOccupancy
@@ -37,6 +48,23 @@ public class Table {
 	public Table(int tableID, int occupancy){
 		
 	}
+	
+	/**
+	 * This sets the ID of the table object 
+	 * @param tableID The ID associated with a table entry in the database
+	 */
+	public void setTableID(int tableID){
+	}
+	
+	/**
+	 * This gets the ID associated with the table
+	 * @return The value of tableID
+	 */
+	public int getTableID(){
+		return this.tableID;
+	}
+	
+
 	
 	/**
 	 * Associate the table with the ID of an employee (server) whose section the table belongs
@@ -47,19 +75,20 @@ public class Table {
 	}
 	
 	/**
+	 * Gets the ID of the employee server whose section is in the table
+	 * @return The Employee ID responsible for serving this table
+	 */
+	public int getServerSection(){
+		return this.employeeID;
+	}
+	
+	
+	/**
 	 * Set the maximum number of seats the table can hold 
 	 * @param max The table's max seating
 	 */
 	public void setMaxOccupancy(int max){
 		
-	}
-	
-	/**
-	 * Gets the ID of the employee server whose section is in the table
-	 * @return The Employee ID responsible for serving this table
-	 */
-	public int getServerSection(){
-		return this.serverSection;
 	}
 	
 	/**
@@ -71,12 +100,10 @@ public class Table {
 	}
 	
 	/**
-	 * Gets the ID associated with the table
-	 * @return The tableID
+	 * This will update the status of the table, so that it can be properly utilized by the system 
+	 * @param newStatus The updated status of the table
 	 */
-	public int getTableID(){
-		return this.tableID;
-	}
+	public void updateTableStatus(String newStatus){}
 	
 	/**
 	 * Find status of the table
@@ -85,6 +112,8 @@ public class Table {
 	public String getStatus(){
 		return this.status;
 	}
+	
+	
 	
 	
 }
