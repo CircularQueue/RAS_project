@@ -7,6 +7,14 @@ import model.CommonJDBC;
 
 public class SalesJDBC extends BaseJDBC<Order> implements CommonJDBC<Order>{
 
+	/**
+	 * Constructor;
+	 * Establishes a database connection.
+	 */
+	public SalesJDBC(){
+		
+	}
+	
 	@Override
 	public Order finByID(int ID) {
 		// TODO Auto-generated method stub

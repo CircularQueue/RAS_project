@@ -32,7 +32,7 @@ public class Table {
 	
 	/**
 	 * Constructor, to create a table with just the occupancy
-	 * @param occupany The maximum number of people that can be seated
+	 * @param occupancy The maximum number of people that can be seated
 	 * Sets the tableID
 	 */
 	public Table(int occupancy){

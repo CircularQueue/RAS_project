@@ -8,6 +8,14 @@ import model.employee.Server;
 
 public class TableJDBC extends BaseJDBC<Table> implements CommonJDBC<Table>{
 
+	/**
+	 * Constructor;
+	 * Establishes a database connection.
+	 */
+	public TableJDBC(){
+		
+	}
+	
 	@Override
 	public Table finByID(int ID) {
 		// TODO Auto-generated method stub
@@ -38,10 +46,20 @@ public class TableJDBC extends BaseJDBC<Table> implements CommonJDBC<Table>{
 		return null;
 	}
 	
-	public Server finServerForTable(int tableID){
+	/**
+	 * Finds the Server whose employeeID matches the tableID; Identifies the Server section the table belongs to.
+	 * @param tableID The ID of the table to search for.
+	 * @return A Server object who has a section which includes the table; the Server's employeeID will match the table's employeeID. Returns null if no matching Server can be found.
+	 */
+	public Server findServerForTable(int tableID){
 		return null;
 	}
 	
+	/**
+	 * Finds all of the Tables in the section of a Server; any Table where the server's employeeID matches the Table.
+	 * @param serverID The employeeID of the Server whose section of tables we want to retrieve
+	 * @return All tables in the section of the Server with the given employeeID 
+	 */
 	public ArrayList<Table> findTablesForServer(int serverID){
 		return null;
 	}
