@@ -14,15 +14,22 @@ import model.table.Table;
  */
 public class EmployeeJDBC extends BaseJDBC<Employee> implements CommonJDBC<Employee>{
 
+	/**
+	 * Constructor; establishes database connection
+	 * 
+	 */
 	public EmployeeJDBC() {
 		
 	}
 	
 
-
+	/**
+	 * Finds an Employee by their employeeID
+	 * @param employeeID The ID of the employee to search for
+	 * @return An Employee object with matching ID from the database
+	 */
 	@Override
-	public Employee finByID(int ID) {
-		// TODO Auto-generated method stub
+	public Employee finByID(int employeeID) {
 		return null;
 	}
 

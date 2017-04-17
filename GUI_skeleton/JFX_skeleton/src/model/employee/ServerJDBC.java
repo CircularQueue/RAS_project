@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 import model.table.Table;
 
+/**
+ * Child of EmployeeJDBC; specialized JDBC methods for Manager
+ * @author Phillip Witkin
+ *
+ */
 public class ServerJDBC extends EmployeeJDBC {
 
 	public ServerJDBC() {
-		
+		// establish DB connection
 	}
 
 	

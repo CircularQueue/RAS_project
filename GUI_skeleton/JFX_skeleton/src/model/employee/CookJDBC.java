@@ -1,9 +1,14 @@
 package model.employee;
 
+/**
+ * Child of EmployeeJDBC; specialized JDBC methods for Cook
+ * @author Phillip Witkin
+ *
+ */
 public class CookJDBC extends EmployeeJDBC {
 
 	public CookJDBC() {
-		// TODO Auto-generated constructor stub
+		// establish DB connection
 	}
 
 }
