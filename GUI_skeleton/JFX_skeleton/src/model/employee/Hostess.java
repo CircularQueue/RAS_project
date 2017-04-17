@@ -1,4 +1,4 @@
-package model;
+package model.employee;
 
 /**
  * This class is a Child of Employee. 

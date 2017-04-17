@@ -1,4 +1,4 @@
-package model;
+package model.table;
 /**
  * A single table in the restaurant
  */

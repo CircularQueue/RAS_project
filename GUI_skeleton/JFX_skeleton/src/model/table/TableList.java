@@ -1,7 +1,9 @@
-package model;
+package model.table;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import model.employee.Employee;
 
 /**
  * Contains all of the tables used. 

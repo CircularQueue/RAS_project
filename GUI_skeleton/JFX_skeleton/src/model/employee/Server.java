@@ -1,6 +1,8 @@
-package model;
+package model.employee;
 
 import java.util.ArrayList;
+
+import model.table.Table;
 
 /**
  * A Child class of Employee representing a server. 

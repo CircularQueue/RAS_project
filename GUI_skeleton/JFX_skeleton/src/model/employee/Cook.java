@@ -1,4 +1,5 @@
-package model;
+package model.employee;
+
 /**
  * this class allows the cook to extend in to the employee 
  * it allows the the other employees to know when the food is ready 
