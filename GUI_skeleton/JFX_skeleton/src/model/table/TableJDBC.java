@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import model.BaseJDBC;
 import model.CommonJDBC;
 import model.employee.Server;
-
+/**
+ * This class contains the JDBC functionality for the Table and TableList class.
+ * It implements the CommonJDBC interface, with some additional methods specific for Tables
+ * @author Phillip Witkin
+ *
+ */
 public class TableJDBC extends BaseJDBC<Table> implements CommonJDBC<Table>{
 
 	/**

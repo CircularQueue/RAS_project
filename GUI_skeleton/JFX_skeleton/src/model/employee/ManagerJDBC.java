@@ -7,6 +7,9 @@ package model.employee;
  */
 public class ManagerJDBC extends EmployeeJDBC {
 
+	/**
+	 * Constructor; Establishes database connewction
+	 */
 	public ManagerJDBC() {
 		// establish DB connection
 	}
