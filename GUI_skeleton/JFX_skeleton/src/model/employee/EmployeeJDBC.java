@@ -14,6 +14,7 @@ import model.table.Table;
  */
 public class EmployeeJDBC extends BaseJDBC<Employee> implements CommonJDBC<Employee>{
 
+				
 	/**
 	 * Constructor; establishes database connection
 	 * 

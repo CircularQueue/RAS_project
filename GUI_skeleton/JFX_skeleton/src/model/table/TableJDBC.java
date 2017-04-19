@@ -1,6 +1,7 @@
 package model.table;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.BaseJDBC;
 import model.CommonJDBC;
@@ -66,6 +67,15 @@ public class TableJDBC extends BaseJDBC<Table> implements CommonJDBC<Table>{
 	 * @return All tables in the section of the Server with the given employeeID 
 	 */
 	public ArrayList<Table> findTablesForServer(int serverID){
+		return null;
+	}
+	
+	/**
+	 * Gets a complete breakdown of which tables belong to which server section. Each server has at least one table with their employeeID;
+	 * this method returns a map of all the servers, and for each server, a list of their tables.
+	 * @return A HashMap of Servers and ArrayLists of Tables associated with each Server.
+	 */
+	public HashMap<Server, ArrayList<Table> > getAllServerSections(){
 		return null;
 	}
 	

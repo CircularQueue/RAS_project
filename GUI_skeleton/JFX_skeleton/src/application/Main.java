@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// instatiate contoller as an object
-		SampleController sc = new SampleController();
+		SampleController sc = new SampleController(primaryStage);
 		// pass sc in as a scene parameter, since it extends borderpane
 		Scene scene = new Scene(sc, 400, 300);
 		// set the scene, and display it
