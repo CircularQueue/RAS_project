@@ -1,10 +1,10 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * 
  * @author Benjamin
  * Class Name: Menu
- * Description: This class adds, removes, search, and updates items to the menu and views the menu.
+ * DESCRIPTION: This class adds, removes, search, and updates items to the menu and views the menu.
  *
  */
 public class Menu {
@@ -12,23 +12,24 @@ public class Menu {
 	/**
 	 * This is used to store all of the MenuItems.
 	 */
-	private HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+	private ArrayList list;
 	
 	/**
 	 * This method will create a new MenuItem with the given name and price and add that to the Hashmap.
-	 * @param name Name to be added
-	 * @param price Price to be added
+	 * @param item The menu item that needs to be added
+	 * @return true if the item was added or false if the item was not added
 	 */
-	public void addItem(String name, int price){
+	
+	public boolean addItem(MenuItem item){
 		
 	}
 	
 	/**
 	 * This method will search the hashmap for the wanted MenuItem.
 	 * @param name The name of the item to be searched for
-	 * @return True if the item is found or false if the item is not found
+	 * @return the menu item that was searched for
 	 */
-	public boolean searchItem(String name){
+	public MenuItem searchItem(int id){
 		
 	}
 	
@@ -36,9 +37,9 @@ public class Menu {
 	 * This method will call on the search method to look for an item,
 	 * then if that item is found it will be removed from the hashmap with it's price.
 	 * @param name The name of the item to be removed
-	 * @return True if the item was removed or false if the item was not removed
+	 * @return the MenuItem that was removed
 	 */
-	public boolean removeItem(String name){
+	public MenuItem removeItem(int id){
 		
 	}
 	
@@ -46,17 +47,25 @@ public class Menu {
 	 * This method will call on the search method to look for an item,
 	 * then if that item is found it will change that item's name or price.
 	 * @param name The name of the item to be changed
-	 * @return True if the item was updated or false if it was unchanged
+	 * @return the menu item that was updated
 	 */
-	public boolean updateItem(String name){
+	public MenuItem updateItem(ind id){
 		
 	}
 	
 	/**
-	 * This method will return the entire hashmap
+	 * This method will return the entire ArrayList
 	 * @return The current menu status
 	 */
-	public String viewMenu(){
+	public ArrayList viewMenu(){
+		
+	}
+	
+	/**
+	 * This method will output everything as a string
+	 * @return a string of text
+	 */
+	public String toString(){
 		
 	}
 	
