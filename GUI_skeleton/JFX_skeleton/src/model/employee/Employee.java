@@ -3,7 +3,6 @@ package model.employee;
 import java.util.HashMap;
 
 /**
- *  Base class for types of employees.
  * Contains employeeID, and the name of the employees first and last name 
  * class name employee
  * description: this class would allow employees to input their id name how many hours they are assigned to what

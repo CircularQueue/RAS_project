@@ -6,7 +6,7 @@ import java.util.HashMap;
 import model.employee.Employee;
 
 /**
- * Contains all of the tables used. 
+ * This is collection class for Table, and contains all of the tables used. 
  * Serves as a container for the table layout in the restaurant
  * @author Phillip Witkin
  */
@@ -31,10 +31,11 @@ public class TableList {
 	
 	/**
 	 * Adds a table to the restaruant's layout
-	 * @param tbl The new table to be added
+	 * @param tbl The new table to be added. The tableID will only be determined after insertion into the database.
+	 * @return Returns the Table object added to the database; it will have an tableID consistent with the entry in the database
 	 */
-	public void addTable(Table tbl){
-		
+	public Table addTable(Table tbl){
+		return null;
 	}
 	
 	/**

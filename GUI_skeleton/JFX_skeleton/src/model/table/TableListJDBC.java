@@ -7,27 +7,27 @@ import java.util.HashMap;
 import model.employee.Employee;
 
 /**
- * This class contains the JDBC functionality for the Table and TableList class.
- * It implements the CommonJDBC interface, with some additional methods specific for Tables
+ * This class contains the JDBC functionality for the TableList class.
  * @author Phillip Witkin
  *
  */
-public class TableJDBC {
+public class TableListJDBC {
 
 	/**
 	 * Constructor;
 	 * Establishes a database connection.
 	 */
-	public TableJDBC(){
+	public TableListJDBC(){
 		
 	}
 	
 	/**
 	 * Adds a table to the restaruant's layout
-	 * @param tbl The new table to be added
+	 * @param tbl The new table to be added. The tableID will only be determined after insertion into the database.
+	 * @return Returns the Table object added to the database; it will have an tableID consistent with the entry in the database
 	 */
-	public void addTable(Table tbl){
-		
+	public Table addTable(Table tbl){
+		return null;
 	}
 	
 	/**

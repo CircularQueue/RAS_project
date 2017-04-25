@@ -22,9 +22,10 @@ public class EmployeeManagementJDBC {
 	/**
 	 * this method would basically allow the manager to add the employee in to the system. 
 	 * it will also allow the manager to create a profile with an employee id for this new worker
-	 * @param name The name of the new employee
+	 * @param name The name of the new employee; the employeeID will be determined upon database action.
+	 * @return The new employee, with an employeeID consistent with its corresponding database entry
 	 */
-	public void addemployee(String name){}
+	public Employee addemployee(String name){return null;}
 	
 	
 	 /** 
