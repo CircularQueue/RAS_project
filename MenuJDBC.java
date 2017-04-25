@@ -12,28 +12,24 @@ public class MenuJDBC {
 	private static String password = "password";
 	private Connection conn = null;
 	private Statement st = null;
-	private DBConnection db;
 	private MenuItem item;
+	private PreparedStatement pt;
 	
 	/**
 	 * This will find an id in the database
 	 * @param id the wanted id
-	 * @return the id if it was found
+	 * @return the item
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public String findID (int id) throws ClassNotFoundException, SQLException{
-		String query = "SELECT * FROM menuitem WHERE menu_id = " + id;
+	public MenuItem findItem (int id) throws ClassNotFoundException, SQLException{
+		String query = "SELECT * FROM menuitem WHERE item_id = " + id + ";";
 		try{
+			conn=getDBConnection();
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			while(rs.next()){
-				/*String item_name = rs.getString("item_name");
-				int item_price = rs.getInt("item_price");
-				String item_description = rs.getString("item_description");
-				int item_id = rs.getInt("item_id");
-				System.out.println("Found: name: " + item_name + ", price: " + item_price + ", description: " + item_description + ", id: " + item_id);*/
-				return item.toString(new MenuItem(rs.getString("item_name"), rs.getInt("item_price"), rs.getString("item_description"), rs.getInt("item_id")));
+				return new MenuItem(rs.getInt("item_id"), rs.getString("item_name"), rs.getInt("item_price"), rs.getString("item_description"));
 			}
 		}
 		catch(SQLException e){
@@ -49,18 +45,18 @@ public class MenuJDBC {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public int insertData(MenuItem item) throws ClassNotFoundException, SQLException{
-		String sql = "INSERT INTO menuitem" + "(item_name, item_price, item_description)" + " VALUES " + "(\'" + item.getName() + "\', " + item.getPrice() + ", \'" + item.getDescription() + "\', " + item.getID() + ");";
+	public MenuItem insertData(MenuItem item) throws ClassNotFoundException, SQLException{
+		String sql = "INSERT INTO menuitem" + "(item_id, item_name, item_price, item_description)" + " VALUES " + "(" + item.getID() + ", \'" + item.getName() + "\', " + item.getPrice() + ", \'" + item.getDescription() + "\');";
 		try{
 			conn = getDBConnection();
 			st = conn.createStatement();
-			int rs = st.executeUpdate(sql);
-			return item.getID();
+			st.executeUpdate(sql);
+			return item;
 		}
 		catch(SQLException e){
 			System.out.print(e.getStackTrace());
 		}
-		return 0;
+		return null;
 	}
 	
 	/**
@@ -70,18 +66,19 @@ public class MenuJDBC {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public int deleteData(MenuItem item)throws ClassNotFoundException, SQLException{
-		String sql = "DELETE FROM menuitem WHERE " + "(item_name, item_price, item_description, item_id) = " + "(\'" + item.getName() + "\', " + item.getPrice() + ", \'" + item.getDescription() + "\', " + item.getID() + ");";
+	public MenuItem deleteData(int id)throws ClassNotFoundException, SQLException{
+		String sql = "DELETE FROM menuitem WHERE item_id = " + id  + ";";
+		item = findItem(id);
 		try{
 			conn = getDBConnection();
 			st = conn.createStatement();
-			int rs = st.executeUpdate(sql);
-			return item.getID();
+			st.executeUpdate(sql);
+			return item;
 		}
 		catch(SQLException e){
 			System.out.print(e.getStackTrace());
 		}
-		return 0;
+		return null;
 	}
 	
 	/**
@@ -92,11 +89,16 @@ public class MenuJDBC {
 	 * @throws SQLException
 	 */
 	public MenuItem updateData(MenuItem item, int id)throws ClassNotFoundException, SQLException{
-		String sql = "UPDATE menuitem SET item_name = \'" + item.getName() + "\', item_price = " + item.getPrice() + ", item_decription = \'" + item.getDescription() + "\' WHERE item_id = " + id + ";";
+		String sql = "UPDATE menuitem SET item_id = ?, item_name = ?, item_price = ?, item_description = ? WHERE item_id = ?";
 		try{
 			conn = getDBConnection();
-			st = conn.createStatement();
-			int rs = st.executeUpdate(sql);
+			pt=conn.prepareStatement(sql);
+			pt.setInt(1, item.getID());
+			pt.setString(2, item.getName());
+			pt.setDouble(3, item.getPrice());
+			pt.setString(4, item.getDescription());
+			pt.setInt(5, id);
+			pt.executeUpdate();
 			return item;
 		}
 		catch(SQLException e){
@@ -112,7 +114,6 @@ public class MenuJDBC {
 	public Connection getDBConnection() throws ClassNotFoundException, SQLException{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		    System.out.println("Connecting to a selected database...");
 		    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/menudatabase","root","password");
 		    return conn;
 		} catch (ClassNotFoundException e) {

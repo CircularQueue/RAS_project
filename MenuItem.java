@@ -106,7 +106,7 @@ public class MenuItem {
 	}
 	
 	public String toString(){
-		String item = "Name = " + getName() + " Price = " + getPrice() + " Description = " + getDescription() + " Id = " + getID();
+		String item = " Id = " + getID() + " Name = " + getName() + " Price = " + getPrice() + " Description = " + getDescription();
 		return item;
 	}
 	
