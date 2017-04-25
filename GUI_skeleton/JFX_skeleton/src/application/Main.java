@@ -43,8 +43,7 @@ public class Main extends Application {
 	
 		try {
 		    conn =
-		       DriverManager.getConnection("jdbc:mysql://127.0.0.1/test?" +
-		                                   "user=root&password=");
+		       DriverManager.getConnection("jdbc:mysql://127.0.0.1:3310/dbma_assignment1?", "root", "root");
 
 		    // Do something with the Connection
 		    
@@ -61,7 +60,7 @@ public class Main extends Application {
 
 		try {
 		    stmt = conn.createStatement();
-		    rs = stmt.executeQuery("SELECT * FROM stuff");
+		    rs = stmt.executeQuery("SELECT * FROM Part");
 
 		    // or alternatively, if you don't know ahead of time that
 		    // the query will be a SELECT...
@@ -72,7 +71,7 @@ public class Main extends Application {
 
 		    // Now do something with the ResultSet ....
 		    while (rs.next()){
-		    	System.out.println("Title: " + rs.getString("Stuff_Title"));
+		    	System.out.println("Title: " + rs.getString("Part_Description"));
 		    }
 		    
 		}

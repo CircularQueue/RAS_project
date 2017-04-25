@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 /**
  * 
- * A container for a collection of checks, which are paid orders
+ * This class is a collection of checks, which are paid orders. It has methods which are specific only to paid orders.
  * @author phillip witkin
  */
 public class Sales {

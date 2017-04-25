@@ -3,16 +3,16 @@ package model.table;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.BaseJDBC;
-import model.CommonJDBC;
-import model.employee.Server;
+
+import model.employee.Employee;
+
 /**
  * This class contains the JDBC functionality for the Table and TableList class.
  * It implements the CommonJDBC interface, with some additional methods specific for Tables
  * @author Phillip Witkin
  *
  */
-public class TableJDBC extends BaseJDBC<Table> implements CommonJDBC<Table>{
+public class TableJDBC {
 
 	/**
 	 * Constructor;
@@ -22,60 +22,74 @@ public class TableJDBC extends BaseJDBC<Table> implements CommonJDBC<Table>{
 		
 	}
 	
-	@Override
-	public Table finByID(int ID) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Adds a table to the restaruant's layout
+	 * @param tbl The new table to be added
+	 */
+	public void addTable(Table tbl){
+		
 	}
-
-	@Override
-	public ArrayList<Table> findWhere(String SQLWhere) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Table update(Table updatedTable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Table create(Table newTable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Table deleteByID(int tabkeID) {
-		// TODO Auto-generated method stub
+	
+	/**
+	 * 
+	 * @param tableID The ID of the table to remove
+	 * @return The removed table
+	 */
+	public Table removeTable(int tableID){
 		return null;
 	}
 	
 	/**
-	 * Finds the Server whose employeeID matches the tableID; Identifies the Server section the table belongs to.
-	 * @param tableID The ID of the table to search for.
-	 * @return A Server object who has a section which includes the table; the Server's employeeID will match the table's employeeID. Returns null if no matching Server can be found.
+	 * Assigns a group of tables to specific employee
+	 * @param emp The employee that the tables are being assigned to
+	 * @param tables An arrayList of tables which belong to the employee 
 	 */
-	public Server findServerForTable(int tableID){
+	public void createServerSection(Employee emp, ArrayList<Table> tables){
+		
+	}
+	
+	/**
+	 * See all the tables in the section of a specific server
+	 * @param emp The employee whose tables we want to check
+	 * @return The Tables in the section of emp
+	 */
+	public ArrayList<Table> getTablesInSection(Employee emp){
 		return null;
 	}
 	
 	/**
-	 * Finds all of the Tables in the section of a Server; any Table where the server's employeeID matches the Table.
-	 * @param serverID The employeeID of the Server whose section of tables we want to retrieve
-	 * @return All tables in the section of the Server with the given employeeID 
+	 * View all of the server sections
+	 * @return A hashMap of employees and tables, with an Employee object as the key and a Table array as the value
+	 * 
 	 */
-	public ArrayList<Table> findTablesForServer(int serverID){
+	public HashMap<Employee, Table[]> viewServerSections(){
 		return null;
 	}
 	
 	/**
-	 * Gets a complete breakdown of which tables belong to which server section. Each server has at least one table with their employeeID;
-	 * this method returns a map of all the servers, and for each server, a list of their tables.
-	 * @return A HashMap of Servers and ArrayLists of Tables associated with each Server.
+	 * This method Searches for a specific table from TableList, so that all of the details can be viewed, or the table updated
+	 * @param tableID The ID of the table to be retrieved
+	 * @return A Table with the matching tableID
 	 */
-	public HashMap<Server, ArrayList<Table> > getAllServerSections(){
+	public Table searchTableDetails(int tableID){
+		return null;
+	}
+	
+	/**
+	 * This is used in order to modify seating. It links together many tables together through a virtual ID into one new table, with a combined number of seats for larger parties.
+	 * @param linkedTables An arrayList of tables which we want to combine together 
+	 * @return One Table aggregated from the  
+	 */
+	public Table combineTables(ArrayList<Table> linkedTables){
+		return null;
+	}
+
+	/**
+	 * This is used in order to modify seating. It splits up table linked together back into several smaller tables.
+	 * @param combinationTable The combined table that we want to split up
+	 * @return An ArrayList of individual tables 
+	 */
+	public ArrayList<Table> splitTable(Table combinationTable){
 		return null;
 	}
 	

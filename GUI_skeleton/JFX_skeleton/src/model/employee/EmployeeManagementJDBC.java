@@ -1,23 +1,24 @@
 package model.employee;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-/** 
- * A Child class of Employee.
- * Contains some special functions regarding modifying other employees reserved only for Managers
- * @author Christina Sadhu.
-*/
 
-public class Manager extends Employee {
+import model.table.Table;
+
+/**
+ * This class has JDBC database level implementations of all the methods in EmployeeManagement
+ * @author phillipwitkin
+ *
+ */
+public class EmployeeManagementJDBC {
+
 	/**
 	 * Constructor
-	 * Uses constructor of Parent class Employee
-	 * @param fname The first name of the employee 
-	 * @param lname The last name of the employee
 	 */
-	public Manager(String fname, String lname){
-		super(fname, lname);
+	public EmployeeManagementJDBC() {
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * this method would basically allow the manager to add the employee in to the system. 
 	 * it will also allow the manager to create a profile with an employee id for this new worker
@@ -49,7 +50,7 @@ public class Manager extends Employee {
 	  * this method retrieves all the time stat and time end hours for all employees 
 	  * it is a string where the employee name and double[] represents 
 	  *  two numbers when they start and when they finish
-	  * @return employees and hours worked 
+	  * @return employees and hours worked , as a hash map with a key String representing the day, and a Double array representing start and stop times
 	  * 
 	  */
 	 public HashMap<String, Double[]> getAllShifts()
@@ -82,4 +83,14 @@ public class Manager extends Employee {
 	 public Employee updateEmployee(Employee empData){
 		 return null;
 	 }
+	 
+		/**
+		* This method shows all of the tables that a server is responsible for attending.
+		* These are those tables where the table's employeeID is the same as the employee's ID
+		* @param serverID The ID of the server whose tables we want to see
+		*@return An ArrayList of all the tables in this server's section
+		*/
+		public ArrayList<Table> getAllTablesServed(int serverID){
+			return null;
+		}
 }
