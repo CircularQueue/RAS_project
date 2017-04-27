@@ -87,6 +87,24 @@ public abstract class Employee {
 	 */
 	public HashMap<String, Double[]> getAssignedHours(){return null;};
 	
+	/**
+	 * Adds a shift to the employee's assignedHours HashMap. Contains a day, start and stop time.
+	 * @param day The day of the added shift
+	 * @param startTime The shift start time
+	 * @param stopTime The shift stop time
+	 */
+	public void addShift(String day, Double startTime, Double stopTime){
+		
+	}
+	
+	/**
+	 * Removes a shift on a given day from the employee's assignedHours Hashmap.
+	 * @param day A string representing the day of the shift to remove; will be a key of the assignedHours HashMAp.
+	 * @return The removed shift; contains a single key-value pair: key as a String rep. of the day, and the Double[] value of start and stop times
+	 */
+	public HashMap<String, Double[]> removeShift(String day){
+		return null;
+	}
 	 
 	 /**
 	  * this method would allow the workers to know that they are working now on certain shifts

@@ -114,6 +114,16 @@ public class Table {
 	}
 	
 	
+	public String toString(){
+		String res = "";
+		res += "TableID: " + this.getTableID() + "\n";
+		res += "ServerSection employeeID: " + this.getServerSection() + "\n";
+		res += "MaxOccupancy: " + this.getMaxOccupancy() + "\n";
+		res += "Table Status: " + this.getStatus() + "\n";
+		
+		return res;
+	}
+	
 	
 	
 }

@@ -1,2 +1,4 @@
-/application/
 /model/
+/application/
+/GUI/
+/TableLayoutView.fxml

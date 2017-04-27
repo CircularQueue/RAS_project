@@ -2,6 +2,9 @@ package model.table;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import model.employee.Employee;
 
@@ -16,18 +19,39 @@ public class TableList {
 	 * All tables in the restaurant observable layout
 	 */
 	private HashMap<Integer, Table> tableLayout;
+
+	private HashMap<Integer, ArrayList<Table> > sections;
 	/**
 	 * Any Tables combined together under a virtual tableID
 	 */
 	private HashMap<Integer, Table> tableCombinations;
 	
+	TableListJDBC tableDB;
 	/**
 	 * Constructor
 	 * Retrieves all of the tables from the database
 	 */
 	public TableList(){
-		
+		this.tableDB = new TableListJDBC();
+		// retrieve tables from database
+		this.sections =  this.viewServerSections();
+		//Set<Map.Entry<Employee, Table[]>> sectionSet = sections.entrySet();
+		HashMap <Integer, Table> layout = new HashMap<>();
+		for ( Integer empID : sections.keySet() ){
+			ArrayList<Table> tables = sections.get(empID);
+			for (Table tbl : tables){
+				layout.put(tbl.getTableID(), tbl);
+			}
+			
+		}
+		this.tableLayout = layout;
 	}
+	
+	public HashMap<Integer, Table> getTableLayout(){
+		return this.tableLayout;
+	}
+	
+
 	
 	/**
 	 * Adds a table to the restaruant's layout
@@ -70,8 +94,8 @@ public class TableList {
 	 * @return A hashMap of employees and tables, with an Employee object as the key and a Table array as the value
 	 * 
 	 */
-	public HashMap<Employee, Table[]> viewServerSections(){
-		return null;
+	public HashMap<Integer, ArrayList<Table> > viewServerSections(){
+		return tableDB.viewServerSections();
 	}
 	
 	/**

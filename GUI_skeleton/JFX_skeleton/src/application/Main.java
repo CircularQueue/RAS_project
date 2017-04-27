@@ -3,16 +3,22 @@ package application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.table.Table;
+import model.table.TableList;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import com.mysql.jdbc.Statement;
+
 
 public class Main extends Application {
 	@Override
@@ -29,79 +35,92 @@ public class Main extends Application {
 	public static void main(String[] args) {
 //		launch(args);
 		
+		TableList tableList = new TableList();
 		
+		HashMap<Integer, Table> allTables = tableList.getTableLayout();
+		HashMap<Integer, ArrayList<Table> > sections = tableList.viewServerSections();
+		
+		System.out.println("Table Layout of all tables:");
+		for (Integer tableId : allTables.keySet()){
+			Table table = allTables.get(tableId);
+			System.out.println(table);
+		}
 		// jdbc config experiment
-		  try {
-	            // The newInstance() call is a work around for some
-	            // broken Java implementations
-
-	            Class.forName("com.mysql.jdbc.Driver").newInstance();
-	        } catch (Exception ex) {
-	            // handle the error
-	        }
-		Connection conn = null;
-	
-		try {
-		    conn =
-		       DriverManager.getConnection("jdbc:mysql://127.0.0.1:3310/dbma_assignment1?", "root", "root");
-
-		    // Do something with the Connection
-		    
-		   
-		} catch (SQLException ex) {
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		}
-		
-		java.sql.Statement stmt = null;
-		ResultSet rs = null;
-
-		try {
-		    stmt = conn.createStatement();
-		    rs = stmt.executeQuery("SELECT * FROM Part");
-
-		    // or alternatively, if you don't know ahead of time that
-		    // the query will be a SELECT...
-
-//		    if (stmt.execute("SELECT foo FROM bar")) {
-//		        rs = stmt.getResultSet();
+//		  try {
+//	            // The newInstance() call is a work around for some
+//	            // broken Java implementations
+//
+//	            Class.forName("com.mysql.jdbc.Driver").newInstance();
+//	        } catch (Exception ex) {
+//	            // handle the error
+//	        }
+//		Connection conn = null;
+//	
+//		try {
+//		    conn =
+//		       DriverManager.getConnection("jdbc:mysql://localhost/dbma_assignment1?", "root", "root");
+//
+//		    // Do something with the Connection
+//		    
+//		   
+//		} catch (SQLException ex) {
+//		    // handle any errors
+//		    System.out.println("SQLException: " + ex.getMessage());
+//		    System.out.println("SQLState: " + ex.getSQLState());
+//		    System.out.println("VendorError: " + ex.getErrorCode());
+//		}
+//		
+//		PreparedStatement stmtPrep = null;
+//		
+//		Statement stmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+////		    stmt = conn.createStatement();
+////			rs = stmt.executeQuery("SELECT * FROM Part");
+//			stmtPrep = conn.prepareStatement("SELECT * FROM Part");
+//			rs = stmtPrep.executeQuery();
+//
+//		    // or alternatively, if you don't know ahead of time that
+//		    // the query will be a SELECT...
+//
+////		    if (stmt.execute("SELECT foo FROM bar")) {
+////		        rs = stmt.getResultSet();
+////		    }
+//
+//		    // Now do something with the ResultSet ....
+//		    while (rs.next()){
+//		    	System.out.println("PartName: " + rs.getString("Part_Description"));
 //		    }
-
-		    // Now do something with the ResultSet ....
-		    while (rs.next()){
-		    	System.out.println("Title: " + rs.getString("Part_Description"));
-		    }
-		    
-		}
-		catch (SQLException ex){
-		    // handle any errors
-		    System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		}
-		finally {
-		    // it is a good idea to release
-		    // resources in a finally{} block
-		    // in reverse-order of their creation
-		    // if they are no-longer needed
-
-		    if (rs != null) {
-		        try {
-		            rs.close();
-		        } catch (SQLException sqlEx) { } // ignore
-
-		        rs = null;
-		    }
-
-		    if (stmt != null) {
-		        try {
-		            stmt.close();
-		        } catch (SQLException sqlEx) { } // ignore
-
-		        stmt = null;
-		    }
-		}
+//		    
+//		}
+//		catch (SQLException ex){
+//		    // handle any errors
+//		    System.out.println("SQLException: " + ex.getMessage());
+//		    System.out.println("SQLState: " + ex.getSQLState());
+//		    System.out.println("VendorError: " + ex.getErrorCode());
+//		}
+//		finally {
+//		    // it is a good idea to release
+//		    // resources in a finally{} block
+//		    // in reverse-order of their creation
+//		    // if they are no-longer needed
+//
+//		    if (rs != null) {
+//		        try {
+//		            rs.close();
+//		        } catch (SQLException sqlEx) { } // ignore
+//
+//		        rs = null;
+//		    }
+//
+//		    if (stmt != null) {
+//		        try {
+//		            stmt.close();
+//		        } catch (SQLException sqlEx) { } // ignore
+//
+//		        stmt = null;
+//		    }
+//		}
 	}
 }

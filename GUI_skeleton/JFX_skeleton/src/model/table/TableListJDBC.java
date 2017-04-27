@@ -3,7 +3,13 @@ package model.table;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import model.ConnectionJDBC;
 import model.employee.Employee;
 
 /**
@@ -13,12 +19,14 @@ import model.employee.Employee;
  */
 public class TableListJDBC {
 
+	   
+	   static Connection conn = null;
 	/**
 	 * Constructor;
 	 * Establishes a database connection.
 	 */
 	public TableListJDBC(){
-		
+		TableListJDBC.conn = ConnectionJDBC.getDB();
 	}
 	
 	/**
@@ -59,11 +67,67 @@ public class TableListJDBC {
 	
 	/**
 	 * View all of the server sections
-	 * @return A hashMap of employees and tables, with an Employee object as the key and a Table array as the value
+	 * @return A hashMap of employeeID's and tables, with an Employee object as the key and a Table array as the value
 	 * 
 	 */
-	public HashMap<Employee, Table[]> viewServerSections(){
-		return null;
+	public HashMap<Integer, ArrayList<Table> > viewServerSections(){
+		
+		HashMap<Integer, ArrayList<Table> > sections = new HashMap<>();
+		// map tableID to Table
+		HashMap<Integer, Table> allTables = new HashMap<>();
+		
+		PreparedStatement stmtPrep = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmtPrep = conn.prepareStatement("SELECT * FROM Tables");// INNER JOIN Employees WHERE Tables.tableID = Employees.employeeID");
+			rs = stmtPrep.executeQuery();
+			
+			ArrayList<Table> tblArr;
+		    while (rs.next()){
+		    	//System.out.println("PartName: " + rs.getString("Part_Description"));
+		    	String empID = rs.getString("employeeID");
+		    	String tableID = rs.getString("tableID");
+		    	String occupancy = rs.getString("max_occupancy");
+		    	String status = rs.getString("Table_status");
+		    	
+//		    	Table table = new Table(tableID, occupancy);
+		    	System.out.println("TableID: " + tableID + ", serverID: " + empID + ", occupancy: " + occupancy + ", stats: " + status);
+//				if (!sections.containsKey(empID)){
+//					tblArr = new ArrayList<>();
+//					tblArr.add(table);
+//					sections.put(empID,  tblArr );
+//				} else {
+//					tblArr = sections.get(empID);
+//					tblArr.add(table);
+//				}
+		    }
+		    
+		} catch (SQLException ex){
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+		
+//		ArrayList<Table> tblArr;
+//		
+//		for ( Table table : allTables.values() ){
+//			
+//			int empID = table.getServerSection();
+//			
+//			if (sections.containsKey(empID)){
+//				tblArr = new ArrayList<>();
+//				tblArr.add(table);
+//				sections.put(empID,  tblArr );
+//			} else {
+//				tblArr = sections.get(empID);
+//				tblArr.add(table);
+//			}
+//		}
+		
+		return sections;
 	}
 	
 	/**
@@ -92,9 +156,6 @@ public class TableListJDBC {
 	public ArrayList<Table> splitTable(Table combinationTable){
 		return null;
 	}
-	
-	
-	
 	
 
 }

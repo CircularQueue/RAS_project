@@ -3,6 +3,12 @@ package model.employee;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import model.ConnectionJDBC;
 import model.table.Table;
 
 /**
@@ -11,12 +17,14 @@ import model.table.Table;
  *
  */
 public class EmployeeManagementJDBC {
-
+	   
+	   static Connection conn = null;
+	
 	/**
 	 * Constructor
 	 */
 	public EmployeeManagementJDBC() {
-		// TODO Auto-generated constructor stub
+		EmployeeManagementJDBC.conn = ConnectionJDBC.getDB();
 	}
 
 	/**
@@ -94,4 +102,7 @@ public class EmployeeManagementJDBC {
 		public ArrayList<Table> getAllTablesServed(int serverID){
 			return null;
 		}
+		
+
+
 }
