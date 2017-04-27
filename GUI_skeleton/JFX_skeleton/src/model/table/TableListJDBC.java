@@ -87,21 +87,30 @@ public class TableListJDBC {
 			ArrayList<Table> tblArr;
 		    while (rs.next()){
 		    	//System.out.println("PartName: " + rs.getString("Part_Description"));
-		    	String empID = rs.getString("employeeID");
-		    	String tableID = rs.getString("tableID");
-		    	String occupancy = rs.getString("max_occupancy");
+		    	String empId = rs.getString("employeeID");
+		    	String tableId = rs.getString("tableID");
+		    	String max_oc = rs.getString("max_occupancy");
 		    	String status = rs.getString("Table_status");
 		    	
-//		    	Table table = new Table(tableID, occupancy);
-		    	System.out.println("TableID: " + tableID + ", serverID: " + empID + ", occupancy: " + occupancy + ", stats: " + status);
-//				if (!sections.containsKey(empID)){
-//					tblArr = new ArrayList<>();
-//					tblArr.add(table);
-//					sections.put(empID,  tblArr );
-//				} else {
-//					tblArr = sections.get(empID);
-//					tblArr.add(table);
-//				}
+		    	int empID = Integer.parseInt(empId);
+		    	int tableID = Integer.parseInt(tableId);
+		    	int occupancy = Integer.parseInt(max_oc);
+		    	
+		    	Table table = new Table(tableID, occupancy);
+		    	table.setServerSection(empID);
+		    	table.updateTableStatus(status);
+		    	
+				if (!sections.containsKey(empID)){
+					tblArr = new ArrayList<>();
+					tblArr.add(table);
+					sections.put(empID,  tblArr );
+				} else {
+					tblArr = sections.get(empID);
+					tblArr.add(table);
+				}
+				
+//				System.out.println(sections);
+//				System.out.println("TableID: " + tableID + ", serverID: " + empID + ", occupancy: " + occupancy + ", stats: " + status);
 		    }
 		    
 		} catch (SQLException ex){
@@ -111,21 +120,6 @@ public class TableListJDBC {
 		    System.out.println("VendorError: " + ex.getErrorCode());
 		}
 		
-//		ArrayList<Table> tblArr;
-//		
-//		for ( Table table : allTables.values() ){
-//			
-//			int empID = table.getServerSection();
-//			
-//			if (sections.containsKey(empID)){
-//				tblArr = new ArrayList<>();
-//				tblArr.add(table);
-//				sections.put(empID,  tblArr );
-//			} else {
-//				tblArr = sections.get(empID);
-//				tblArr.add(table);
-//			}
-//		}
 		
 		return sections;
 	}

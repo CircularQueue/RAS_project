@@ -46,7 +46,8 @@ public class Table {
 	 * Sets the tableID and maxOccupancy
 	 */
 	public Table(int tableID, int occupancy){
-		
+		this.tableID = tableID;
+		this.maxOccuppancy = occupancy;
 	}
 	
 	/**
@@ -54,6 +55,7 @@ public class Table {
 	 * @param tableID The ID associated with a table entry in the database
 	 */
 	public void setTableID(int tableID){
+		this.tableID = tableID;
 	}
 	
 	/**
@@ -71,7 +73,7 @@ public class Table {
 	 * @param serverID the ID of the server whose section includes this table
 	 */
 	public void setServerSection(int serverID){
-		
+		this.employeeID = serverID;
 	}
 	
 	/**
@@ -88,7 +90,7 @@ public class Table {
 	 * @param max The table's max seating
 	 */
 	public void setMaxOccupancy(int max){
-		
+		this.maxOccuppancy = max;
 	}
 	
 	/**
@@ -103,7 +105,9 @@ public class Table {
 	 * This will update the status of the table, so that it can be properly utilized by the system 
 	 * @param newStatus The updated status of the table
 	 */
-	public void updateTableStatus(String newStatus){}
+	public void updateTableStatus(String newStatus){
+		this.status = newStatus;
+	}
 	
 	/**
 	 * Find status of the table

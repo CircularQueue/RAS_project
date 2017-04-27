@@ -95,7 +95,9 @@ public class TableList {
 	 * 
 	 */
 	public HashMap<Integer, ArrayList<Table> > viewServerSections(){
-		return tableDB.viewServerSections();
+		HashMap<Integer, ArrayList<Table> > sectionsByEmp = tableDB.viewServerSections();
+		this.sections = sectionsByEmp;
+		return sections;
 	}
 	
 	/**

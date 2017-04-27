@@ -40,11 +40,20 @@ public class Main extends Application {
 		HashMap<Integer, Table> allTables = tableList.getTableLayout();
 		HashMap<Integer, ArrayList<Table> > sections = tableList.viewServerSections();
 		
-		System.out.println("Table Layout of all tables:");
-		for (Integer tableId : allTables.keySet()){
-			Table table = allTables.get(tableId);
-			System.out.println(table);
+//		System.out.println("Table Layout of all tables:");
+//		for (Integer tableId : allTables.keySet()){
+//			Table table = allTables.get(tableId);
+//			System.out.println(table);
+//		}
+		
+		System.out.println("Tables by section:");
+		for ( Integer serverID : sections.keySet() ){
+			System.out.println("Tables for employeeID: " + serverID);
+			for ( Table table : sections.get(serverID)){
+				System.out.println(table);
+			}
 		}
+		
 		// jdbc config experiment
 //		  try {
 //	            // The newInstance() call is a work around for some
