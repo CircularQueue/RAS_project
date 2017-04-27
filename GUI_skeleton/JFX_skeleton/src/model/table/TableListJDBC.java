@@ -87,14 +87,19 @@ public class TableListJDBC {
 			ArrayList<Table> tblArr;
 		    while (rs.next()){
 		    	//System.out.println("PartName: " + rs.getString("Part_Description"));
-		    	String empId = rs.getString("employeeID");
-		    	String tableId = rs.getString("tableID");
-		    	String max_oc = rs.getString("max_occupancy");
+//		    	String empId = rs.getString("employeeID");
+//		    	String tableId = rs.getString("tableID");
+//		    	String max_oc = rs.getString("max_occupancy");
 		    	String status = rs.getString("Table_status");
 		    	
-		    	int empID = Integer.parseInt(empId);
-		    	int tableID = Integer.parseInt(tableId);
-		    	int occupancy = Integer.parseInt(max_oc);
+		    	Integer empID = new Integer(rs.getInt("employeeID"));
+		    	Integer tableID =new Integer( rs.getInt("tableID") );
+		    	Integer occupancy = new Integer(rs.getInt("max_occupancy"));
+		    	
+		    	System.out.println("Found.... TableID: " + tableID + ", serverID: " + empID + ", occupancy: " + occupancy + ", stats: " + status);
+//		    	int empID = Integer.parseInt(empId);
+//		    	int tableID = Integer.parseInt(tableId);
+//		    	int occupancy = Integer.parseInt(max_oc);
 		    	
 		    	Table table = new Table(tableID, occupancy);
 		    	table.setServerSection(empID);

@@ -53,20 +53,20 @@ public class SampleController extends BorderPane{
 	@FXML protected void changeScene(ActionEvent ae){
 		
 		
-		if (!stage.getTitle().equals("My modal window")){
-			stage = new Stage();
+//		if (!stage.getTitle().equals("My modal window")){
+//			stage = new Stage();
 			SampleController cont2 = new SecondSceneController(this.stage);
 			Scene nextScene = new Scene(cont2);
 			
 			stage.setScene(nextScene);
-			stage.setTitle("My modal window");
-			stage.initModality(Modality.APPLICATION_MODAL);
-//			stage.initOwner(btnChange.getScene().getWindow());
-			stage.showAndWait();
-		} else {
-			stage.close();
-			this.stage.setTitle("Window1");
-		}
+//			stage.setTitle("My modal window");
+//			stage.initModality(Modality.APPLICATION_MODAL);
+
+//			stage.showAndWait();
+//		} else {
+//			stage.close();
+//			this.stage.setTitle("Window1");
+//		}
 		
 		 
 		

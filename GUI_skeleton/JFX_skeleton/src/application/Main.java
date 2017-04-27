@@ -18,41 +18,45 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import GUI.table.TableLayoutController;
+
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// instatiate contoller as an object
-		SampleController sc = new SampleController(primaryStage);
+//		TableLayoutController tlc = new TableLayoutController(primaryStage);
 		// pass sc in as a scene parameter, since it extends borderpane
-		Scene scene = new Scene(sc, 400, 300);
+//		Scene scene = new Scene(tlc, 600, 500);
+		SampleController sc = new SampleController(primaryStage);
+		Scene scene = new Scene(sc);
 		// set the scene, and display it
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 	
 	public static void main(String[] args) {
-//		launch(args);
+		launch(args);
 		
-		TableList tableList = new TableList();
-		
-		HashMap<Integer, Table> allTables = tableList.getTableLayout();
-		HashMap<Integer, ArrayList<Table> > sections = tableList.viewServerSections();
-		
+//		TableList tableList = new TableList();
+//		
+//		HashMap<Integer, Table> allTables = tableList.getTableLayout();
+//		HashMap<Integer, ArrayList<Table> > sections = tableList.viewServerSections();
+//		
 //		System.out.println("Table Layout of all tables:");
 //		for (Integer tableId : allTables.keySet()){
 //			Table table = allTables.get(tableId);
 //			System.out.println(table);
 //		}
-		
-		System.out.println("Tables by section:");
-		for ( Integer serverID : sections.keySet() ){
-			System.out.println("Tables for employeeID: " + serverID);
-			for ( Table table : sections.get(serverID)){
-				System.out.println(table);
-			}
-		}
+//		
+//		System.out.println("Tables by section:");
+//		for ( Integer serverID : sections.keySet() ){
+//			System.out.println("Tables for employeeID: " + serverID);
+//			for ( Table table : sections.get(serverID)){
+//				System.out.println(table);
+//			}
+//		}
 		
 		// jdbc config experiment
 //		  try {
