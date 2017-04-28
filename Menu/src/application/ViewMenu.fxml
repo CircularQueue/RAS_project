@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane prefHeight="587.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView layoutX="224.0" layoutY="-387.0" prefHeight="587.0" prefWidth="522.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="item_id" />
+                  <TableColumn prefWidth="120.0" text="item_name" />
+                  <TableColumn prefWidth="112.0" text="item_price" />
+                  <TableColumn prefWidth="214.0" text="item_description" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="47.0" layoutY="163.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="146.0" text="Remove Item" />
+            <Button layoutX="47.0" layoutY="63.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="146.0" text="Add item" />
+            <Button layoutX="47.0" layoutY="269.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="146.0" text="Update Item" />
+         </children>
+      </Pane>
+   </center>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

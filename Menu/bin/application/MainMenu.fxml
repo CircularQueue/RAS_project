@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane prefHeight="329.0" prefWidth="416.0" BorderPane.alignment="CENTER">
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btn4" layoutX="157.0" layoutY="25.0" mnemonicParsing="false" text="Update Item" />
+               </children>
+            </Pane>
+         </center>
+         <top>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="132.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Main">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="btn" layoutX="161.0" layoutY="78.0" mnemonicParsing="false" onAction="#changeScene" text="View Menu" />
+                  <Button fx:id="btn2" layoutX="167.0" layoutY="130.0" mnemonicParsing="false" text="Add Item" />
+                  <Button fx:id="btn3" layoutX="154.0" layoutY="178.0" mnemonicParsing="false" text="Remove Item" />
+               </children>
+            </Pane>
+         </top>
+      </BorderPane>
+   </center>
+</fx:root>
