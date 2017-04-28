@@ -26,11 +26,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// instatiate contoller as an object
-//		TableLayoutController tlc = new TableLayoutController(primaryStage);
+		TableLayoutController tlc = new TableLayoutController(primaryStage);
 		// pass sc in as a scene parameter, since it extends borderpane
-//		Scene scene = new Scene(tlc, 600, 500);
-		SampleController sc = new SampleController(primaryStage);
-		Scene scene = new Scene(sc);
+		Scene scene = new Scene(tlc, 600, 500);
+//		SampleController sc = new SampleController(primaryStage);
+//		Scene scene = new Scene(sc);
 		// set the scene, and display it
 		primaryStage.setScene(scene);
 		primaryStage.show();
