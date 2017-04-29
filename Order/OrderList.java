@@ -1,5 +1,6 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /** 
  * Order List
@@ -9,8 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class OrderList {
-	//private Order ord;
-	private OrderListJDBC ord;
+	public OrderListJDBC ord;
 	
 
 	/**
@@ -21,7 +21,6 @@ public class OrderList {
 		ord = new OrderListJDBC();
 	}
 	
-	
 	/**
 	 * 
 	 * Adds an order to the order list
@@ -30,24 +29,11 @@ public class OrderList {
 	 * @throws SQLException 
 	 */
 	public boolean placeOrder(Order o,OrderItems...args) throws SQLException{
-		ord.placeOrder(o, args);
-		return true;
+		boolean wasPlaced = ord.placeOrder(o, args);
+		if (wasPlaced) return true;
+		else return false;
 
 	}	
-		/*
-			for(int i = 0;i < args.length;i++){
-				try {
-				ord.placeOrder(o,args[i]);
-			}
-			catch (SQLException e) {
-				System.out.println("Error inserting multiple items");
-				e.printStackTrace();
-				return false;
-				}
-			}
-			return true;
-		}
-	*/
 
 	/**
 	 * Updates an existing order, already in the order list
@@ -66,19 +52,29 @@ public class OrderList {
 	 */
 	
 	public Order payOrder(int orderId){
-		
-	
 		/** This method takes the table id and change the table status to need cleaning; invoked within payOrder Method. 
 		 * 
 		 * @param table_id
 		 * @return true/false
 		 */
 		Table.clearTable(0);
-
-
 		return null;
 	}
 	
+	public void viewUncookedOrders(Order...args){
+		ord.viewUncookedOrders();
+	}
+	
+
+	public void getOrder(){
+		ord.getOrder();
+	}
+	/*
+	public boolean populateUncookedOrders(){
+		boolean isFull = ord.populateUncookedOrders();
+		if (isFull) return true; else return false;
+	}
+	*/
 	
 	/**
 	 * Calls the JDBC method to delete the order.

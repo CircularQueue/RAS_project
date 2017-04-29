@@ -15,5 +15,20 @@ public class OrderItems extends MenuItem {
 		return seatNumber;
 	}
 	
+	public int getOrderItemsId(){
+		return orderId;
+	}
+	
+	@Override public String toString(){
+		String s= "";
+		s += "Order Item Number " + getOrderItemsId() + 
+			 ", Seat Number " + getSeatNumber() + 
+			 ", Order Item ID" + getID() +  
+			 ", Item Name " + getName() +  
+			 ", Item Price" + getPrice() + 
+			 ", Item Description " + getDescription();
+		
+		return s;
+	}
 
 }

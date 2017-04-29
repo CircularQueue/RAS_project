@@ -12,10 +12,8 @@ public class Order {
 	private int orderId; //holds order Id -p.k
 	private int serverId; //holds server Id associated with the order.  -f.k
 	private int tableId; //holds table Id associated with the table. -f.k
-	private ArrayList<Items> items; //list of items in the order
 	private int orderStatus; //order status: 0 = un-cooked: 1 = cooked
 	private double orderTotal;
-	private int numItems;
 	
 	
 	/**
@@ -34,14 +32,7 @@ public class Order {
 		this.orderStatus = orderStatus;
 		this.orderTotal = orderTotal;
 	}
-	public Order(int orderId,int serverId,int tableId,int orderStatus, Double orderTotal,int numItems){
-		this.orderId = orderId;
-		this.serverId = serverId;
-		this.tableId = tableId;
-		this.orderStatus = orderStatus;
-		this.orderTotal = orderTotal;
-		this.numItems = numItems;
-	}
+	
 	
 	/**
 	 * Sets the Order ID.
@@ -93,18 +84,7 @@ public class Order {
 		return tableId;
 	}
 	
-	 
-	/**
-	 * 
-	 * @return The items in the Order
-	 */
-	public ArrayList<Items> getOrderItems() {
-			return items;
-	} 
-	
-	public int getItems(){
-		return numItems;
-	}
+
 	
 	/**
 	 * Sets the items of this order
@@ -149,9 +129,16 @@ public class Order {
   	}
 	
 	public String toString(){
-		String s="";
+		String s ="";
+		s += "Order id = " + getOrderId() + "\n" +
+			 "Server id = " + getServerIdInOrder() + "\n" + 
+			 "Table id = " + getTableIdinOrder() + "\n" +
+			 "Order status = " + getOrderStatus() + "\n" + 
+			 "Order Total = " + getOrderTotal() + "\n";
+		
 		return s;
-	}
+			 
+}
         
     
  }
