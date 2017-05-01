@@ -13,7 +13,7 @@ public class TableDetailController {
 	}
 
 	public void setTable(Table table){
-		
+		// takes in a table
 	}
 	
 	private void displayTableDetails(){
