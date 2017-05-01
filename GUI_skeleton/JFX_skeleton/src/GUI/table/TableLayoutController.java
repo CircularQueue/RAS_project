@@ -78,6 +78,8 @@ public class TableLayoutController extends BorderPane{
 	
 	public void viewTableDetails(int tableID){
 		System.out.println("Show detail for table " + tableID);
+		Table table = this.tableList.searchTableDetails(tableID);
+		
 	}
 
 }
