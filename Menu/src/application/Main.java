@@ -16,7 +16,7 @@ public class Main extends Application {
 		// instatiate contoller as an object
 		ViewController sc = new ViewController(primaryStage);
 		// pass sc in as a scene parameter, since it extends borderpane
-		Scene scene = new Scene(sc, 800, 600);
+		Scene scene = new Scene(sc, 1000, 600);
 		// set the scene, and display it
 		primaryStage.setScene(scene);
 		primaryStage.show();

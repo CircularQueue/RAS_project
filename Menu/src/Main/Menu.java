@@ -2,6 +2,8 @@ package Main;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import application.ViewController.MenuItemData;
+
 /**
  * 
  * @author Benjamin
@@ -11,13 +13,8 @@ import java.util.HashMap;
  */
 public class Menu {
 	
-	private MenuJDBC db = new MenuJDBC();
+	private MenuJDBC db;
 	private MenuItem item;
-	
-	/**
-	 * This is used to store all of the MenuItems.
-	 */
-	private HashMap<Integer, MenuItem> list = new HashMap<Integer, MenuItem>();
 	
 	/**
 	 * This method will create a new MenuItem with the given name and price and add that to the Hashmap.
@@ -27,10 +24,14 @@ public class Menu {
 	 * @throws ClassNotFoundException 
 	 */
 	
+	public Menu() throws ClassNotFoundException, SQLException{
+		db = new MenuJDBC();
+		item = new MenuItem();
+	}
+	
 	public boolean addItem(MenuItem item) throws ClassNotFoundException, SQLException{
 		try{
 			db.insertData(item);
-			list.put(item.getID(), item);
 			return true;
 		}
 		catch(SQLException e){
@@ -47,9 +48,7 @@ public class Menu {
 	 * @throws ClassNotFoundException 
 	 */
 	public MenuItem searchItem(int id) throws ClassNotFoundException, SQLException{
-		if(list.get(id)==null)
-			return db.findItem(id);
-		return list.get(id);
+		return db.getHash().get(id);
 	}
 	
 	/**
@@ -63,7 +62,6 @@ public class Menu {
 	public MenuItem removeItem(int id) throws ClassNotFoundException, SQLException{
 		try{
 			item = db.deleteData(id);
-			list.remove(id);
 			return item;
 		}
 		catch(SQLException e){
@@ -81,7 +79,6 @@ public class Menu {
 	 */
 	public MenuItem updateItem(MenuItem item, int id) throws ClassNotFoundException{
 		try{
-			list.replace(id, item);
 			return db.updateData(item, id);
 		}
 		catch(SQLException e){
@@ -96,7 +93,11 @@ public class Menu {
 	 */
 	@Override
 	public String toString(){
-		return list.toString();
+		String st = "";
+        for(Integer key : db.getHash().keySet()){
+        	st += db.getHash().get(key).toString() + "\n";
+        }
+        return st;
 	}
 	
 }

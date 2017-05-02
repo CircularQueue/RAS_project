@@ -2,9 +2,13 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Main.MenuItem;
+import Main.MenuJDBC;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,16 +16,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 //import 
 // Note this is an extension of the container class BorderPane. The fxml must also have that as its root.
 public class ViewController extends BorderPane implements Initializable{
@@ -36,6 +52,7 @@ public class ViewController extends BorderPane implements Initializable{
 	@FXML private Button btn;
 	@FXML TableView<MenuItemData> itemTable = new TableView<MenuItemData>();
 	private ObservableList<MenuItemData> data = FXCollections.observableArrayList();
+	private MenuJDBC db;
 	
 	public static class MenuItemData{
 		
@@ -55,7 +72,7 @@ public class ViewController extends BorderPane implements Initializable{
 				System.out.println("here name");
 				return this.name.get();
 			}    
-			public String getItem_ID(){
+			public String getItem_id(){
 				System.out.println("here id");
 				return this.item_id.get();
 			}
@@ -69,7 +86,7 @@ public class ViewController extends BorderPane implements Initializable{
 			}
 	}
 	
-	public ViewController(Stage stage){
+	public ViewController(Stage stage) throws ClassNotFoundException, SQLException{
 		this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewMenu2.fxml"));
         // make sure that FX root construct is checked in scene builder
@@ -88,28 +105,25 @@ public class ViewController extends BorderPane implements Initializable{
         initializeTable();
 	}
 	
-	public void initializeTable(){
-//		item_id = new TableColumn ("item_id");
-//		item_name = new TableColumn ("item_name");
-//		item_price = new TableColumn ("item_price");
-//		item_description = new TableColumn ("item_description");
-		MenuItem item = new MenuItem(001,"Pasta", 2.50, "Pasta food");
-		MenuItem item2 = new MenuItem(002,"Basta", 2.50, "Basta food");
-		MenuItemData iData = new MenuItemData(item);
-		MenuItemData iData2 = new MenuItemData(item2);
+	public void initializeTable() throws ClassNotFoundException, SQLException{
+		MenuItemData iData;
         item_name.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("name"));
         item_id.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("item_id"));
         item_price.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("price"));
         item_description.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("description"));
-        System.out.println(iData.item_id);
-        data.add(iData);
-        data.add(iData2);
+        db = new MenuJDBC();
+        HashMap<Integer, MenuItem> hm = new HashMap<>();
+        hm = db.populateMenu();
+        for(Integer key : hm.keySet()){
+        	iData = new MenuItemData(hm.get(key));
+        	data.add(iData);
+        }
         itemTable.setItems(data);
 	
 	}
 	
 	public void addItem(){
-		stage.initModality(Modality.APPLICATION_MODAL);
+		
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package Main;
 import java.sql.*;
+import java.util.HashMap;
 
 /**
  * Class Description: This class will add, remove, update, and search the database
@@ -16,8 +17,12 @@ public class MenuJDBC {
 	private MenuItem item;
 	private PreparedStatement pt;
 	private ResultSet rs;
-	private Menu menu;
+	private HashMap<Integer, MenuItem> list;
 	
+	public MenuJDBC() throws ClassNotFoundException, SQLException{
+		list = new HashMap<>();
+		populateMenu();
+	}
 	/**
 	 * This will find an id in the database
 	 * @param id the wanted id
@@ -54,6 +59,7 @@ public class MenuJDBC {
 			conn = getDBConnection();
 			st = conn.createStatement();
 			st.executeUpdate(sql);
+			list.put(item.getID(), item);
 			return item;
 		}
 		catch(SQLException e){
@@ -76,6 +82,7 @@ public class MenuJDBC {
 			conn = getDBConnection();
 			st = conn.createStatement();
 			st.executeUpdate(sql);
+			list.remove(id);
 			return item;
 		}
 		catch(SQLException e){
@@ -102,6 +109,7 @@ public class MenuJDBC {
 			pt.setString(4, item.getDescription());
 			pt.setInt(5, id);
 			pt.executeUpdate();
+			list.put(id, item);
 			return item;
 		}
 		catch(SQLException e){
@@ -125,10 +133,27 @@ public class MenuJDBC {
 		return conn;
 	}
 	
-	public void populateMenu() throws SQLException{
+	public HashMap<Integer, MenuItem> populateMenu() throws SQLException, ClassNotFoundException{
+		conn=getDBConnection();
+		pt = conn.prepareStatement("SELECT * FROM menuitem");
+		rs = pt.executeQuery();
 		while(rs.next()){
-			menu.list = 
+			Integer itemID = new Integer(rs.getInt("item_id"));
+			String itemName = new String(rs.getString("item_name"));
+			Double itemPrice = new Double(rs.getDouble("item_price"));
+			String itemDes = new String(rs.getString("item_description"));
+			list.put(itemID, new MenuItem(itemID, itemName, itemPrice, itemDes));
 		}
+		return list;
+	}
+	
+	public HashMap<Integer, MenuItem> getHash(){
+		return list;
+	}
+	
+	@Override
+	public String toString(){
+		return list.toString();
 	}
 	
 }
