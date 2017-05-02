@@ -1,1 +1,17 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#placeOrder,#updateOrder,#payOrder,#submitSearch,#serverHomepage {
+	-fx-text-fill: black;
+}
+
+#placeOrder:hover, #updateOrder:hover, #payOrder:hover, #serverHomePage:hover, #submitSearch:hover {
+	-fx-background-color:  grey ;
+}
+
+#back {
+    -fx-background-color:#f0f8ff;
+}
+
+#searchError {
+	-fx-text-fill: red;
+}
