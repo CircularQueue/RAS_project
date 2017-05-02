@@ -18,7 +18,7 @@ public class TableList {
 	/**
 	 * All tables in the restaurant observable layout
 	 */
-	private HashMap<Integer, Table> tableLayout;
+	protected HashMap<Integer, Table> tableLayout;
 
 	private HashMap<Integer, ArrayList<Table> > sections;
 	/**
@@ -45,6 +45,13 @@ public class TableList {
 			
 		}
 		this.tableLayout = layout;
+	}
+	
+	public Table changeTableStatus(int tableID, String status){
+		Table tbl = tableLayout.get(tableID);
+		tbl.updateTableStatus(status);
+//		this.tableDB.
+		return tbl;
 	}
 	
 	public HashMap<Integer, Table> getTableLayout(){

@@ -9,11 +9,11 @@ public class TableDetailController {
 	Table table;
 	
 	public TableDetailController(Stage stage) {
-		// TODO Auto-generated constructor stub
+		this.stage = stage;
 	}
 
 	public void setTable(Table table){
-		// takes in a table
+		
 	}
 	
 	private void displayTableDetails(){

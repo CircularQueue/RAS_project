@@ -93,7 +93,7 @@ public class TableListJDBC {
 		    	String status = rs.getString("Table_status");
 		    	
 		    	Integer empID = new Integer(rs.getInt("employeeID"));
-		    	Integer tableID =new Integer( rs.getInt("tableID") );
+		    	Integer tableID = new Integer( rs.getInt("tableID") );
 		    	Integer occupancy = new Integer(rs.getInt("max_occupancy"));
 		    	
 		    	System.out.println("Found.... TableID: " + tableID + ", serverID: " + empID + ", occupancy: " + occupancy + ", stats: " + status);
@@ -130,12 +130,97 @@ public class TableListJDBC {
 	}
 	
 	/**
+	 * Changes a table status to the given new status
+	 * @param tableID The ID of the table we want to update
+	 * @param status The new status of the table 
+	 * @return A copy of the updated table object
+	 */
+	public Table changeTableStatus(int tableID, String status){
+		Table updatedTable = null;
+		
+		PreparedStatement stmtPrep = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmtPrep = conn.prepareStatement("UPDATE Tables SET Table_status = ? WHERE tableID = ?");// INNER JOIN Employees WHERE Tables.tableID = Employees.employeeID");
+//			rs = stmtPrep.executeUpdate();
+			stmtPrep.setString(1, status);
+			stmtPrep.setInt(2, tableID);
+			// execute insert SQL stetement
+			stmtPrep.executeUpdate();
+			
+		} catch (SQLException ex){
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}	
+		
+		updatedTable = this.searchTableDetails(tableID);
+//		try {
+//			
+//			stmtPrep = conn.prepareStatement("SELECT * FROM Tables WHERE tableID = ?");
+//			rs = stmtPrep.executeQuery();
+//
+//			while (rs.next()){
+//				String statusUpdate = rs.getString("Table_status");
+//				Integer empID = new Integer(rs.getInt("employeeID"));
+////		    	Integer tableID = new Integer( rs.getInt("tableID") );
+//		    	Integer occupancy = new Integer(rs.getInt("max_occupancy"));
+//		    	
+//		    	updatedTable = new Table(tableID, occupancy);
+//		    	updatedTable.setServerSection(empID);
+//		    	updatedTable.updateTableStatus(statusUpdate);
+//			}
+//			
+//		} catch (SQLException ex){
+//		    // handle any errors
+//		    System.out.println("SQLException: " + ex.getMessage());
+//		    System.out.println("SQLState: " + ex.getSQLState());
+//		    System.out.println("VendorError: " + ex.getErrorCode());
+//		}	
+		
+		return updatedTable;
+		
+	}
+	
+	
+	/**
 	 * This method Searches for a specific table from TableList, so that all of the details can be viewed, or the table updated
 	 * @param tableID The ID of the table to be retrieved
 	 * @return A Table with the matching tableID
 	 */
 	public Table searchTableDetails(int tableID){
-		return null;
+		Table foundTable = null;
+		
+		PreparedStatement stmtPrep = null;
+		ResultSet rs = null;
+		try {
+			
+			stmtPrep = conn.prepareStatement("SELECT * FROM Tables WHERE tableID = ?");
+			rs = stmtPrep.executeQuery();
+
+			while (rs.next()){
+				String statusUpdate = rs.getString("Table_status");
+				Integer empID = new Integer(rs.getInt("employeeID"));
+//		    	Integer tableID = new Integer( rs.getInt("tableID") );
+		    	Integer occupancy = new Integer(rs.getInt("max_occupancy"));
+		    	
+		    	foundTable = new Table(tableID, occupancy);
+		    	foundTable.setServerSection(empID);
+		    	foundTable.updateTableStatus(statusUpdate);
+			}
+			
+		} catch (SQLException ex){
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}	
+		
+		return foundTable;
+		
 	}
 	
 	/**

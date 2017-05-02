@@ -24,6 +24,7 @@ public class TableLayoutController extends BorderPane{
 	
 	@FXML GridPane tableGrid;
 
+	TableDetailController tblDetail;
 	
 	public TableLayoutController(Stage stage) {
 		this.stage = stage;
@@ -44,6 +45,8 @@ public class TableLayoutController extends BorderPane{
 		
 		this.tableList = new TableList();
 		this.showTables();
+		
+		this.tblDetail = new TableDetailController(stage);
 
 	}
 	
