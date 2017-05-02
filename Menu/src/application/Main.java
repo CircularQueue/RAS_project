@@ -1,6 +1,8 @@
 package application;
 	
 
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -10,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
 		// instatiate contoller as an object
 		ViewController sc = new ViewController(primaryStage);
 		// pass sc in as a scene parameter, since it extends borderpane

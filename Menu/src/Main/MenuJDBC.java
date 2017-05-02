@@ -15,6 +15,8 @@ public class MenuJDBC {
 	private Statement st = null;
 	private MenuItem item;
 	private PreparedStatement pt;
+	private ResultSet rs;
+	private Menu menu;
 	
 	/**
 	 * This will find an id in the database
@@ -27,8 +29,8 @@ public class MenuJDBC {
 		String query = "SELECT * FROM menuitem WHERE item_id = " + id + ";";
 		try{
 			conn=getDBConnection();
-			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
+			st = conn.createStatement();
+			rs = st.executeQuery(query);
 			while(rs.next()){
 				return new MenuItem(rs.getInt("item_id"), rs.getString("item_name"), rs.getInt("item_price"), rs.getString("item_description"));
 			}
@@ -121,6 +123,12 @@ public class MenuJDBC {
 			e.printStackTrace();
 		}
 		return conn;
+	}
+	
+	public void populateMenu() throws SQLException{
+		while(rs.next()){
+			menu.list = 
+		}
 	}
 	
 }

@@ -94,6 +94,7 @@ public class Menu {
 	 * This method will output everything as a string
 	 * @return a string of text
 	 */
+	@Override
 	public String toString(){
 		return list.toString();
 	}

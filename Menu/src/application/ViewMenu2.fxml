@@ -11,10 +11,10 @@
          <children>
             <TableView fx:id="itemTable" layoutX="224.0" layoutY="-387.0" prefHeight="587.0" prefWidth="522.0">
                <columns>
-                  <TableColumn fx:id="item_id" prefWidth="75.0" text="item_id" />
-                  <TableColumn fx:id="item_name" prefWidth="120.0" text="item_name" />
+                  <TableColumn fx:id="item_id" prefWidth="91.0" text="item_id" />
+                  <TableColumn fx:id="item_name" prefWidth="104.0" text="item_name" />
                   <TableColumn fx:id="item_price" prefWidth="112.0" text="item_price" />
-                  <TableColumn prefWidth="214.0" text="item_description" />
+                  <TableColumn fx:id="item_description" prefWidth="214.0" text="item_description" />
                </columns>
             </TableView>
          </children>
@@ -23,7 +23,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="43.0" layoutY="51.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="151.0" text="Add item" />
+            <Button fx:id="btn" layoutX="43.0" layoutY="51.0" mnemonicParsing="false" onAction="#addItem" prefHeight="164.0" prefWidth="151.0" text="Add item" />
          </children>
       </Pane>
    </center>
