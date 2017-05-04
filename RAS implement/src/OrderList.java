@@ -113,11 +113,10 @@ public class OrderList {
 	public Order deleteOrder(int orderID)
 	{
 		Order ret = ord.deleteOrder(orderID);	
-		System.out.println("Deleted order is: ");
+		//System.out.println("Deleted order is: ");
 		return ret;
 		
 	}
-	
 	
 	/**
 	 * Displays the Order List

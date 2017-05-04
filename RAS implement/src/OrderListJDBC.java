@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
@@ -129,7 +130,9 @@ public class OrderListJDBC
 	 * @param orderId Takes in the order ID
 	 * @return Order Returns the newly updated order with a changed order status, or null if the order could not be updated.  
 	 */
-	
+	/*
+	 * 
+	 */
 	public Order payOrder(int orderId)
 	{
 		/** This method takes the table id and change the table status to need cleaning; invoked within payOrder Method. 
@@ -137,17 +140,43 @@ public class OrderListJDBC
 		 * @param table_id
 		 * @return true/false
 		 */
+		Order searchOrder = searchOrder(orderId);
+		if(searchOrder==null)
+		{
+			//System.out.println("Order not found");
+			return null;
+		}
+		else
+			
 		try
 		{
-			System.out.println("Inside payOrder Begining");
-		String update = "UPDATE orders set orderstatus=? where orderid =?";
+			
+			String getTotal = " select sum(item_price) from order_items where orderid =" + orderId;
+			PreparedStatement myStmt1 = conn.prepareStatement(getTotal);
+			ResultSet result = myStmt1.executeQuery();
+		     result.next();
+		     String sum = result.getString(1);
+		     //System.out.println("The Sum is = "+sum);
+		     DecimalFormat two = new DecimalFormat(".##");
+		     double temp = Double.parseDouble(sum);
+		     double sum1 = Math.round(temp*100);
+		     sum1= sum1/100;
+			
+			//System.out.println("Inside payOrder Begining");
+		String update = "UPDATE orders set orderstatus=?, ordertotal = ? where orderid =?";
 		PreparedStatement myStmt = conn.prepareStatement(update);
-		myStmt.setInt(1,-88);
-		myStmt.setInt(2,orderId);
+		myStmt.setInt(1,1);
+		myStmt.setDouble(2,sum1);
+		myStmt.setInt(3,orderId);
 		myStmt.executeUpdate();
+		
+		//order total generate.
+		/*
+		 * count total for order id on the itemPrice column. 
+		 */
 		Table.clearTable(0);
 		Table.clearTable(0);
-		System.out.println("in payorder in JDBC");
+		//System.out.println("in payorder in JDBC");
 		}
 		catch(Exception e)
 		{
@@ -166,26 +195,21 @@ public class OrderListJDBC
 	public Order deleteOrder(int orderID)
 	{
 		Order searchOrder = searchOrder(orderID);
-		if(searchOrder.getOrderId()==0)
+		if(searchOrder==null)
 		{
-			System.out.println("Order not found");
+			//System.out.println("Order not found");
 			return null;
 		}
 		else
 		{
+			deleteOrderItem(orderID);
 			try
 			{
 				System.out.print("Inside delete in JDBC");
 				String deleteOrders = "DELETE from orders where orderid = " +orderID;
 				PreparedStatement delete1 = conn.prepareStatement(deleteOrders); 
 				delete1.executeUpdate();
-				
-				// Delete from order_items as well. 
-				/*
-				String deleteOrderItems = "DELETE from orders where orderid = " +orderID;
-				PreparedStatement delete2 = conn.prepareStatement(deleteOrderItems); 
-				delete2.executeUpdate();
-				*/
+				// Delete from order_items as well. 	
 			}
 			catch(Exception e)
 			{
@@ -197,11 +221,38 @@ public class OrderListJDBC
 		
 	}
 	
+	public Order deleteOrderItem(int orderID)
+	{
+		Order searchOrder = searchOrder(orderID);
+		if(searchOrder==null)
+		{
+			//System.out.println("Order not found");
+			return null;
+		}
+		else
+			
+		try
+		{
+			String deleteOrderItems = "DELETE from order_items where orderid = " +orderID;
+			PreparedStatement delete2 = conn.prepareStatement(deleteOrderItems); 
+			delete2.executeUpdate();
+		}
+		catch(Exception e)
+		{
+	 		System.err.println(e);
+	 	}
+		return searchOrder;
+	}
+	
 	/**
 	 * 
 	 * Handles Database logic to search if an order exists.
 	 * @param orderId Search by order Id.
 	 * @return Returns the order that was found, or null of the order was not found.
+	 */
+	/*
+	 * Handle null order
+	 * 
 	 */
 	public Order searchOrder(int orderId)
 	{
@@ -209,7 +260,7 @@ public class OrderListJDBC
 		// search order then get the order attributes.
 		try
 		{
-			System.out.println("in search ordeer");
+			//System.out.println("in search ordeer");
 		String searchOrder = "Select orderid, serverid, tableid, orderstatus, ordertotal from Orders where orderid ="+orderId;
 		PreparedStatement myStmt = conn.prepareStatement(searchOrder);
 //		myStmt.setInt(1,orderId);
@@ -233,8 +284,15 @@ public class OrderListJDBC
 	 		
 	 	}
 
-		Order orderDetails = new Order (orderId1, serverId, tableId, orderStatus, orderTotal);
+		if(orderId1!=orderId)
+		{
+			return null; 
+		}
+		else
+		{
+			Order orderDetails = new Order (orderId1, serverId, tableId, orderStatus, orderTotal);
 		return orderDetails;
+		}
 		}
 	
 	/**

@@ -37,7 +37,8 @@ public class MenuItem {
 	/**
 	 * This is the default constructor if a name and price are not set
 	 */
-	public MenuItem(){
+	public MenuItem()
+	{
 		item_name = "null";
 		price = 0;
 		item_description = "null";

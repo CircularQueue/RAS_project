@@ -55,7 +55,8 @@ public class Order {
 	 * Gets the order Id.	
 	 * @return Returns the Order ID
 	 */
-	public int getOrderId(){
+	public int getOrderId()
+	{
 			return orderId;
 	}
 		    	
@@ -64,7 +65,8 @@ public class Order {
 	 * @param serverIdToChange Takes in an integer to change to Server ID associated with this order
 	 * @return Returns true if the value was successfully changed, false otherwise.
 	 */
-	public boolean setServerIdInOrder(int serverIdToChange){
+	public boolean setServerIdInOrder(int serverIdToChange)
+	{
 		return true;
 	}
 	
@@ -149,8 +151,19 @@ public class Order {
 	  		return orderTotal;
   	}
 	
-	public String toString(){
-		String s= "Order Id "+Integer.toString(orderId) + " Server ID: "+ Integer.toString(serverId) +" Table ID: "+ Integer.toString(tableId) + " Order Status: " + Integer.toString(orderStatus) + " Order Total: "+Double.toString(orderTotal);;
+	public String toString()
+	{
+		String orderstatus = Integer.toString(orderStatus);
+		int check = Integer.valueOf(orderStatus);
+		String orderStat="";
+		if(check==1)
+		{
+			orderStat=" Paid ";
+		}
+		else 
+			orderStat=" Not paid ";
+		
+		String s= "\nOrder Id "+Integer.toString(orderId) + " \nServer ID: "+ Integer.toString(serverId) +" \nTable ID: "+ Integer.toString(tableId) + "\nOrder Status:"+orderStat + " \nOrder Total: "+Double.toString(orderTotal);;
 		return s;
 	}
         
