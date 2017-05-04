@@ -113,7 +113,7 @@ public class TableList {
 	 * @return A Table with the matching tableID
 	 */
 	public Table searchTableDetails(int tableID){
-		return null;
+		return tableDB.searchTableDetails(tableID);
 	}
 	
 	/**

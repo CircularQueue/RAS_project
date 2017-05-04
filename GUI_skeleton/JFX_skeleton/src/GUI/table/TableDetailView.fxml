@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<fx:root prefHeight="346.0" prefWidth="376.0" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <center>
+      <TabPane prefHeight="350.0" prefWidth="321.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Table">
+            <content>
+              <AnchorPane fx:id="tableID" minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="358.0">
+                     <children>
+                        <TextArea fx:id="occupancy" layoutX="159.0" layoutY="94.0" prefHeight="35.0" prefWidth="135.0" />
+                        <TextArea fx:id="tableStatus" layoutX="138.0" layoutY="144.0" prefHeight="38.0" prefWidth="152.0" />
+                        <TextArea fx:id="employee" layoutX="109.0" layoutY="201.0" prefHeight="50.0" prefWidth="185.0" />
+                        <Text layoutX="34.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server" wrappingWidth="61.15447235107422">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="39.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table ID" wrappingWidth="79.68292617797852">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="33.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupancy" wrappingWidth="99.68292617797852">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="34.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="89.68292617797852">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="tableID" layoutX="161.0" layoutY="32.0" prefHeight="35.0" prefWidth="131.0" />
+                        <Button fx:id="backToLayoutBtn1" layoutX="36.0" layoutY="273.0" mnemonicParsing="false" onAction="#backToLayout" text="Return to Layout" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Order">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="backToLayoutBtn2" layoutX="28.0" layoutY="264.0" mnemonicParsing="false" onAction="#backToLayout" prefHeight="26.0" prefWidth="121.0" text="Return to Layout" />
+                        <TableView fx:id="orderItemTable" layoutY="34.0" prefHeight="222.0" prefWidth="371.0">
+                          <columns>
+                            <TableColumn fx:id="menuItemID" prefWidth="94.0" text="MenuItemID" />
+                            <TableColumn fx:id="orderItemDescription" prefWidth="137.0" text="Description" />
+                              <TableColumn fx:id="orderItemPrice" prefWidth="69.0" text="Price" />
+                              <TableColumn fx:id="orderItemSeat" prefWidth="69.0" text="Seat" />
+                          </columns>
+                        </TableView>
+                        <TextArea fx:id="orderID" layoutX="86.0" layoutY="-1.0" prefHeight="30.0" prefWidth="67.0" />
+                        <Text layoutX="15.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OrderID:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="173.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="orderStatus" layoutX="238.0" layoutY="-1.0" prefHeight="31.0" prefWidth="132.0" />
+                        <Button fx:id="placeOrder" layoutX="239.0" layoutY="264.0" mnemonicParsing="false" onAction="#backToLayout" prefHeight="26.0" prefWidth="121.0" text="Place Order" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</fx:root>

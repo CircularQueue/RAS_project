@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -44,7 +45,7 @@ public class TableLayoutController extends BorderPane{
         }
 		
 		this.tableList = new TableList();
-		this.showTables();
+		this.showTables();	
 		
 		this.tblDetail = new TableDetailController(stage);
 
@@ -82,7 +83,10 @@ public class TableLayoutController extends BorderPane{
 	public void viewTableDetails(int tableID){
 		System.out.println("Show detail for table " + tableID);
 		Table table = this.tableList.searchTableDetails(tableID);
+		this.tblDetail.setTable(table);
+		Scene nextScene = new Scene(this.tblDetail);
 		
+		stage.setScene(nextScene);
 	}
 
 }

@@ -40,6 +40,8 @@ public class Main extends Application {
 		launch(args);
 		
 //		TableList tableList = new TableList();
+//		System.out.println("Searching for table ID 20...");
+//		System.out.println(tableList.searchTableDetails(20));
 //		
 //		HashMap<Integer, Table> allTables = tableList.getTableLayout();
 //		HashMap<Integer, ArrayList<Table> > sections = tableList.viewServerSections();
