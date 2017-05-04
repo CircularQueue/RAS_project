@@ -71,6 +71,13 @@ public class ServerHomeController extends BorderPane{
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}
+	@FXML protected void changeSceneCookOrder(ActionEvent ae) throws IOException{
+		//instantiate controller here
+		CookOrderController cont = new CookOrderController(stage);
+		
+		Scene scen = new Scene(cont);
+		this.stage.setScene(scen);
+	}
 	@FXML protected void loadAbout(ActionEvent ae) throws IOException {
 		AboutController cont = new AboutController(stage);
 		Scene scen = new Scene(cont);

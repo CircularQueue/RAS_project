@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+
+
 /** 
  * Order List
  * This is the collection of orders.  The underlining data structure is an Array List.  It is a mirror class of the
@@ -67,26 +70,37 @@ public class OrderList {
 		ord.viewUncookedOrders();
 	}
 	
+	
 
 	public void getOrder(){
 		ord.getOrder();
 	}
-	
 	public HashMap<Integer, List<OrderItems>> getOrderItems(){
 		return ord.getOrderItems();
+		
 	}
-	
-	public int getOrderIdByTable(int n){
-		int num = ord.getOrderIdByTable(n);
-		return num;
+	/*
+	public boolean populateUncookedOrders(){
+		boolean isFull = ord.populateUncookedOrders();
+		if (isFull) return true; else return false;
 	}
+	*/
 	
 	/**
 	 * Calls the JDBC method to delete the order.
 	 * @param orderID The order of 
 	 * @return Order Returns the order if it was successfully deleted, otherwise null
 	 */
-	public Order cookOrder(int orderID){return null;}
+	public boolean changeOrderStatus(int orderID,int orderStatusToChange){
+	
+		return ord.changeOrderStatus(orderID,orderStatusToChange);
+		
+	}
+	
+	public int getOrderIdByTable(int n){
+		int num = ord.getOrderIdByTable(n);
+		return num;
+	}
 	
 	/**
 	 * Search if an order exists.
@@ -100,7 +114,9 @@ public class OrderList {
 	 * @param orderID The order id
 	 * @return Order Returns the order object if it was deleted, or null if the order was not found.
 	 */
-	public Order deleteOrder(int orderID){return null;}
+	public Order deleteOrder(int orderID){
+		return ord.deleteOrder(orderID);
+	}
 	
 	
 	/**

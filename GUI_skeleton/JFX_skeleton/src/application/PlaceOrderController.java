@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import order.Order;
+import order.OrderList;
 
 public class PlaceOrderController extends BorderPane {
 	Stage stage;
@@ -19,6 +22,13 @@ public class PlaceOrderController extends BorderPane {
 	@FXML Button payOrder;
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
+	@FXML Button getValue;
+	@FXML TextArea numSeats;
+	@FXML TextArea serverId;
+	@FXML TextArea tableId;
+	@FXML TextArea errorMessage;
+	
+	OrderList orderList = new OrderList();
 	
 	public PlaceOrderController(Stage stage) throws IOException {
 
@@ -40,6 +50,45 @@ public class PlaceOrderController extends BorderPane {
 	            throw new RuntimeException(exception);
 	        }
 		}
+	
+	@FXML protected void getValue(ActionEvent ae) throws IOException{
+		boolean isValidOrder = true;
+		int num = 0;
+		int id = 0;
+		int tableInt = 0;
+		int serverInt = 0;
+		String c = numSeats.getText();
+		String server = serverId.getText();
+		String table = tableId.getText();
+		try{
+			 num = Integer.parseInt(c); 
+			 serverInt = Integer.parseInt(server);
+			 tableInt = Integer.parseInt(table);
+		}
+		catch(Exception e){
+			isValidOrder = false;
+			numSeats.clear();
+			errorMessage.appendText("*Error");
+		}
+		
+		Order o = new Order(serverInt,tableInt);
+		try {
+			if (!isValidOrder){
+				errorMessage.clear();
+				errorMessage.appendText("Can't place order, all forms jmust be valid");
+			}
+			else{
+				orderList.placeOrder(o);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error Placing Order");
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(num + "," + server+"," + table );
+	
+	}
 	
 	@FXML protected void backToHome(ActionEvent ae) throws IOException{
 		//instantiate controller here

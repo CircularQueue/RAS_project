@@ -10,10 +10,11 @@
    <bottom>
       <Pane fx:id="back" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="placeOrder" layoutX="238.0" layoutY="250.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScenePlaceOrder" prefHeight="30.0" prefWidth="124.0" text="Place Order" />
-            <TextArea fx:id="textDisplay" layoutX="192.0" layoutY="64.0" prefHeight="57.0" prefWidth="216.0" text="Welcome Server ID#" />
-            <Button fx:id="updateOrder" layoutX="238.0" layoutY="304.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeSceneUpdateOrder" prefHeight="30.0" prefWidth="125.0" text="Update Order" />
-            <Button fx:id="payOrder" layoutX="239.0" layoutY="194.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScenePayOrder" prefHeight="32.0" prefWidth="122.0" text="Pay Order" />
+            <Button fx:id="placeOrder" layoutX="208.0" layoutY="244.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScenePlaceOrder" prefHeight="45.0" prefWidth="185.0" text="Place Order" />
+            <TextArea fx:id="textDisplay" layoutX="193.0" layoutY="61.0" prefHeight="57.0" prefWidth="216.0" text="Welcome Server ID#" />
+            <Button fx:id="updateOrder" layoutX="208.0" layoutY="310.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeSceneUpdateOrder" prefHeight="45.0" prefWidth="185.0" text="View Uncooked Orders" />
+            <Button fx:id="payOrder" layoutX="208.0" layoutY="179.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScenePayOrder" prefHeight="45.0" prefWidth="185.0" text="Pay Order" />
+            <Button fx:id="cookOrder" layoutX="208.0" layoutY="372.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeSceneCookOrder" prefHeight="45.0" prefWidth="185.0" text="Cook Order" />
          </children>
       </Pane>
    </bottom>

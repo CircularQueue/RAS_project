@@ -26,9 +26,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import order.Order;
 import order.OrderItems;
 
-public class UpdateOrderController extends BorderPane implements Initializable {
+public class ViewOrderController extends BorderPane implements Initializable {
 	Stage stage;
 	@FXML Button placeOrder;
 	@FXML Button viewOrder;
@@ -36,27 +37,27 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
 	@FXML ComboBox<Integer> orderChoice;
-	private order.Order ord;
 	private order.OrderList oi;
-	private ObservableList<PopulateTable> list = FXCollections.observableArrayList(); 
+	private ObservableList<ViewOrder> list = FXCollections.observableArrayList(); 
 	private HashMap<Integer, List<order.OrderItems>> orderItems111;
+	private HashMap<Integer, Order> ord;
 
-	@FXML TableView<PopulateTable> tableUser = new TableView<PopulateTable>();
-	@FXML TableColumn<PopulateTable, String> orderIdCell;
-	@FXML TableColumn<PopulateTable, String> seatNumberCell;
-	@FXML TableColumn<PopulateTable, String> itemIdCell;
-	@FXML TableColumn<PopulateTable, String> itemNameCell;
-	@FXML TableColumn<PopulateTable, String> itemPriceCell;
-	@FXML TableColumn<PopulateTable, String> itemDescriptionCell;
+
+	@FXML TableView<ViewOrder> tableUser = new TableView<ViewOrder>();
+	@FXML TableColumn<ViewOrder, String> orderIdCell;
+	@FXML TableColumn<ViewOrder, String> seatNumberCell;
+	@FXML TableColumn<ViewOrder, String> itemIdCell;
+	@FXML TableColumn<ViewOrder, String> itemNameCell;
+	@FXML TableColumn<ViewOrder, String> itemPriceCell;
 
 	
-	public UpdateOrderController(Stage stage) throws IOException {
+	public ViewOrderController(Stage stage) throws IOException {
 		oi = new order.OrderList(); //create a new order list
 		orderItems111 = oi.getOrderItems(); //put those items in a hashmap to iterate
 
 		this.stage = stage;
 		
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateOrder.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewOrderController.fxml"));
 		    // make sure that FX root construct is checked in scene builder
 
 		    
@@ -77,39 +78,39 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	
 	@FXML public void initialze(){
 		
+	/*	
 		
-		
-		orderIdCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("orderId"));
-		seatNumberCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("seatNumber"));
-		itemIdCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("itemId"));
-		itemNameCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("name"));
-		itemPriceCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("price"));
-		itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("desc"));
+		orderIdCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("orderId"));
+		seatNumberCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("seatNumber"));
+		itemIdCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("itemId"));
+		itemNameCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("name"));
+		itemPriceCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("price"));
 		
 		for(Entry<Integer, List<OrderItems>> key: orderItems111.entrySet()){
 			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
 			for(OrderItems num : key.getValue()){
-				OrderItems o = new OrderItems(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
-				list.add(new PopulateTable(o));
+				Order o = new Order(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
+				list.add(new ViewOrder(o));
 			}
 			
 		}
 		System.out.println("Setting Table");
 		tableUser.setItems(list);
 		tableUser.setEditable(true);
-		
+		*/
 	}
-	
+	/*
 	public ObservableList<PopulateTable> getObservableList(){
 		return list;
 	}
-	/*
+	
 	@FXML protected Integer submitOrder(ActionEvent ae) throws IOException{
 		int n = orderChoice.getValue();
-		//oi.searchOrder(orderId)
+		oi.searchOrder(orderId)
 		
 	}
 	*/
+	
 	@FXML protected void backToHome(ActionEvent ae) throws IOException{
 		//instantiate controller here
 		ServerHomeController cont = new ServerHomeController(stage);
@@ -140,24 +141,22 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		
 	}
 	
-	public static class PopulateTable{
+	public static class ViewOrder{
 		
 		final SimpleStringProperty orderId; //error from not naming getters correctly
-		final SimpleStringProperty seatNumber;
-		final SimpleStringProperty menuItemId;
-		final SimpleStringProperty name;
-		final SimpleStringProperty price;
-		final SimpleStringProperty desc;
+		final SimpleStringProperty serverId;
+		final SimpleStringProperty tableId;
+		final SimpleStringProperty orderStatus;
+		final SimpleStringProperty orderTotal;
 		
-		public PopulateTable(order.OrderItems item) {
+		public ViewOrder(Order o) {
 			//String s = Integer.toString(item.getOrderItemsId());
-			this.orderId = new SimpleStringProperty(Integer.toString(item.getOrderItemsId()));
+			this.orderId = new SimpleStringProperty(Integer.toString(o.getOrderId()));
 		//	this.oId = new SimpleIntegerProperty(item.getOrderItemsId());
-			this.seatNumber = new SimpleStringProperty(String.valueOf(item.getSeatNumber())); //<- this is not converting it to a string
-			this.menuItemId = new SimpleStringProperty(String.valueOf(item.getID()));
-			this.name = new SimpleStringProperty(item.getName());
-			this.price = new SimpleStringProperty(Double.toString(item.getPrice()));
-			this.desc = new SimpleStringProperty(item.getDescription());
+			this.serverId = new SimpleStringProperty(String.valueOf(o.getServerIdInOrder())); //<- this is not converting it to a string
+			this.tableId = new SimpleStringProperty(String.valueOf(o.getTableIdinOrder()));
+			this.orderStatus = new SimpleStringProperty(Integer.toString(o.getOrderStatus()));
+			this.orderTotal = new SimpleStringProperty(Double.toString(o.getOrderTotal()));
 		}
 			
 		public String getOrderId() { //these getters have to be named properly, i.e get getOrderId() , not getOrdId
@@ -165,28 +164,26 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		}
 		
 		public String getSeatNumber() {
-			return this.seatNumber.get();
+			return this.serverId.get();
 		}
 
 		public String getItemId() {
-			return this.menuItemId.get();
+			return this.tableId.get();
 		}
 
 		public String getName() {
-			return this.name.get();
+			return this.orderStatus.get();
 		}
 
 		public String getPrice() {
-			return this.price.get();
+			return this.orderTotal.get();
 		}
 
-		public String getDesc() {
-			return this.desc.get();
-		}
 		
 		public void setOrderId(String num){
 			this.orderId.set(num);
 		}
+		/*
 		public void setSeatNumber(String num) {
 			this.seatNumber.set(num);
 		}
@@ -197,6 +194,6 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		public void setDesc(String description){
 			this.desc.set(description);
 		}
-		
+		*/
 	}
 }

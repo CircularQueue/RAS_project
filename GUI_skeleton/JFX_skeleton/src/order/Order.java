@@ -1,6 +1,8 @@
 package order;
 import java.util.ArrayList;
 
+
+
 /** 
  *Order Class
  *This class Represents a singular order that will be placed into RAS database.  It contains a unique ID to ensure that no 2 orders are
@@ -32,6 +34,14 @@ public class Order {
 		this.tableId = tableId;
 		this.orderStatus = orderStatus;
 		this.orderTotal = orderTotal;
+	}
+	
+	public Order(int serverId,int tableId){
+		orderId = (int)(Math.random() * 1000);
+		this.serverId = serverId;
+		this.tableId = tableId;
+		orderStatus = 0;
+		orderTotal = 0;
 	}
 	
 	
@@ -119,8 +129,8 @@ public class Order {
 	 * @param orderTotal
 	 * @return True if the total was successfully changed.
 	 */
-	public boolean setOrderTotal(Double orderTotal) {
-	  		return true;
+	public void setOrderTotal(Double orderTotal) {
+	  		this.orderTotal = orderTotal;
   	}
 	
 	/**
