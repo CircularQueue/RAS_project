@@ -9,14 +9,17 @@ import java.util.ResourceBundle;
 
 import Main.MenuItem;
 import Main.MenuJDBC;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,31 +31,32 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+
 //import 
 // Note this is an extension of the container class BorderPane. The fxml must also have that as its root.
 public class ViewController extends BorderPane implements Initializable{
-	
-	protected Stage stage;
-
-
-	@FXML private TableColumn<MenuItemData, String> item_name;
-	@FXML private TableColumn<MenuItemData, String> item_id;
-	@FXML private TableColumn<MenuItemData, String> item_price;
-	@FXML private TableColumn<MenuItemData, String> item_description;
-	@FXML private Button btn;
-	@FXML TableView<MenuItemData> itemTable = new TableView<MenuItemData>();
+	private TableView<MenuItemData> itemTable = new TableView<MenuItemData>();
 	private ObservableList<MenuItemData> data = FXCollections.observableArrayList();
 	private MenuJDBC db;
+	final HBox hb = new HBox();
+	VBox vbox;
 	
 	public static class MenuItemData{
 		
@@ -84,29 +88,37 @@ public class ViewController extends BorderPane implements Initializable{
 				System.out.println("here des");
 				return this.description.get();
 			}
+			
+			public void setName(String name){
+				this.name=item_id.set(name);
+			}
 	}
 	
 	public ViewController(Stage stage) throws ClassNotFoundException, SQLException{
-		this.stage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewMenu2.fxml"));
-        // make sure that FX root construct is checked in scene builder
-        fxmlLoader.setRoot(this);
-        // leave controller blank in scene builder, or set it to this class
-        // this allows us to override that setting and reuse the scene as a template for others
-        fxmlLoader.setController(this);
-        
-        try {
-        	// load fxml file
-            fxmlLoader.load();
-            
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        Scene scene = new Scene(new Group());
+        stage.setWidth(450);
+        stage.setHeight(550);
         initializeTable();
+        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+        
+        stage.setScene(scene);
+        stage.show();
 	}
 	
 	public void initializeTable() throws ClassNotFoundException, SQLException{
+		db=new MenuJDBC();
 		MenuItemData iData;
+	    final Label label = new Label("Menu");
+		itemTable.setEditable(true);
+		TableColumn item_name = new TableColumn("Item ID");
+		TableColumn item_id = new TableColumn("Item Name");
+		TableColumn item_price = new TableColumn("Item Price");
+		TableColumn item_description = new TableColumn("Item Description");
+		itemTable.getColumns().addAll(item_id, item_name, item_price, item_description);
+	    item_name.setMinWidth(100);
+	    item_id.setMinWidth(100);
+	    item_price.setMinWidth(100);
+	    item_description.setMinWidth(100);
         item_name.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("name"));
         item_id.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("item_id"));
         item_price.setCellValueFactory(new PropertyValueFactory<MenuItemData, String>("price"));
@@ -114,12 +126,68 @@ public class ViewController extends BorderPane implements Initializable{
         db = new MenuJDBC();
         HashMap<Integer, MenuItem> hm = new HashMap<>();
         hm = db.populateMenu();
+        
+		item_name.setCellFactory(TextFieldTableCell.forTableColumn());
+		
+		item_name.setOnEditCommit(
+            new EventHandler<CellEditEvent<MenuItemData, String>>() {
+                @Override
+                public void handle(CellEditEvent<MenuItemData, String> t) {
+                    ((MenuItemData) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                            ).setName((t.getNewValue()));
+                }
+            }
+        );
+        
+        itemTable.setItems(data);
         for(Integer key : hm.keySet()){
         	iData = new MenuItemData(hm.get(key));
         	data.add(iData);
         }
-        itemTable.setItems(data);
-	
+        final TextField addItemID = new TextField();
+        addItemID.setPromptText("Item ID");
+        addItemID.setMaxWidth(item_id.getPrefWidth());
+        final TextField addItemName = new TextField();
+        addItemName.setMaxWidth(item_name.getPrefWidth());
+        addItemName.setPromptText("Item Name");
+        final TextField addItemPrice = new TextField();
+        addItemPrice.setMaxWidth(item_price.getPrefWidth());
+        addItemPrice.setPromptText("Item Price");
+        final TextField addItemDescription = new TextField();
+        addItemDescription.setMaxWidth(item_description.getPrefWidth());
+        addItemDescription.setPromptText("Item Description");
+ 
+        final Button addButton = new Button("Add");
+        addButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                try {
+					db.insertData(new MenuItem(Integer.parseInt(addItemID.getText()), addItemName.getText(), Double.parseDouble(addItemPrice.getText()), addItemDescription.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                addItemID.clear();
+                addItemName.clear();
+                addItemPrice.clear();
+                addItemDescription.clear();
+            }
+        });
+        hb.getChildren().addAll(addItemID, addItemName, addItemPrice, addItemDescription, addButton);
+        hb.setSpacing(4);
+ 
+        vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(10, 0, 0, 10));
+        vbox.getChildren().addAll(label, itemTable, hb);
+        
 	}
 	
 	public void addItem(){

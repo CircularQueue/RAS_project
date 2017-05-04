@@ -12,14 +12,8 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
-		// instatiate contoller as an object
-		ViewController sc = new ViewController(primaryStage);
-		// pass sc in as a scene parameter, since it extends borderpane
-		Scene scene = new Scene(sc, 1000, 600);
-		// set the scene, and display it
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	public void start(Stage stage) throws ClassNotFoundException, SQLException {
+		ViewController vc = new ViewController(stage);
 	}
 	
 	public static void main(String[] args) {

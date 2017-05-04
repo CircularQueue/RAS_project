@@ -5,29 +5,4 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<fx:root prefHeight="587.0" prefWidth="988.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <TableView fx:id="itemTable" layoutX="224.0" layoutY="-387.0" prefHeight="587.0" prefWidth="765.0">
-               <columns>
-                  <TableColumn fx:id="item_id" prefWidth="60.0" text="item_id" />
-                  <TableColumn fx:id="item_name" prefWidth="135.0" text="item_name" />
-                  <TableColumn fx:id="item_price" prefWidth="81.0" text="item_price" />
-                  <TableColumn fx:id="item_description" prefWidth="488.0" text="item_description" />
-               </columns>
-            </TableView>
-         </children>
-      </Pane>
-   </bottom>
-   <center>
-      <Pane prefHeight="387.0" prefWidth="993.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="btn" layoutX="43.0" layoutY="51.0" mnemonicParsing="false" onAction="#addItem" prefHeight="164.0" prefWidth="151.0" text="Add item" />
-         </children>
-      </Pane>
-   </center>
-   <right>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </right>
-</fx:root>
+<fx:root prefHeight="587.0" prefWidth="988.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
