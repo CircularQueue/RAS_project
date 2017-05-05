@@ -3,6 +3,8 @@ package application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.employee.Employee;
+import model.employee.EmployeeManagementJDBC;
 import model.table.Table;
 import model.table.TableList;
 import javafx.scene.Scene;
@@ -37,8 +39,37 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+//		launch(args);
+		EmployeeManagementJDBC empDB = new EmployeeManagementJDBC();
+		Employee emp = empDB.findEmployeeInformation("Clara Oswald");
 		
+		if (emp != null)
+		{
+			System.out.println("Found employee: " + emp);
+		} else 
+		{
+			System.out.println("No employee found with that name.");
+		}
+		
+		Employee good= new Employee ("sam smith", "server", true);
+		Employee emp1 = empDB.addemployee(good);
+		
+		emp = empDB.findEmployeeInformation("sam smith");
+		if (emp!=null)
+		{
+			System.out.println("add employee: " + emp1);
+		}
+		else
+		{
+			System.out.println("new employee not added");
+		}
+		
+		Employee emp2 = empDB.removeEmployee("Clara Oswald");
+		if (emp2 !=null){
+			System.out.println("removed employee"+ emp2);
+		}else {
+				System.out.println("remove employee from the database not sucessful");
+		}
 //		TableList tableList = new TableList();
 //		
 //		HashMap<Integer, Table> allTables = tableList.getTableLayout();
