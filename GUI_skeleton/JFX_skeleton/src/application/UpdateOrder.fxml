@@ -22,8 +22,7 @@
                   <TableColumn fx:id="itemDescriptionCell" prefWidth="160.0" text="Description" />
               </columns>
             </TableView>
-            <ComboBox fx:id="orderChoice" layoutX="33.0" layoutY="57.0" prefWidth="150.0" />
-            <TextField layoutX="11.0" layoutY="20.0" prefHeight="27.0" prefWidth="194.0" text="Select Order Status To View" />
+            <TextField editable="false" layoutX="11.0" layoutY="20.0" prefHeight="72.0" prefWidth="186.0" text="All of our orders" />
          </children>
       </Pane>
    </center>

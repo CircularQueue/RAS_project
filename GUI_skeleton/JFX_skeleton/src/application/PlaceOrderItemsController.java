@@ -1,40 +1,45 @@
 package application;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.HashMap;
 
-import application.UpdateOrderController.OrderItemData;
+import com.sun.glass.events.MouseEvent;
+
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import order.Menu;
 import order.MenuItem;
+import order.Order;
+import order.OrderItems;
+import order.OrderList;
 
-
-
-
-public class PayOrderController extends BorderPane {
+public class PlaceOrderItemsController extends BorderPane {
 	Stage stage;
-	@FXML Button placeOrder;
-	@FXML Button viewOrder;
-	@FXML Button payOrder;
-	@FXML TextArea textDisplay;
-	@FXML Stage window;
+
 	
 
 	
-	public PayOrderController(Stage stage) throws IOException {
 
-		this.stage = stage;
+
+	
+	public PlaceOrderItemsController(Stage stage) throws IOException {
+			
+			this.stage = stage;
 		
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PayOrder.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlaceOrderItems.fxml"));
 		    // make sure that FX root construct is checked in scene builder
 
 		    
@@ -49,7 +54,17 @@ public class PayOrderController extends BorderPane {
 	        }catch (IOException exception) {
 	            throw new RuntimeException(exception);
 	        }
+	        
+	        
 		}
+	
+	@FXML protected void copyItems(ActionEvent ae){
+		
+	}
+	
+	
+
+
 	
 	@FXML protected void backToHome(ActionEvent ae) throws IOException{
 		//instantiate controller here
@@ -58,6 +73,8 @@ public class PayOrderController extends BorderPane {
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}
+	
+
 	@FXML protected void loadAbout(ActionEvent ae) throws IOException {
 		AboutController cont = new AboutController(stage);
 		Scene scen = new Scene(cont);

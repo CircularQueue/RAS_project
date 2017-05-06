@@ -18,6 +18,7 @@ public class ServerHomeController extends BorderPane{
 	@FXML Button placeOrder;
 	@FXML Button viewOrder;
 	@FXML Button payOrder;
+	@FXML Button searchOrder;
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
 	private int numClicks;
@@ -60,6 +61,12 @@ public class ServerHomeController extends BorderPane{
 		//instantiate controller here
 		PayOrderController cont = new PayOrderController(stage);
 		
+		Scene scen = new Scene(cont);
+		this.stage.setScene(scen);
+	}
+	
+	@FXML protected void changeSceneSearchOrder(ActionEvent ae)throws IOException {
+		SearchOrderController cont = new SearchOrderController(stage);
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}

@@ -38,16 +38,16 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	@FXML ComboBox<Integer> orderChoice;
 	private order.Order ord;
 	private order.OrderList oi;
-	private ObservableList<PopulateTable> list = FXCollections.observableArrayList(); 
+	private ObservableList<OrderItemData> list = FXCollections.observableArrayList(); 
 	private HashMap<Integer, List<order.OrderItems>> orderItems111;
 
-	@FXML TableView<PopulateTable> tableUser = new TableView<PopulateTable>();
-	@FXML TableColumn<PopulateTable, String> orderIdCell;
-	@FXML TableColumn<PopulateTable, String> seatNumberCell;
-	@FXML TableColumn<PopulateTable, String> itemIdCell;
-	@FXML TableColumn<PopulateTable, String> itemNameCell;
-	@FXML TableColumn<PopulateTable, String> itemPriceCell;
-	@FXML TableColumn<PopulateTable, String> itemDescriptionCell;
+	@FXML TableView<OrderItemData> tableUser = new TableView<OrderItemData>();
+	@FXML TableColumn<OrderItemData, String> orderIdCell;
+	@FXML TableColumn<OrderItemData, String> seatNumberCell;
+	@FXML TableColumn<OrderItemData, String> itemIdCell;
+	@FXML TableColumn<OrderItemData, String> itemNameCell;
+	@FXML TableColumn<OrderItemData, String> itemPriceCell;
+	@FXML TableColumn<OrderItemData, String> itemDescriptionCell;
 
 	
 	public UpdateOrderController(Stage stage) throws IOException {
@@ -71,7 +71,6 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	        }catch (IOException exception) {
 	            throw new RuntimeException(exception);
 	        }
-	        getOrderType();
 	        initialze();
 		}
 	
@@ -79,18 +78,18 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		
 		
 		
-		orderIdCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("orderId"));
-		seatNumberCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("seatNumber"));
-		itemIdCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("itemId"));
-		itemNameCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("name"));
-		itemPriceCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("price"));
-		itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("desc"));
+		orderIdCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("orderId"));
+		seatNumberCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("seatNumber"));
+		itemIdCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("itemId"));
+		itemNameCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("name"));
+		itemPriceCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("price"));
+		itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("desc"));
 		
 		for(Entry<Integer, List<OrderItems>> key: orderItems111.entrySet()){
 			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
 			for(OrderItems num : key.getValue()){
 				OrderItems o = new OrderItems(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
-				list.add(new PopulateTable(o));
+				list.add(new OrderItemData(o));
 			}
 			
 		}
@@ -100,7 +99,7 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		
 	}
 	
-	public ObservableList<PopulateTable> getObservableList(){
+	public ObservableList<OrderItemData> getObservableList(){
 		return list;
 	}
 	/*
@@ -123,14 +122,7 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		this.stage.setScene(scen);
 	}
 	
-	@FXML protected void getOrderType() throws IOException{
-		orderChoice.getItems().addAll(
-			    1,
-			    2,
-			    3
-			);
-	}
-	
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 
@@ -140,7 +132,7 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		
 	}
 	
-	public static class PopulateTable{
+	public static class OrderItemData{
 		
 		final SimpleStringProperty orderId; //error from not naming getters correctly
 		final SimpleStringProperty seatNumber;
@@ -149,7 +141,7 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		final SimpleStringProperty price;
 		final SimpleStringProperty desc;
 		
-		public PopulateTable(order.OrderItems item) {
+		public OrderItemData(order.OrderItems item) {
 			//String s = Integer.toString(item.getOrderItemsId());
 			this.orderId = new SimpleStringProperty(Integer.toString(item.getOrderItemsId()));
 		//	this.oId = new SimpleIntegerProperty(item.getOrderItemsId());

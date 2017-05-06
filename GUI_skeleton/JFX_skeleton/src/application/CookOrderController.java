@@ -2,7 +2,7 @@ package application;
 
 import java.io.IOException;
 
-import application.UpdateOrderController.PopulateTable;
+import application.UpdateOrderController.OrderItemData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,12 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import order.Order;
 import order.OrderList;
 
 public class CookOrderController extends BorderPane {
@@ -26,16 +28,16 @@ public class CookOrderController extends BorderPane {
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
 	@FXML TextArea cookOrderId;
-	@FXML TextArea errorMessage;
+	@FXML Label errorMessage;
 	UpdateOrderController oc = new UpdateOrderController(stage);
-	private ObservableList<PopulateTable> listCook = FXCollections.observableArrayList(); 
-	@FXML TableView<PopulateTable> tableUser = new TableView<PopulateTable>();
-	@FXML TableColumn<PopulateTable, String> orderIdCell;
-	@FXML TableColumn<PopulateTable, String> seatNumberCell;
-	@FXML TableColumn<PopulateTable, String> itemIdCell;
-	@FXML TableColumn<PopulateTable, String> itemNameCell;
-	@FXML TableColumn<PopulateTable, String> itemPriceCell;
-	@FXML TableColumn<PopulateTable, String> itemDescriptionCell;
+	private ObservableList<OrderItemData> listCook = FXCollections.observableArrayList(); 
+	@FXML TableView<OrderItemData> tableUser = new TableView<OrderItemData>();
+	@FXML TableColumn<OrderItemData, String> orderIdCell;
+	@FXML TableColumn<OrderItemData, String> seatNumberCell;
+	@FXML TableColumn<OrderItemData, String> itemIdCell;
+	@FXML TableColumn<OrderItemData, String> itemNameCell;
+	@FXML TableColumn<OrderItemData, String> itemPriceCell;
+	@FXML TableColumn<OrderItemData, String> itemDescriptionCell;
 
 
 
@@ -67,24 +69,22 @@ public class CookOrderController extends BorderPane {
 	       
 		}
 	@FXML protected void cookOrder(ActionEvent ae) throws IOException{
-		boolean isValidId = true;
-		int cookId = 0;
+		int cookId = -1;
 		String s = cookOrderId.getText();
 		try{
 			cookId = Integer.parseInt(s);
 		}
 		catch(Exception e){
-			isValidId = false;
-			errorMessage.appendText("*Non valid Id");
+			errorMessage.setText("*Non valid Id");
 		}
+		Order ord = od.searchOrder(cookId);
 		
-		// od.searchOrder(cookId); //jagdeep needs to fix this to return null or make it a boolean
-		
-		if (isValidId){
-			System.out.println(od.changeOrderStatus(cookId,1));
-			//loadData();
+		if (ord != null){
+			errorMessage.setText("Order has been cooked!");
+			od.changeOrderStatus(cookId,1);
 		}
 		else {
+			errorMessage.setText("Order does not exists");
 			System.out.println("Couldn't delete Order");
 		}
 		
@@ -92,12 +92,12 @@ public class CookOrderController extends BorderPane {
 	
 	@FXML public void loadData() {
 		
-		orderIdCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("orderId"));
-		seatNumberCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("seatNumber"));
-		itemIdCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("itemId"));
-		itemNameCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("name"));
-		itemPriceCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("price"));
-		itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<PopulateTable,String>("desc"));
+		orderIdCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("orderId"));
+		seatNumberCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("seatNumber"));
+		itemIdCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("itemId"));
+		itemNameCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("name"));
+		itemPriceCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("price"));
+		itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("desc"));
 		listCook.addAll(oc.getObservableList());
 		tableUser.setItems(listCook);
 		

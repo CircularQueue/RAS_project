@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -29,35 +30,38 @@ import javafx.stage.Stage;
 import order.Order;
 import order.OrderItems;
 
-public class ViewOrderController extends BorderPane implements Initializable {
+public class SearchOrderController extends BorderPane implements Initializable {
 	Stage stage;
 	@FXML Button placeOrder;
 	@FXML Button viewOrder;
 	@FXML Button payOrder;
 	@FXML TextArea textDisplay;
+	@FXML TextArea searchItem;
+	@FXML Label errorMessage;
+	@FXML Label orderStatusLabel;
 	@FXML Stage window;
 	@FXML ComboBox<Integer> orderChoice;
 	private order.OrderList oi;
-	private ObservableList<ViewOrder> list = FXCollections.observableArrayList(); 
+	private ObservableList<OrderData> list = FXCollections.observableArrayList(); 
 	private HashMap<Integer, List<order.OrderItems>> orderItems111;
 	private HashMap<Integer, Order> ord;
 
 
-	@FXML TableView<ViewOrder> tableUser = new TableView<ViewOrder>();
-	@FXML TableColumn<ViewOrder, String> orderIdCell;
-	@FXML TableColumn<ViewOrder, String> seatNumberCell;
-	@FXML TableColumn<ViewOrder, String> itemIdCell;
-	@FXML TableColumn<ViewOrder, String> itemNameCell;
-	@FXML TableColumn<ViewOrder, String> itemPriceCell;
+	@FXML TableView<OrderData> tableUser = new TableView<OrderData>();
+	@FXML TableColumn<OrderData, String> orderIdCell;
+	@FXML TableColumn<OrderData, String> serverIdCell;
+	@FXML TableColumn<OrderData, String> tableIdCell;
+	@FXML TableColumn<OrderData, String> orderStatusCell;
+	@FXML TableColumn<OrderData, String> orderTotalCell;
 
 	
-	public ViewOrderController(Stage stage) throws IOException {
+	public SearchOrderController(Stage stage) throws IOException {
 		oi = new order.OrderList(); //create a new order list
 		orderItems111 = oi.getOrderItems(); //put those items in a hashmap to iterate
 
 		this.stage = stage;
 		
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewOrderController.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SearchOrder.fxml"));
 		    // make sure that FX root construct is checked in scene builder
 
 		    
@@ -72,43 +76,56 @@ public class ViewOrderController extends BorderPane implements Initializable {
 	        }catch (IOException exception) {
 	            throw new RuntimeException(exception);
 	        }
-	        getOrderType();
 	        initialze();
 		}
 	
 	@FXML public void initialze(){
-		
-	/*	
-		
-		orderIdCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("orderId"));
-		seatNumberCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("seatNumber"));
-		itemIdCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("itemId"));
-		itemNameCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("name"));
-		itemPriceCell.setCellValueFactory(new PropertyValueFactory<ViewOrder,String>("price"));
-		
-		for(Entry<Integer, List<OrderItems>> key: orderItems111.entrySet()){
-			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
-			for(OrderItems num : key.getValue()){
-				Order o = new Order(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
-				list.add(new ViewOrder(o));
-			}
-			
+		orderIdCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("orderId"));
+		serverIdCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("serverId"));
+		tableIdCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("tableId"));
+		orderStatusCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("orderStatus"));
+		orderTotalCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("orderTotal"));
+	}
+	
+	@FXML public void searchOrder() {
+
+		list.clear();
+		String s = searchItem.getText();
+		int id = -1;
+		try {
+			id = Integer.parseInt(s);
+		}catch(Exception e){
+			errorMessage.setText("*Order Id must be a number");
+
 		}
-		System.out.println("Setting Table");
-		tableUser.setItems(list);
-		tableUser.setEditable(true);
-		*/
+		
+		Order o = oi.searchOrder(id);
+		if(o != null){
+			list.add(new OrderData(o));
+			tableUser.setItems(list);
+			System.out.println("Searching For an Order");
+			switch(o.getOrderStatus()){
+			case 0:
+				orderStatusLabel.setText("Order is uncooked.");
+				break;
+			case 1:
+				orderStatusLabel.setText("Order is cooked but not paid");
+				break;
+			case 2:
+				orderStatusLabel.setText("Order is cooked and paid");
+				break;
+			}
+		}
+		else {
+			errorMessage.setText("Order not found");
+		}
 	}
 	/*
 	public ObservableList<PopulateTable> getObservableList(){
 		return list;
 	}
 	
-	@FXML protected Integer submitOrder(ActionEvent ae) throws IOException{
-		int n = orderChoice.getValue();
-		oi.searchOrder(orderId)
-		
-	}
+	
 	*/
 	
 	@FXML protected void backToHome(ActionEvent ae) throws IOException{
@@ -124,13 +141,7 @@ public class ViewOrderController extends BorderPane implements Initializable {
 		this.stage.setScene(scen);
 	}
 	
-	@FXML protected void getOrderType() throws IOException{
-		orderChoice.getItems().addAll(
-			    1,
-			    2,
-			    3
-			);
-	}
+	
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -141,7 +152,7 @@ public class ViewOrderController extends BorderPane implements Initializable {
 		
 	}
 	
-	public static class ViewOrder{
+	public static class OrderData{
 		
 		final SimpleStringProperty orderId; //error from not naming getters correctly
 		final SimpleStringProperty serverId;
@@ -149,11 +160,9 @@ public class ViewOrderController extends BorderPane implements Initializable {
 		final SimpleStringProperty orderStatus;
 		final SimpleStringProperty orderTotal;
 		
-		public ViewOrder(Order o) {
-			//String s = Integer.toString(item.getOrderItemsId());
+		public OrderData(Order o) {
 			this.orderId = new SimpleStringProperty(Integer.toString(o.getOrderId()));
-		//	this.oId = new SimpleIntegerProperty(item.getOrderItemsId());
-			this.serverId = new SimpleStringProperty(String.valueOf(o.getServerIdInOrder())); //<- this is not converting it to a string
+			this.serverId = new SimpleStringProperty(Integer.toString(o.getServerId())); //<- this is not converting it to a string
 			this.tableId = new SimpleStringProperty(String.valueOf(o.getTableIdinOrder()));
 			this.orderStatus = new SimpleStringProperty(Integer.toString(o.getOrderStatus()));
 			this.orderTotal = new SimpleStringProperty(Double.toString(o.getOrderTotal()));
@@ -163,19 +172,19 @@ public class ViewOrderController extends BorderPane implements Initializable {
 			return orderId.get();
 		}
 		
-		public String getSeatNumber() {
+		public String getServerId() {
 			return this.serverId.get();
 		}
 
-		public String getItemId() {
+		public String getTableId() {
 			return this.tableId.get();
 		}
 
-		public String getName() {
+		public String getOrderStatus() {
 			return this.orderStatus.get();
 		}
 
-		public String getPrice() {
+		public String getOrderTotal() {
 			return this.orderTotal.get();
 		}
 

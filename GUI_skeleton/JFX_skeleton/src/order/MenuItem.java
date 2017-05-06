@@ -1,3 +1,4 @@
+
 package order;
 /**
  * 
@@ -39,9 +40,9 @@ public class MenuItem {
 	 * This is the default constructor if a name and price are not set
 	 */
 	public MenuItem(){
-		item_name = "null";
+		item_name = "Food";
 		price = 0;
-		item_description = "null";
+		item_description = "Good Food";
 		item_id=-1;
 	}
 	
@@ -107,7 +108,7 @@ public class MenuItem {
 	}
 	
 	public String toString(){
-		String item = "Name = " + getName() + " Price = " + getPrice() + " Description = " + getDescription() + " Id = " + getID();
+		String item = " Id = " + getID() + " Name = " + getName() + " Price = " + getPrice() + " Description = " + getDescription();
 		return item;
 	}
 	

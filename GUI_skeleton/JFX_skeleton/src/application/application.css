@@ -12,6 +12,10 @@
     -fx-background-color:#f0f8ff;
 }
 
-#searchError {
+#searchError,#itemAddedMessage,#errorMessage {
 	-fx-text-fill: red;
+}
+
+#orderStatusLabel {
+	-fx-text-fill: green;
 }

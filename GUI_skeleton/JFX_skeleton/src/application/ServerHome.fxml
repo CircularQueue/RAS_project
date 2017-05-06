@@ -15,6 +15,7 @@
             <Button fx:id="updateOrder" layoutX="208.0" layoutY="310.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeSceneUpdateOrder" prefHeight="45.0" prefWidth="185.0" text="View Uncooked Orders" />
             <Button fx:id="payOrder" layoutX="208.0" layoutY="179.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeScenePayOrder" prefHeight="45.0" prefWidth="185.0" text="Pay Order" />
             <Button fx:id="cookOrder" layoutX="208.0" layoutY="372.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeSceneCookOrder" prefHeight="45.0" prefWidth="185.0" text="Cook Order" />
+            <Button fx:id="searchOrder" layoutX="8.0" layoutY="179.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#changeSceneSearchOrder" prefHeight="45.0" prefWidth="185.0" text="Search" />
          </children>
       </Pane>
    </bottom>
