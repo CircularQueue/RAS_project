@@ -2,7 +2,7 @@ package application;
 
 import java.io.IOException;
 
-import application.UpdateOrderController.OrderItemData;
+import application.ViewUncokedOrdersController.OrderItemData;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +17,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import order.MenuItem;
 
-
-
-
+/**
+ * 
+ * @author benjaminxerri
+ *Pay order Scene.  Allows the user to see all the orders and pay for an order that has been cooked.  
+ */
 public class PayOrderController extends BorderPane {
 	Stage stage;
 	@FXML Button placeOrder;
@@ -27,8 +29,6 @@ public class PayOrderController extends BorderPane {
 	@FXML Button payOrder;
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
-	
-
 	
 	public PayOrderController(Stage stage) throws IOException {
 
@@ -63,6 +63,11 @@ public class PayOrderController extends BorderPane {
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}
+	
+	@FXML protected void quit(ActionEvent ae) throws IOException{
+		System.exit(0);
+	}
+	
 	
 
 }

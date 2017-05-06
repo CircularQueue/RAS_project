@@ -12,6 +12,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author benjaminxerri
+ *About page.  Navigated here from Menu Bar
+ */
 public class AboutController extends BorderPane {
 	Stage stage;
 	@FXML Button placeOrder;
@@ -48,4 +53,8 @@ public class AboutController extends BorderPane {
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}
+	@FXML protected void quit(ActionEvent ae) throws IOException{
+		System.exit(0);
+	}
+	
 }

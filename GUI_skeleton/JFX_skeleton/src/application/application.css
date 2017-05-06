@@ -14,6 +14,7 @@
 
 #searchError,#itemAddedMessage,#errorMessage {
 	-fx-text-fill: red;
+	-fx-font-size:15px;
 }
 
 #orderStatusLabel {

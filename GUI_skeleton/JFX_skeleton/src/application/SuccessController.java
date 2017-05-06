@@ -26,20 +26,19 @@ import order.Order;
 import order.OrderItems;
 import order.OrderList;
 
-public class PlaceOrderItemsController extends BorderPane {
+/**
+ * 
+ * @author benjaminxerri
+ *User is put here upon a successfull transaction.  They have the option to quit or return to home.
+ */
+public class SuccessController extends BorderPane {
 	Stage stage;
 
-	
-
-	
-
-
-	
-	public PlaceOrderItemsController(Stage stage) throws IOException {
+	public SuccessController(Stage stage) throws IOException {
 			
 			this.stage = stage;
 		
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlaceOrderItems.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Success.fxml"));
 		    // make sure that FX root construct is checked in scene builder
 
 		    
@@ -56,15 +55,10 @@ public class PlaceOrderItemsController extends BorderPane {
 	        }
 	        
 	        
-		}
-	
-	@FXML protected void copyItems(ActionEvent ae){
-		
+		}	
+	@FXML protected void quit(ActionEvent ae) throws IOException{
+		System.exit(0);
 	}
-	
-	
-
-
 	
 	@FXML protected void backToHome(ActionEvent ae) throws IOException{
 		//instantiate controller here

@@ -89,7 +89,6 @@ public class OrderListJDBC  {
 		 	}
 		}
 	 	populateUncookedOrders();
-	 //	orderItems.put(o.getOrderId(),);
 		return true;
 	}	
 
@@ -138,28 +137,22 @@ public class OrderListJDBC  {
 	 * @return Order Returns the order object if it was deleted, or null if the order was not found.
 	 */
 	public Order deleteOrder(int orderID){
-		
 		Order searchOrder = searchOrder(orderID);
-		if(searchOrder.getOrderId()==0)
+		if(searchOrder==null)
 		{
-			System.out.println("Order not found");
+			//System.out.println("Order not found");
 			return null;
 		}
 		else
 		{
+			deleteOrderItem(orderID);
 			try
 			{
 				System.out.print("Inside delete in JDBC");
 				String deleteOrders = "DELETE from orders where orderid = " +orderID;
 				PreparedStatement delete1 = conn.prepareStatement(deleteOrders); 
 				delete1.executeUpdate();
-				
-				// Delete from order_items as well. 
-				/*
-				String deleteOrderItems = "DELETE from orders where orderid = " +orderID;
-				PreparedStatement delete2 = conn.prepareStatement(deleteOrderItems); 
-				delete2.executeUpdate();
-				*/
+				// Delete from order_items as well. 	
 			}
 			catch(Exception e)
 			{
@@ -169,6 +162,29 @@ public class OrderListJDBC  {
 		
 		return searchOrder;
 		
+	}
+	
+	public Order deleteOrderItem(int orderID)
+	{
+		Order searchOrder = searchOrder(orderID);
+		if(searchOrder==null)
+		{
+			//System.out.println("Order not found");
+			return null;
+		}
+		else
+			
+		try
+		{
+			String deleteOrderItems = "DELETE from order_items where orderid = " +orderID;
+			PreparedStatement delete2 = conn.prepareStatement(deleteOrderItems); 
+			delete2.executeUpdate();
+		}
+		catch(Exception e)
+		{
+	 		System.err.println(e);
+	 	}
+		return searchOrder;
 	}
 	
 	/**

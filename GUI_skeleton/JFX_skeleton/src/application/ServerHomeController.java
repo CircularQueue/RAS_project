@@ -12,7 +12,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-// Note this is an extension of the container class BorderPane. The fxml must also have that as its root.
+/**
+ * 
+ * @author benjaminxerri
+ * Order Home page.  Used to connect to all other order functions with button clicks.
+ */
 public class ServerHomeController extends BorderPane{
 	Stage stage;
 	@FXML Button placeOrder;
@@ -21,15 +25,13 @@ public class ServerHomeController extends BorderPane{
 	@FXML Button searchOrder;
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
-	private int numClicks;
 	
 	public ServerHomeController(Stage stage){
 		this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ServerHome.fxml"));
         // make sure that FX root construct is checked in scene builder
         fxmlLoader.setRoot(this);
-        // leave controller blank in scene builder, or set it to this class
-        // this allows us to overide that setting and reuse the scene as a template for others
+     
         fxmlLoader.setController(this);
         
         try {
@@ -38,20 +40,13 @@ public class ServerHomeController extends BorderPane{
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        
-        this.numClicks = 0;
-		
+
 	}
 	
-	// method which is called when button click event occurs (set in scene builder)
-	@FXML protected void clickButton(ActionEvent ae){
-		this.numClicks++;
-		textDisplay.setText("Button clicked " + this.numClicks + " times");
-	}
 	
 	@FXML protected void changeSceneUpdateOrder(ActionEvent ae) throws IOException{
 		//instantiate controller here
-		UpdateOrderController cont = new UpdateOrderController(stage);
+		ViewUncokedOrdersController cont = new ViewUncokedOrdersController(stage);
 		
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
@@ -89,6 +84,9 @@ public class ServerHomeController extends BorderPane{
 		AboutController cont = new AboutController(stage);
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
+	}
+	@FXML protected void quit(ActionEvent ae) throws IOException{
+		System.exit(0);
 	}
 	
 	

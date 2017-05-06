@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -27,8 +25,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import order.OrderItems;
-
-public class UpdateOrderController extends BorderPane implements Initializable {
+/**
+ * 
+ * @author benjaminxerri
+ *This scene allows the user to see all the uncooked orders.  
+ */
+public class ViewUncokedOrdersController extends BorderPane implements Initializable {
 	Stage stage;
 	@FXML Button placeOrder;
 	@FXML Button viewOrder;
@@ -36,7 +38,6 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
 	@FXML ComboBox<Integer> orderChoice;
-	private order.Order ord;
 	private order.OrderList oi;
 	private ObservableList<OrderItemData> list = FXCollections.observableArrayList(); 
 	private HashMap<Integer, List<order.OrderItems>> orderItems111;
@@ -50,13 +51,13 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	@FXML TableColumn<OrderItemData, String> itemDescriptionCell;
 
 	
-	public UpdateOrderController(Stage stage) throws IOException {
+	public ViewUncokedOrdersController(Stage stage) throws IOException {
 		oi = new order.OrderList(); //create a new order list
 		orderItems111 = oi.getOrderItems(); //put those items in a hashmap to iterate
 
 		this.stage = stage;
 		
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UpdateOrder.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewUncookedOrders.fxml"));
 		    // make sure that FX root construct is checked in scene builder
 
 		    
@@ -73,11 +74,10 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 	        }
 	        initialze();
 		}
-	
+	/**
+	 * FXML method to populate GUI with all of the un-cooked orders
+	 */
 	@FXML public void initialze(){
-		
-		
-		
 		orderIdCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("orderId"));
 		seatNumberCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("seatNumber"));
 		itemIdCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("itemId"));
@@ -93,22 +93,12 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 			}
 			
 		}
-		System.out.println("Setting Table");
 		tableUser.setItems(list);
-		tableUser.setEditable(true);
 		
 	}
-	
 	public ObservableList<OrderItemData> getObservableList(){
 		return list;
 	}
-	/*
-	@FXML protected Integer submitOrder(ActionEvent ae) throws IOException{
-		int n = orderChoice.getValue();
-		//oi.searchOrder(orderId)
-		
-	}
-	*/
 	@FXML protected void backToHome(ActionEvent ae) throws IOException{
 		//instantiate controller here
 		ServerHomeController cont = new ServerHomeController(stage);
@@ -189,6 +179,11 @@ public class UpdateOrderController extends BorderPane implements Initializable {
 		public void setDesc(String description){
 			this.desc.set(description);
 		}
+		
+		@FXML protected void quit(ActionEvent ae) throws IOException{
+			System.exit(0);
+		}
+		
 		
 	}
 }

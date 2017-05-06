@@ -29,8 +29,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import order.Order;
 import order.OrderItems;
-
-public class SearchOrderController extends BorderPane implements Initializable {
+/**
+ * 
+ * @author benjaminxerri
+ *This allows the user to search for an order, and if the order is there, it displays the order and it's current status.  
+ */
+public class SearchOrderController extends BorderPane  {
 	Stage stage;
 	@FXML Button placeOrder;
 	@FXML Button viewOrder;
@@ -78,7 +82,9 @@ public class SearchOrderController extends BorderPane implements Initializable {
 	        }
 	        initialze();
 		}
-	
+	/**
+	 * Populates GUI with Orders table from database
+	 */
 	@FXML public void initialze(){
 		orderIdCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("orderId"));
 		serverIdCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("serverId"));
@@ -87,8 +93,16 @@ public class SearchOrderController extends BorderPane implements Initializable {
 		orderTotalCell.setCellValueFactory(new PropertyValueFactory<OrderData,String>("orderTotal"));
 	}
 	
+	/**
+	 * Searches for an order in the database.
+	 * Message if not found.
+	 * If the order was found, it displays the order and it's status.
+	 * 0 if uncooked.
+	 * 1 if cooked and not paid.
+	 * 2 if cooked and paid.
+	 */
+	
 	@FXML public void searchOrder() {
-
 		list.clear();
 		String s = searchItem.getText();
 		int id = -1;
@@ -101,6 +115,7 @@ public class SearchOrderController extends BorderPane implements Initializable {
 		
 		Order o = oi.searchOrder(id);
 		if(o != null){
+			errorMessage.setText("");
 			list.add(new OrderData(o));
 			tableUser.setItems(list);
 			System.out.println("Searching For an Order");
@@ -114,9 +129,13 @@ public class SearchOrderController extends BorderPane implements Initializable {
 			case 2:
 				orderStatusLabel.setText("Order is cooked and paid");
 				break;
+			default:
+				orderStatusLabel.setText("Abnormal order status, consider deleting.");
+				break;
 			}
 		}
 		else {
+			orderStatusLabel.setText("");
 			errorMessage.setText("Order not found");
 		}
 	}
@@ -141,15 +160,9 @@ public class SearchOrderController extends BorderPane implements Initializable {
 		this.stage.setScene(scen);
 	}
 	
-	
-	
-	public void initialize(URL arg0, ResourceBundle arg1) {
 
-
-	}
-	
-	@FXML protected void populateItems(){
-		
+	@FXML protected void quit(ActionEvent ae) throws IOException{
+		System.exit(0);
 	}
 	
 	public static class OrderData{
