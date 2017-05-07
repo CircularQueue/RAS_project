@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class MenuTest {
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Menu menu = new Menu();
+		menu.updateItem(new MenuItem(001, "NEw hot dog", 4.57, "newy hot dogggy"), 001);
 		/*Scanner sc = new Scanner(System.in);
 		Scanner sc2 = new Scanner(System.in);
 		Menu menu = new Menu();

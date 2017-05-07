@@ -47,7 +47,6 @@ public class ViewController extends BorderPane implements Initializable{
 	    final SimpleStringProperty price;
 	    final SimpleStringProperty description;
 	    private String tempName;
-	    private int tempId;
 	    private Double tempPrice;
 	    private String tempDes;
 	    public MenuItemData (MenuItem item){
@@ -55,6 +54,9 @@ public class ViewController extends BorderPane implements Initializable{
 			this.item_id = new SimpleStringProperty(Integer.toString(item.getID()));
 			this.price = new SimpleStringProperty(Double.toString(item.getPrice()));
 			this.description = new SimpleStringProperty(item.getDescription());
+			this.tempName = item.getName();
+			this.tempPrice = item.getPrice();
+			this.tempDes = item.getDescription();
 	    }
 			
 			public String getName(){
@@ -83,7 +85,7 @@ public class ViewController extends BorderPane implements Initializable{
 			}
 			
 			public MenuItem setItem(){
-				return new MenuItem(Integer.parseInt(getItem_id()), getName(), Double.parseDouble(getPrice()), getDescription());
+				return new MenuItem(Integer.parseInt(getItem_id()), tempName, tempPrice, tempDes);
 			}
 	}
 	
@@ -105,10 +107,10 @@ public class ViewController extends BorderPane implements Initializable{
 	    final Label label = new Label("Menu");
         label.setFont(new Font("Arial", 20));
 		itemTable.setEditable(true);
-		TableColumn item_name = new TableColumn("Item ID");
-		TableColumn item_id = new TableColumn("Item Name");
-		TableColumn item_price = new TableColumn("Item Price");
-		TableColumn item_description = new TableColumn("Item Description");
+		TableColumn <MenuItemData, String> item_name = new TableColumn <MenuItemData, String> ("Item ID");
+		TableColumn <MenuItemData, String>  item_id = new TableColumn <MenuItemData, String> ("Item Name");
+		TableColumn <MenuItemData, String>  item_price = new TableColumn <MenuItemData, String> ("Item Price");
+		TableColumn <MenuItemData, String>  item_description = new TableColumn <MenuItemData, String> ("Item Description");
 		itemTable.getColumns().addAll(item_id, item_name, item_price, item_description);
 	    item_name.setMinWidth(200);
 	    item_id.setMinWidth(100);
@@ -268,10 +270,7 @@ public class ViewController extends BorderPane implements Initializable{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-                addItemID.clear();
-                addItemName.clear();
-                addItemPrice.clear();
-                addItemDescription.clear();
+                removeItem.clear();
             }
         });
         
