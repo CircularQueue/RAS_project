@@ -20,6 +20,7 @@ import java.util.List;
 public class OrderListJDBC  {
 
 		private HashMap<Integer,Order> orders;
+		private HashMap<Integer,Order> allOrders;
 		private HashMap<Integer, List<OrderItems>> orderItems;
 		
 	   // JDBC driver name and database URL
@@ -36,6 +37,7 @@ public class OrderListJDBC  {
 	 * 
 	 */
 	public OrderListJDBC() {
+		allOrders = new HashMap<Integer,Order>();
 		orders = new HashMap<Integer,Order>();
 		orderItems = new HashMap<Integer, List<OrderItems>>();
 		conn = getDB();
@@ -110,16 +112,41 @@ public class OrderListJDBC  {
 	
 	public Order payOrder(int orderId){
 		
+		Order searchOrder = searchOrder(orderId);
+		if(searchOrder==null)
+		{
+			//System.out.println("Order not found");
+			return null;
+		}
+		else
+			
 		try
 		{
-			System.out.println("Inside payOrder Begining");
-		String update = "UPDATE orders set orderstatus=? where orderid =?";
+			
+			String getTotal = " select sum(item_price) from order_items where orderid =" + orderId;
+			PreparedStatement myStmt1 = conn.prepareStatement(getTotal);
+			ResultSet result = myStmt1.executeQuery();
+		     result.next();
+		     String sum = result.getString(1);
+		     //System.out.println("The Sum is = "+sum);
+		     double temp = Double.parseDouble(sum);
+		     double sum1 = Math.round(temp*100);
+		     sum1= sum1/100;
+			
+			//System.out.println("Inside payOrder Begining");
+		String update = "UPDATE orders set orderstatus=?, ordertotal = ? where orderid =?";
 		PreparedStatement myStmt = conn.prepareStatement(update);
-		myStmt.setInt(1,-88);
-		myStmt.setInt(2,orderId);
+		myStmt.setInt(1,2);
+		myStmt.setDouble(2,sum1);
+		myStmt.setInt(3,orderId);
 		myStmt.executeUpdate();
-		//Table.clearTable(0);
-		System.out.println("in payorder in JDBC");
+		deleteOrderItem(orderId); //deletes items in order items;
+		//order total generate.
+		/*
+		 * count total for order id on the itemPrice column. 
+		 */
+		
+		//System.out.println("in payorder in JDBC");
 		}
 		catch(Exception e)
 		{
@@ -128,9 +155,7 @@ public class OrderListJDBC  {
 		
 		Order ordFound = searchOrder(orderId);
 		return ordFound;
-	
-		}
-	
+	}
 	/**
 	 * Handles Database logic to remove an order from the order table in the database.
 	 * @param orderID The order id
@@ -145,10 +170,10 @@ public class OrderListJDBC  {
 		}
 		else
 		{
-			deleteOrderItem(orderID);
 			try
 			{
-				System.out.print("Inside delete in JDBC");
+				deleteOrderItem(orderID);
+				System.out.print("Items were deleted");
 				String deleteOrders = "DELETE from orders where orderid = " +orderID;
 				PreparedStatement delete1 = conn.prepareStatement(deleteOrders); 
 				delete1.executeUpdate();
@@ -164,7 +189,7 @@ public class OrderListJDBC  {
 		
 	}
 	
-	public Order deleteOrderItem(int orderID)
+	private Order deleteOrderItem(int orderID)
 	{
 		Order searchOrder = searchOrder(orderID);
 		if(searchOrder==null)
@@ -274,6 +299,37 @@ public class OrderListJDBC  {
 		}
 	}
 	
+	private boolean populateAllOrders() {
+		
+		   Statement stmt = null;
+		   int id = 0;
+		   String uncookedOrds = "SELECT * FROM Orders";
+			
+			 try {
+					stmt = conn.createStatement();
+					ResultSet rs = stmt.executeQuery(uncookedOrds);
+					while(rs.next()){
+						id = rs.getInt("OrderID");
+						int servId = rs.getInt("ServerID");
+						int table = rs.getInt("TableID");
+						int status = rs.getInt("OrderStatus");
+						double price = rs.getDouble("OrderTotal");
+						
+						Order ord = new Order(id,servId,table,status,price);
+						allOrders.put(id, ord);
+						populateUncookedOrderItems(id);
+					//	System.out.println("Order " + id + " was placed into hashmap");	
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return false;
+				}
+				
+			 System.out.println("Populated ALL Orders");
+			 return true;
+		
+	}
+	
 	/**private function that populates the orders hash table with orders.
 	 * 
 	 * @return
@@ -342,9 +398,9 @@ public class OrderListJDBC  {
 				return true;
 	}
 	
-	public void getOrder(){
-		orders.forEach((k,v)->System.out.println(k + " " + v));
-		orderItems.forEach((k,v)->System.out.println(k + " " + v));
+	public HashMap<Integer, Order> getOrder(){
+		populateAllOrders();
+		return allOrders;
 	
 	}
 	

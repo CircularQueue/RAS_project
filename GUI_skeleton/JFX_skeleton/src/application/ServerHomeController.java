@@ -80,6 +80,14 @@ public class ServerHomeController extends BorderPane{
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}
+	
+	@FXML protected void changeSceneDeleteOrder(ActionEvent ae)throws IOException {
+		DeleteOrderController cont = new DeleteOrderController(stage);
+		Scene scen = new Scene(cont);
+		this.stage.setScene(scen);
+	}
+	
+	
 	@FXML protected void loadAbout(ActionEvent ae) throws IOException {
 		AboutController cont = new AboutController(stage);
 		Scene scen = new Scene(cont);

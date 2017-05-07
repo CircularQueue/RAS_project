@@ -67,13 +67,15 @@ public class OrderList {
 	
 	
 
-	public void getOrder(){
-		ord.getOrder();
+	public HashMap<Integer, Order> getOrder(){
+		return ord.getOrder();
 	}
 	public HashMap<Integer, List<OrderItems>> getOrderItems(){
 		return ord.getOrderItems();
 		
 	}
+	
+
 
 	/**
 	 * Calls the JDBC method to delete the order.

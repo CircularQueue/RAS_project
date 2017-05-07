@@ -40,7 +40,7 @@ public class ViewUncokedOrdersController extends BorderPane implements Initializ
 	@FXML ComboBox<Integer> orderChoice;
 	private order.OrderList oi;
 	private ObservableList<OrderItemData> list = FXCollections.observableArrayList(); 
-	private HashMap<Integer, List<order.OrderItems>> orderItems111;
+	private HashMap<Integer, List<order.OrderItems>> orderItemsHashMap;
 
 	@FXML TableView<OrderItemData> tableUser = new TableView<OrderItemData>();
 	@FXML TableColumn<OrderItemData, String> orderIdCell;
@@ -53,7 +53,7 @@ public class ViewUncokedOrdersController extends BorderPane implements Initializ
 	
 	public ViewUncokedOrdersController(Stage stage) throws IOException {
 		oi = new order.OrderList(); //create a new order list
-		orderItems111 = oi.getOrderItems(); //put those items in a hashmap to iterate
+		orderItemsHashMap = oi.getOrderItems(); //put those items in a hashmap to iterate
 
 		this.stage = stage;
 		
@@ -85,7 +85,7 @@ public class ViewUncokedOrdersController extends BorderPane implements Initializ
 		itemPriceCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("price"));
 		itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("desc"));
 		
-		for(Entry<Integer, List<OrderItems>> key: orderItems111.entrySet()){
+		for(Entry<Integer, List<OrderItems>> key: orderItemsHashMap.entrySet()){
 			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
 			for(OrderItems num : key.getValue()){
 				OrderItems o = new OrderItems(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());

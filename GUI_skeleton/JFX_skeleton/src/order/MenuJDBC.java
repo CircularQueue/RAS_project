@@ -125,7 +125,7 @@ public class MenuJDBC {
 	public Connection getDBConnection() throws ClassNotFoundException, SQLException{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/RAS3","root","mcNp#tzpQi7");
+		    conn = DriverManager.getConnection(url,username,password);
 		    return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
