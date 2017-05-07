@@ -110,7 +110,6 @@ public class MenuJDBC {
 			pt.setInt(5, id);
 			pt.executeUpdate();
 			list.put(id, item);
-			System.out.println("updating");
 			return item;
 		}
 		catch(SQLException e){

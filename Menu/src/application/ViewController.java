@@ -225,7 +225,7 @@ public class ViewController extends BorderPane implements Initializable{
             public void handle(ActionEvent e) {
                 try {
                 	MenuItem item = new MenuItem(Integer.parseInt(addItemID.getText()), addItemName.getText(), Double.parseDouble(addItemPrice.getText()), addItemDescription.getText());
-					db.insertData(item);
+					menu.addItem(item);
 					MenuItemData itemData = new MenuItemData(item);
 					data.add(itemData);
 					itemTable.refresh();
@@ -256,9 +256,17 @@ public class ViewController extends BorderPane implements Initializable{
         	@Override
             public void handle(ActionEvent e) {
                 try {
-                	MenuItem item = db.deleteData(Integer.parseInt(removeItem.getText()));
-					MenuItemData itemData = new MenuItemData(item);
-					data.remove(itemData);
+                	db.deleteData(((Integer.parseInt(removeItem.getText()))));
+					data.removeAll(data);
+					data.clear();
+					MenuItemData iData;
+					HashMap<Integer, MenuItem> hm = new HashMap<>();
+			        hm = db.populateMenu();
+			        for(Integer key : hm.keySet()){
+			        	iData = new MenuItemData(hm.get(key));
+			        	data.add(iData);
+			        }
+					itemTable.setItems(data);
 					itemTable.refresh();
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
