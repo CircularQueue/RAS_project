@@ -1,3 +1,4 @@
+package model.employee;
 
 import java.util.HashMap;
 
@@ -157,10 +158,10 @@ public class Employee {
 	 
 	 public String toString(){
 		 String res = "";
-		 res += "workingNow"+ this.getWorkingNow()+ "\n";
-		 res+="name"+ this.getname()+"\n";
-		 res+="employeeid"+this.getemployeeID()+"\n";
-		 res+="employeetype"+ this.getEmployeeType()+"\n";
+		 res += "workingNow: "+ this.getWorkingNow()+ "\n";
+		 res+="name: "+ this.getname()+"\n";
+		 res+="employeeid: "+this.getemployeeID()+"\n";
+		 res+="employeetype: "+ this.getEmployeeType()+"\n";
 		 
 			return res;	 
 				 
