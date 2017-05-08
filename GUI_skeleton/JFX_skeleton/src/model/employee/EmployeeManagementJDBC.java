@@ -56,11 +56,14 @@ public class EmployeeManagementJDBC {
 			}
 			// get key from last insert
 			Integer employeeID = null;
-			try (ResultSet keySet = st.getGeneratedKeys()) {
-				if (keySet.next()) {
+			try (ResultSet keySet = st.getGeneratedKeys()) 
+			{
+				if (keySet.next()) 
+				{
 					employeeID = new Integer (keySet.getInt(1));
 				}
-				else {
+				else 
+				{
 					employeetoAdd.setEmployeeID(employeeID);
 				}                                   
 			}              
@@ -134,17 +137,19 @@ public class EmployeeManagementJDBC {
 	  */ 
 	 public Employee removeEmployee(String employeeName) 
 	 {
-		 String sql = "DElETE FROM Employees where employeeName= " + employeeName + ";";
+		 String sql = "DElETE FROM Employees where employee_Name = " + "\"" + employeeName + "\"" + ";";
 		 
-		 Employee removeEmployee= findEmployeeInformation(employeeName);
+		 Employee removeEmployee = findEmployeeInformation(employeeName);
 		 
-		 try{
+		 try
+		 {
 //			 conn = ConnectionJDBC.getDB();
 			 st = conn.prepareStatement(sql);
 			 st.executeUpdate(sql);
 			 return removeEmployee;
 		 }
-		 catch(SQLException e){
+		 catch(SQLException e)
+		 {
 			 System.out.print(e.getStackTrace());
 		 }
 		 return null;
