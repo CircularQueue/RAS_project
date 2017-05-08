@@ -10,12 +10,15 @@ import model.table.Table;
  * @author phillipwitkin
  *
  */
-public class EmployeeManagement {
-
+public class EmployeeManagement{
+        
+        
 	/**
 	 * Constructor
 	 */
+         
 	public EmployeeManagement() {
+           
 	}
 	
 	/**
@@ -24,7 +27,11 @@ public class EmployeeManagement {
 	 * @param name The name of the new employee; the employeeID will be determined upon database action.
 	 * @return The new employee, with an employeeID consistent with its corresponding database entry
 	 */
-	public Employee addemployee(String name){return null;}
+	public Employee addemployee(String name,String type,int bool){
+           return null;
+            
+            
+        }
 	
 	
 	 /** 
