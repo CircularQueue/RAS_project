@@ -58,13 +58,8 @@ public class OrderList {
 	 */
 	
 	public Order payOrder(int orderId){
-		/** This method takes the table id and change the table status to need cleaning; invoked within payOrder Method. 
-		 * 
-		 * @param table_id
-		 * @return true/false
-		 */
-		//Table.clearTable(0);
-		return null;
+
+		return ord.payOrder(orderId);
 	}
 	
 	public void viewUncookedOrders(Order...args){
@@ -73,20 +68,16 @@ public class OrderList {
 	
 	
 
-	public void getOrder(){
-		ord.getOrder();
+	public HashMap<Integer, Order> getOrder(){
+		return ord.getOrder();
 	}
 	public HashMap<Integer, List<OrderItems>> getOrderItems(){
 		return ord.getOrderItems();
 		
 	}
-	/*
-	public boolean populateUncookedOrders(){
-		boolean isFull = ord.populateUncookedOrders();
-		if (isFull) return true; else return false;
-	}
-	*/
 	
+
+
 	/**
 	 * Calls the JDBC method to delete the order.
 	 * @param orderID The order of 
@@ -110,8 +101,8 @@ public class OrderList {
 	 */
 	public Order searchOrder(int orderId){
 		return ord.searchOrder(orderId);
-	}
 	
+}
 	
 	/**
 	 * Removes an order for the database

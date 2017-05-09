@@ -1,3 +1,4 @@
+
 package model.employee;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.HashMap;
  * days they are working and if they are suppose to be working that day.
  * @author Christina Sadhu
  */
-public abstract class Employee {
+public class Employee {
 	
 
 	private int employeeID;
@@ -26,20 +27,35 @@ public abstract class Employee {
 	 * @param lname The employee's last name
 	 * this will allow access to the employees first and last name
 	 */
-	public Employee (String fname, String lname){}
+	public Employee (String name, String employeeTyping, boolean working)
+	{
+		this.name = name;
+		this.employeeType = employeeTyping;
+		this.workingNow = working;
+	}
+	
+	public Employee(){
+		
+	}
 	
 	/**
 	 * Sets the name of the employee
 	 * @param fname The employee's first name
 	 * @param lname The employee's last name
 	 */
-	public void setEmployeeName(String fname, String lname){}
+	public void setEmployeeName(String name)
+	{
+		this.name=name;
+	}
 	
 	/**
 	 * Gets the employee name
 	 * @return The full name of the employee
 	 */
-	public String getEmployeeName(){return "";}
+	public String getEmployeeName(){
+		return name;
+	}
+	
 	 
 	
 	/**
@@ -47,38 +63,55 @@ public abstract class Employee {
 	 * it also shows their full name when clocking in and out so they know how many hours this person has worked
 	 * @return The employeeid
 	 */
-	public int getemployeeID(){return this.employeeID;}
+	public int getemployeeID()
+	{
+		return this.employeeID;
+	}
 	
 	/**
 	 * Allows the employeeID to be set, to match database records
 	 * @param employeeID The employee's ID 
 	 */
-	public void setEmployeeID(int employeeID){}
+	public void setEmployeeID(int employeeID)
+	{
+		this.employeeID=employeeID;
+	}
 	   
 	 
 	/**
 	 * Set's which of the employee types the employee is in the system 
 	 * @param employeetype One of the Child classes of Employee - Manager, Cook, Server, Hostess
 	 */
-	public void seteEployeeType(String employeetype){}
+	public void setEmployeeType(String employeetype){
+		this.employeeType=employeetype;
+	}
     
 	/**
 	 * Get's which type of employee Child class this employee belongs to
 	 * @return The type of employee
 	 */
-	public String getEmployeeType(){return "";}
+	public String getEmployeeType()
+	{
+		return employeeType;
+	}
 	
 	/**
 	 * Allows the name of the employee to be changes
 	 * @param name The name of the employee
 	 */
-	public void setName(String name){}
+	public void setName(String name)
+	{
+		this.name=name;
+	}
     
 	/**
 	 * Gets the full employee name
 	 * @return The name of the employee
 	 */
-	public String getname(){return "";}
+	public String getname()
+	{
+		return name;
+	}
 	 
 	
 	/**
@@ -111,14 +144,29 @@ public abstract class Employee {
 	  *  @return If the employee is working
 	  */
 	 public boolean getWorkingNow(){
-		 return false;
+		 return this.workingNow;
 	 }
 	 
 	 /**
 	  * This method allows the employee to clock in and clock out
 	  * @param working True if the employee is clocking in, false when clocking out
 	  */
-	 public void setWorkingNow(boolean working){}
+	 public void setWorkingNow(boolean working)
+	 {
+		 this.workingNow=working;
+	 }
+	 
+	 
+	 public String toString(){
+		 String res = "";
+		 res += "workingNow: "+ this.getWorkingNow()+ "\n";
+		 res+="name: "+ this.getname()+"\n";
+		 res+="employeeid: "+this.getemployeeID()+"\n";
+		 res+="employeetype: "+ this.getEmployeeType()+"\n";
+		 
+			return res;	 
+				 
+	 }
 	 
 
 	

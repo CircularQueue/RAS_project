@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.ConnectionJDBC;
@@ -104,5 +105,37 @@ public class EmployeeManagementJDBC {
 		}
 		
 
+		public Employee findEmployeeInformation(int employeeID){
+			Employee foundEmployee = null;
+			
+			PreparedStatement stmtPrep = null;
+			ResultSet rs = null;
+			try {
+				
+				stmtPrep = conn.prepareStatement("SELECT * FROM Employees WHERE employeeID = ?");
+				stmtPrep.setInt(1, employeeID);
+				rs = stmtPrep.executeQuery();
+
+				while (rs.next()){
+					String empName = rs.getString("Employee_name");
+					String empType = rs.getString("Employee_Type");
+					Boolean workingNow = new Boolean(rs.getBoolean("working_now"));
+//			    	
+			    	
+			    	foundEmployee = new Employee(empName, empType, workingNow);
+			    	
+			    	
+			    	System.out.println("serverID: " + employeeID + ", name " + empName);
+				}
+				
+			} catch (SQLException ex){
+			    // handle any errors
+			    System.out.println("SQLException: " + ex.getMessage());
+			    System.out.println("SQLState: " + ex.getSQLState());
+			    System.out.println("VendorError: " + ex.getErrorCode());
+			}	
+			
+			return foundEmployee;
+		}
 
 }

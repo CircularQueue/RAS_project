@@ -51,7 +51,7 @@ public class TableListJDBC {
 			stmtPrep.setInt(2, empID);
 			stmtPrep.setInt(3, occupancy);
 			// execute 
-			stmtPrep.executeUpdate();
+//			stmtPrep.executeUpdate();
 
 			// get ID of newly inserted db row
 			// check to see that insert was sucesseful
@@ -62,8 +62,8 @@ public class TableListJDBC {
 		    // get key from last insert
 		    Integer tableID;
 		    try (ResultSet keySet = stmtPrep.getGeneratedKeys()) {
-		        if (rs.next()) {
-		           tableID = new Integer (rs.getInt(1));
+		        if (keySet.next()) {
+		           tableID = new Integer (keySet.getInt(1));
 				    // set the tbl object's ID to the new Id key from the database
 		           tbl.setTableID(tableID);
 		        }

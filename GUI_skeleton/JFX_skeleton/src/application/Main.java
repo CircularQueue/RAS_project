@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import GUI.table.LoginController;
 import GUI.table.TableLayoutController;
 
 
@@ -26,12 +27,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// instatiate contoller as an object
-		TableLayoutController tlc = new TableLayoutController(primaryStage);
+//		TableLayoutController tlc = new TableLayoutController(primaryStage);
 		// pass sc in as a scene parameter, since it extends borderpane
-		Scene scene = new Scene(tlc, 600, 500);
+//		Scene scene = new Scene(tlc, 600, 500);
 //		SampleController sc = new SampleController(primaryStage);
 //		Scene scene = new Scene(sc);
 		// set the scene, and display it
+		LoginController loginCtr = new LoginController(primaryStage);
+		Scene scene = new Scene(loginCtr);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

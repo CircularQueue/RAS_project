@@ -13,7 +13,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.employee.Employee;
 import model.table.Table;
 import model.table.TableList;
 
@@ -23,9 +25,12 @@ public class TableLayoutController extends BorderPane{
 	
 	Stage stage;
 	
+	@FXML Text employeeText;
 	@FXML GridPane tableGrid;
 
 	TableDetailController tblDetail;
+	
+	Employee currentEmp;
 	
 	public TableLayoutController(Stage stage) {
 		this.stage = stage;
@@ -79,6 +84,10 @@ public class TableLayoutController extends BorderPane{
 		}
 	}
 	
+	public void setEmployee(Employee emp){
+		this.currentEmp = emp;
+		this.employeeText.setText("Welcome, " + emp.getEmployeeName());
+	}
 	
 	public void viewTableDetails(int tableID){
 		System.out.println("Show detail for table " + tableID);
@@ -88,5 +97,7 @@ public class TableLayoutController extends BorderPane{
 		
 		stage.setScene(nextScene);
 	}
+	
+	
 
 }

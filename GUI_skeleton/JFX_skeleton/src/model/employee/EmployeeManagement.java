@@ -12,10 +12,13 @@ import model.table.Table;
  */
 public class EmployeeManagement {
 
+	EmployeeManagementJDBC empJDBC;
+	
 	/**
 	 * Constructor
 	 */
 	public EmployeeManagement() {
+		this.empJDBC = new EmployeeManagementJDBC();
 	}
 	
 	/**
@@ -92,6 +95,10 @@ public class EmployeeManagement {
 		*/
 		public ArrayList<Table> getAllTablesServed(int serverID){
 			return null;
+		}
+		
+		public Employee findEmployeeInformation(int empID){
+			return empJDBC.findEmployeeInformation(empID);
 		}
 
 }

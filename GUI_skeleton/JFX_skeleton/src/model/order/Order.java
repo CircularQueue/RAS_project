@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 
+
 /** 
  *Order Class
  *This class Represents a singular order that will be placed into RAS database.  It contains a unique ID to ensure that no 2 orders are
@@ -67,7 +68,7 @@ public class Order {
 	 * @param serverIdToChange Takes in an integer to change to Server ID associated with this order
 	 * @return Returns true if the value was successfully changed, false otherwise.
 	 */
-	public boolean setServerIdInOrder(int serverIdToChange){
+	public boolean setServerIdIn(int serverIdToChange){
 		return true;
 	}
 	
@@ -75,7 +76,7 @@ public class Order {
 	 * Gets the Id of the server responsible for the order.
 	 * @return The server Id
 	 */
-	public int getServerIdInOrder(){
+	public int getServerId(){
 		return serverId;
 	}
 	
@@ -145,7 +146,7 @@ public class Order {
 	public String toString(){
 		String s ="";
 		s += "Order id = " + getOrderId() + "\n" +
-			 "Server id = " + getServerIdInOrder() + "\n" + 
+			 "Server id = " + getServerId() + "\n" + 
 			 "Table id = " + getTableIdinOrder() + "\n" +
 			 "Order status = " + getOrderStatus() + "\n" + 
 			 "Order Total = " + getOrderTotal() + "\n";

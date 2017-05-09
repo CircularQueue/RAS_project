@@ -1,25 +1,31 @@
 package GUI.table;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
-import GUI.table.TableDetailController.OrderItemData;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.order.Order;
 import model.order.OrderItems;
 import model.order.OrderList;
 import model.table.Table;
 
-public class TableDetailControllerOrd extends AnchorPane{
+public class TableDetailControllerOrd extends BorderPane{
 	@FXML TextArea orderID;
 	@FXML TextArea orderStatus;
 	
@@ -28,7 +34,7 @@ public class TableDetailControllerOrd extends AnchorPane{
 	@FXML TableColumn<OrderItemData, String> orderItemPrice;
 	@FXML TableColumn<OrderItemData, String> orderItemSeat;
 	
-	@FXML Button backToLayoutBtn2;
+	@FXML Button backToTableBtn;
 	@FXML Button placeOrder;
 	
 	@FXML TableView<OrderItemData> orderItemTable;
@@ -41,8 +47,10 @@ public class TableDetailControllerOrd extends AnchorPane{
 	
 	OrderList orderList;
 	
-	public TableDetailControllerOrd() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDetailView.fxml"));
+	public TableDetailControllerOrd(Stage stage) {
+		this.stage = stage;
+		
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderTab.fxml"));
         // make sure that FX root construct is checked in scene builder
         fxmlLoader.setRoot(this);
         // leave controller blank in scene builder, or set it to this class
@@ -55,8 +63,10 @@ public class TableDetailControllerOrd extends AnchorPane{
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        
+     
+        this.orderList = new OrderList();
 	}
+	
 	
 	public static class OrderItemData{
 		
@@ -117,5 +127,69 @@ public class TableDetailControllerOrd extends AnchorPane{
 		}	
 		
 	}
+	
+	private void displayTableDetails(){
+		
+		menuItemID.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("orderId"));
+		orderItemDescription.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("seatNumber"));
+		orderItemPrice.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("itemId"));
+		orderItemSeat.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("name"));
+		
+		HashMap<Integer, List<OrderItems>> allOrderItems = orderList.getOrderItems();
+		
+		for(Entry<Integer, List<OrderItems>> key: allOrderItems.entrySet()){
+			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
+			for(OrderItems num : key.getValue()){
+				
+				if (num.getID() == order.getOrderId()){
+					OrderItems o = new OrderItems(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
+					tableList.add(new OrderItemData(o));
+					
+					
+				}
+			}
+			
+		}
+		orderItemTable.setItems(tableList);
+		
+		List<OrderItems> orderItems = allOrderItems.get(this.order.getOrderId());
+		
+		System.out.println("order items: " + orderItems);
+		
+		
+	//	itemPriceCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("price"));
+	//	itemDescriptionCell.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("desc"));
+//		for (OrderItems oi : orderItems){
+//			this.tableList.add(new OrderItemData(oi));
+//		}
+		
+		System.out.println("Setting Table");
+		
+		
+	}
+	
+	@FXML protected void viewTable(ActionEvent ae){
+		TableDetailController tableView = new TableDetailController(this.stage);
+		tableView.setTable(this.table);
+		Scene previousScene = new Scene(tableView);
+		this.stage.setScene(previousScene);
+	}
+	
+	@FXML protected void placeOrder(ActionEvent ae){
+		
+	}
+	
 
+	public void setOrder(Order order){
+		this.order = order;
+	    if (this.order != null){
+	    	this.orderID.setText(Integer.toString(order.getOrderId()));
+	    	this.orderStatus.setText(Integer.toString(order.getOrderStatus()));
+	    	
+	    	this.displayTableDetails();
+//	    	this.placeOrder.setDisable(true);
+	    } else {
+//	    	this.placeOrder.setDisable(false);
+	    }
+	}
 }

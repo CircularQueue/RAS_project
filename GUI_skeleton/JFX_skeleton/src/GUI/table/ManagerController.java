@@ -2,26 +2,20 @@ package GUI.table;
 
 import java.io.IOException;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import model.employee.Employee;
 
-public class TableDetailControllerTbl extends AnchorPane {
+public class ManagerController extends BorderPane{
 
-	@FXML TextArea tableID;
-	@FXML TextArea occupancy;
-	@FXML TextArea tableStatus;
-	@FXML TextArea employee;
+	Stage stage;
+	Employee manager;
 	
-	@FXML Button backToLayoutBtn1;
-	
-	@FXML TextArea orderID;
-	@FXML TextArea orderStatus;
-	
-	public TableDetailControllerTbl() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDetailView.fxml"));
+	public ManagerController(Stage stage) {
+		this.stage = stage;
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ManagerView.fxml"));
         // make sure that FX root construct is checked in scene builder
         fxmlLoader.setRoot(this);
         // leave controller blank in scene builder, or set it to this class
@@ -34,6 +28,10 @@ public class TableDetailControllerTbl extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+	}
+	
+	public void setManager(Employee emp){
+		this.manager = emp;
 	}
 
 }
