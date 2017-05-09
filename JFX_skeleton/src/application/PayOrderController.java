@@ -109,28 +109,35 @@ public class PayOrderController extends BorderPane  {
 	 * Deletes an order from the database. In the process, also deletes order items if they exists.
 	 */
 	
-	@FXML protected void cookOrder(ActionEvent ae) throws IOException{
+	@FXML protected void payOrder(ActionEvent ae) throws IOException{
 		int cookId = -1;
 		String s = deleteItem.getText();
+		boolean inputCheck=true;
 		try{
 			cookId = Integer.parseInt(s);
 		}
-		catch(Exception e){
+		catch(Exception e)
+		{
+			inputCheck=false;
 			errorMessage.setText("*Non valid Id");
 		}
-		Order ord = oi.payOrder(cookId);
+		if(inputCheck)
+		{
+			Order ord = oi.payOrder(cookId);
 		
-		if (ord != null){
+			if (ord != null){
 			errorMessage.setText("");
 			System.out.println("Order was Paid.");
 			orderStatusLabel.setText("Order Was Paid.");
 			list.clear();
 			initialize();
 		}
-		else {
-			orderStatusLabel.setText("");
-			errorMessage.setText("Order does not exists");
-			//System.out.println("Couldn't delete Order");
+			else 
+				{
+				orderStatusLabel.setText("");
+				errorMessage.setText("Order does not exists");
+				//System.out.println("Couldn't delete Order");
+			}
 		}
 		
 	}

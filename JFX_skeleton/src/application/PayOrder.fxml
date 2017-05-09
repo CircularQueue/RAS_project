@@ -10,7 +10,7 @@
    <center>
       <Pane fx:id="back" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="deleteOrder" layoutX="662.0" layoutY="424.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cookOrder" prefHeight="30.0" prefWidth="124.0" text="Submit" />
+            <Button fx:id="deleteOrder" layoutX="662.0" layoutY="424.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#payOrder" prefHeight="30.0" prefWidth="124.0" text="Submit" />
             <Button fx:id="serverHomepage" layoutX="14.0" layoutY="424.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backToHome" prefHeight="30.0" prefWidth="124.0" text="Return" />
             <TableView fx:id="tableUser" layoutX="358.0" layoutY="20.0" prefHeight="380.0" prefWidth="399.0">
               <columns>
