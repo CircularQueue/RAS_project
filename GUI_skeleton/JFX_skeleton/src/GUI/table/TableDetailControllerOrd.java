@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import GUI.order.application.ServerHomeController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -176,7 +177,9 @@ public class TableDetailControllerOrd extends BorderPane{
 	}
 	
 	@FXML protected void placeOrder(ActionEvent ae){
-		
+		ServerHomeController shc = new ServerHomeController(this.stage);
+		Scene nextScene = new Scene(shc);
+		this.stage.setScene(nextScene);
 	}
 	
 
