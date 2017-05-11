@@ -27,7 +27,9 @@ public class EmployeeManagement {
 	 * @param name The name of the new employee; the employeeID will be determined upon database action.
 	 * @return The new employee, with an employeeID consistent with its corresponding database entry
 	 */
-	public Employee addemployee(String name){return null;}
+	public Employee addemployee(String name){
+		return this.empJDBC.addemployee(name);
+	}
 	
 	
 	 /** 
@@ -36,7 +38,7 @@ public class EmployeeManagement {
 	  * @return The employee from the system that no longer works there 
 	  */ 
 	 public Employee removeEmployee(int employeeID){
-		 return null;
+		 return this.empJDBC.removeEmployee(employeeID);
 	 }
 	 
 	 /**
@@ -75,7 +77,7 @@ public class EmployeeManagement {
 		*@return The Employee returned, so that their information can be displayed
 		*/
 	 public Employee findEmployeeInformation(String name){
-		 return null;
+		 return this.empJDBC.findEmployeeInformation(name);
 	 }
 	 
 	 /**
@@ -84,7 +86,7 @@ public class EmployeeManagement {
 	  * @return An employee with the updated attributes
 	  */
 	 public Employee updateEmployee(Employee empData){
-		 return null;
+		 return this.empJDBC.updateEmployee(empData);
 	 }
 	 
 		/**

@@ -12,6 +12,22 @@ import java.sql.SQLException;
 import model.ConnectionJDBC;
 import model.table.Table;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+import model.ConnectionJDBC;
+import model.table.Table;
+
 /**
  * This class has JDBC database level implementations of all the methods in EmployeeManagement
  * @author phillipwitkin
@@ -20,6 +36,7 @@ import model.table.Table;
 public class EmployeeManagementJDBC {
 	   
 	   static Connection conn = null;
+	   Statement stmt;
 	
 	/**
 	 * Constructor
@@ -34,7 +51,86 @@ public class EmployeeManagementJDBC {
 	 * @param name The name of the new employee; the employeeID will be determined upon database action.
 	 * @return The new employee, with an employeeID consistent with its corresponding database entry
 	 */
-	public Employee addemployee(String name){return null;}
+	public Employee addemployee(String name){
+		Employee employeetoAdd = new Employee(name);
+		String sql = "INSERT INTO Employees" + "(Employee_name, Employee_type, working_now)" + " VALUES " + "(\'" + employeetoAdd.getEmployeeName() + "\', \'" + employeetoAdd.getEmployeeType() + "\', " + employeetoAdd.getWorkingNow() + ");";
+		PreparedStatement prepstmt;
+		try{
+//			conn = ConnectionJDBC.getDB();
+			prepstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			
+			int affectedRows = prepstmt.executeUpdate();
+			
+			if (affectedRows == 0) {
+			throw new SQLException("Creating user failed, no rows affected.");
+			}
+			// get key from last insert
+			Integer employeeID = null;
+			try (ResultSet keySet = prepstmt.getGeneratedKeys()) 
+			{
+				if (keySet.next()) 
+				{
+					employeeID = new Integer (keySet.getInt(1));
+				}
+				else 
+				{
+					employeetoAdd.setEmployeeID(employeeID);
+				}                                   
+			}              
+			
+		} catch (SQLException ex){
+			                        // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+		              
+		}                   
+			                    
+			
+			return employeetoAdd;
+	}
+	
+	/**
+	 * this method would basically allow the manager to add the employee in to the system. 
+	 * it will also allow the manager to create a profile with an employee id for this new worker
+	 * @param name The name of the new employee; the employeeID will be determined upon database action.
+         * @param type
+         * @param bool
+	 * @return The new employee, with an employeeID consistent with its corresponding database entry
+	 */
+	public Employee addemployee(String name,String type,int bool){
+            String[] names = name.split(" ");
+            Employee emp = new Employee(names[0],names[1]);
+            emp.setEmployeeType(type);
+            emp.setName(name);
+            emp.setWorkingNow((bool != 0));
+            
+            // getting ID from databse
+            int id = this.getIDfromDB();
+            
+            emp.setEmployeeID(id);
+            
+            //adding employee into database
+            
+            try{
+                stmt = conn.createStatement();
+                String query;
+                query = "INSERT INTO employees VALUES (" + "'" +emp.getemployeeID()+ "','" +emp.getEmployeeName()+ "','"+emp.getEmployeeType()+"','"+bool+"')";
+                
+                int result = stmt.executeUpdate(query);
+                if(result>0)
+                    JOptionPane.showMessageDialog(null, "Data Successfully Saved","INFO", 1);
+                }catch(MySQLIntegrityConstraintViolationException ex){
+                    JOptionPane.showMessageDialog(null,"Duplicate Entry ","Error",0);
+                }catch(SQLException | HeadlessException ex){
+                    JOptionPane.showMessageDialog(null,"Error Executing the Query","Error", 0);
+                    
+                }
+           
+            return emp;
+        
+        }
 	
 	
 	 /** 
@@ -43,7 +139,24 @@ public class EmployeeManagementJDBC {
 	  * @return The employee from the system that no longer works there 
 	  */ 
 	 public Employee removeEmployee(int employeeID){
-		 return null;
+		 
+		 Employee toDelete = this.findEmployeeInformation(employeeID);
+		 
+		 
+		 try{
+             stmt = conn.createStatement();
+             String query = "DELETE FROM employees WHERE employeeID='"+employeeID+"'";
+             int result = stmt.executeUpdate(query);
+             if(result>0){
+                 JOptionPane.showMessageDialog(null, "Record deleted Successfully","INFO",3);
+                 
+             }
+         }catch(SQLException ex){
+             JOptionPane.showMessageDialog(null,"Error in SQL or record not found","ERROR",0);
+             ex.printStackTrace();
+         }
+         
+         return toDelete;
 	 }
 	 
 	 /**
@@ -91,7 +204,24 @@ public class EmployeeManagementJDBC {
 	  * @return An employee with the updated attributes
 	  */
 	 public Employee updateEmployee(Employee empData){
-		 return null;
+			try{
+                stmt = conn.createStatement();
+                int bool=0;
+                if(empData.getWorkingNow()){
+                    bool = 1;
+                }else{
+                    bool = 0;
+                }
+                String query = "UPDATE employees SET Employee_name='"+empData.getEmployeeName()+"',"+"Employee_type='"+empData.getEmployeeType()+"',"+"working_now='"+bool+"' WHERE employeeID='"+empData.getemployeeID()+"'";
+                int result = stmt.executeUpdate(query);
+                if(result>0){
+                    JOptionPane.showMessageDialog(null,"Data Updated Successfully","Information",1);
+                }
+            }catch(HeadlessException | SQLException ex){
+                JOptionPane.showConfirmDialog(null,"Error in SQL","Error",0);
+            
+            }
+            return empData;
 	 }
 	 
 		/**
@@ -138,4 +268,22 @@ public class EmployeeManagementJDBC {
 			return foundEmployee;
 		}
 
+
+		public int getIDfromDB(){
+	            int id=0;
+	            try {
+	                stmt = conn.createStatement();
+	                String query = "SELECT MAX(employeeID) FROM employees";
+	                ResultSet rs = stmt.executeQuery(query);
+	                rs.next();
+	                id = rs.getInt(1);
+	                id = id +1;
+	                System.out.println(id);
+	            } catch (SQLException ex) {
+	                System.out.println("Error in SQL");
+	            }
+	            
+	            return id;
+	        
+	        }
 }

@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<fx:root xmlns:fx="http://javafx.com/fxml/1" type="BorderPane">
-	<!-- TODO Add Nodes -->
-</fx:root>
 
+<fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <center>
+      <Pane prefHeight="417.0" prefWidth="406.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="116.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Tools" textAlignment="CENTER" wrappingWidth="192.08029174804688">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Button fx:id="menuSelectBtn" layoutX="31.0" layoutY="209.0" mnemonicParsing="false" onAction="#menuSelect" prefHeight="39.0" prefWidth="115.0" text="Menu Options" />
+            <Button fx:id="employeeSelectBtn" layoutX="212.0" layoutY="209.0" mnemonicParsing="false" onAction="#employeeSelect" prefHeight="36.0" prefWidth="156.0" text="Employee Options" />
+            <Button fx:id="tableSelectBtn" layoutX="68.0" layoutY="292.0" mnemonicParsing="false" onAction="#tableSelect" prefHeight="36.0" prefWidth="156.0" text="Table Options" />
+         </children>
+      </Pane>
+   </center>
+</fx:root>

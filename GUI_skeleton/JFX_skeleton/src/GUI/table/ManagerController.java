@@ -3,6 +3,8 @@ package GUI.table;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import GUI.employee.EmployeeGUI;
+import GUI.employee.EmployeeGUIWrapper;
 import GUI.menu.ViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,8 +53,8 @@ public class ManagerController extends BorderPane{
 	@FXML protected void menuSelect(ActionEvent ae){
 		try {
 			ViewController menuCont = new ViewController(stage);
-			Scene menuScene = new Scene(menuCont);
-			this.stage.setScene(menuScene);
+//			Scene menuScene = new Scene(menuCont);
+//			this.stage.setScene(menuScene);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,6 +65,8 @@ public class ManagerController extends BorderPane{
 	}
 	
 	@FXML protected void employeeSelect(ActionEvent ae){
+		EmployeeGUIWrapper empGUI = new EmployeeGUIWrapper()	;
+		
 		
 	}
 

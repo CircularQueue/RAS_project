@@ -35,9 +35,15 @@ public class Employee {
 		this.workingNow = working;
 	}
 	
-	public Employee(){
-		
+	public Employee (String fname, String lname){
+        this.name = fname+" "+lname;
+    }
+	
+	public Employee(String name){
+		this.name = name;
 	}
+	
+	
 	
 	/**
 	 * Sets the name of the employee
