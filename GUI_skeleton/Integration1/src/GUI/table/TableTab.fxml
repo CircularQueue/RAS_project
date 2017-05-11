@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="364.0" prefWidth="419.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="281.0" prefWidth="259.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="21.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="89.68292617797852">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="26.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table ID" wrappingWidth="79.68292617797852">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="tableStatus" layoutX="134.0" layoutY="71.0" prefHeight="38.0" prefWidth="152.0" />
+            <TextArea fx:id="occupancy" layoutX="133.0" layoutY="129.0" prefHeight="35.0" prefWidth="135.0" />
+            <TextArea fx:id="employee" layoutX="133.0" layoutY="199.0" prefHeight="35.0" prefWidth="271.0" />
+            <Text layoutX="35.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server" wrappingWidth="61.15447235107422">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="16.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupancy" wrappingWidth="99.68292617797852">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="tableID" layoutX="133.0" layoutY="20.0" prefHeight="35.0" prefWidth="131.0" />
+            <Button fx:id="layoutReturnBtn" layoutX="37.0" layoutY="295.0" mnemonicParsing="false" onAction="#returnToLayout" text="Return to Layout" />
+            <Button fx:id="orderInfoBtn" layoutX="228.0" layoutY="295.0" mnemonicParsing="false" onAction="#viewOrder" text="More Server Options" />
+         </children>
+      </Pane>
+   </center>
+</fx:root>

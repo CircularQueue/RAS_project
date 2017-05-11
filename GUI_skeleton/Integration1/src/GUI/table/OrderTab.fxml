@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="497.0" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="386.0" prefWidth="466.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="placeOrderBtn" layoutX="358.0" layoutY="343.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="26.0" prefWidth="121.0" text="Order Options" />
+            <TextArea fx:id="orderStatus" layoutX="339.0" layoutY="11.0" prefHeight="31.0" prefWidth="143.0" />
+            <Text layoutX="273.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" wrappingWidth="66.4034538269043">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OrderID:">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="orderID" layoutX="91.0" layoutY="11.0" prefHeight="30.0" prefWidth="114.0" />
+            <TableView fx:id="orderItemTable" layoutY="50.0" prefHeight="293.0" prefWidth="483.0">
+               <columns>
+                  <TableColumn fx:id="menuItemID" prefWidth="93.0" text="MenuItemID" />
+                  <TableColumn fx:id="orderItemDescription" prefWidth="224.0" text="Description" />
+                  <TableColumn fx:id="orderItemPrice" prefWidth="96.0" text="Price" />
+                  <TableColumn fx:id="orderItemSeat" minWidth="0.0" prefWidth="69.0" text="Seat" />
+                  <TableColumn fx:id="orderItemName" prefWidth="206.0" text="Name" />
+               </columns>
+            </TableView>
+            <Button fx:id="backToTableBtn" layoutX="27.0" layoutY="343.0" mnemonicParsing="false" onAction="#viewTable" prefHeight="26.0" prefWidth="121.0" text="Return to Layout" />
+         </children>
+      </Pane>
+   </center>
+</fx:root>

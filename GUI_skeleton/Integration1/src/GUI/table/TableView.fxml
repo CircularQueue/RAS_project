@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="60.0" prefWidth="60.0" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fx:id="tableCircleOuter" fill="DODGERBLUE" layoutX="30.0" layoutY="30.0" onMouseClicked="#clickTable" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="tableCircleInner" fill="#a4ff88" layoutX="30.0" layoutY="30.0" onMouseClicked="#clickTable" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text fx:id="tableIDText" layoutX="21.0" layoutY="36.0" onMouseClicked="#clickTable" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </center>
+</fx:root>
