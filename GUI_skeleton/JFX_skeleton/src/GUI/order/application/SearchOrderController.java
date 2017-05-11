@@ -106,39 +106,44 @@ public class SearchOrderController extends BorderPane  {
 	
 	@FXML public void searchOrder() {
 		list.clear();
+		boolean isValid = true;
 		String s = searchItem.getText();
 		int id = -1;
 		try {
 			id = Integer.parseInt(s);
 		}catch(Exception e){
 			errorMessage.setText("*Order Id must be a number");
+			isValid = false;
 
 		}
 		
-		Order o = oi.searchOrder(id);
-		if(o != null){
-			errorMessage.setText("");
-			list.add(new OrderData(o));
-			tableUser.setItems(list);
-			System.out.println("Searching For an Order");
-			switch(o.getOrderStatus()){
-			case 0:
-				orderStatusLabel.setText("Order is uncooked.");
-				break;
-			case 1:
-				orderStatusLabel.setText("Order is cooked but not paid");
-				break;
-			case 2:
-				orderStatusLabel.setText("Order is cooked and paid");
-				break;
-			default:
-				orderStatusLabel.setText("Abnormal order status, consider deleting.");
-				break;
+		
+		if(isValid){
+			Order o = oi.searchOrder(id);
+			if(o != null){
+				errorMessage.setText("");
+				list.add(new OrderData(o));
+				tableUser.setItems(list);
+				System.out.println("Searching For an Order");
+				switch(o.getOrderStatus()){
+				case 0:
+					orderStatusLabel.setText("Order is uncooked.");
+					break;
+				case 1:
+					orderStatusLabel.setText("Order is cooked but not paid");
+					break;
+				case 2:
+					orderStatusLabel.setText("Order is cooked and paid");
+					break;
+				default:
+					orderStatusLabel.setText("Abnormal order status, consider deleting.");
+					break;
+				}
 			}
-		}
-		else {
-			orderStatusLabel.setText("");
-			errorMessage.setText("Order not found");
+			else {
+				orderStatusLabel.setText("");
+				errorMessage.setText("Order not found");
+				}
 		}
 	}
 	
