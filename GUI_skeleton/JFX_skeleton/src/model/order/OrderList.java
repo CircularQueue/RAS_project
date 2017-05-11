@@ -119,4 +119,9 @@ public class OrderList {
 	 * @return String Returns a string representation of the order.
 	 */
 	@Override public String toString(){String s ="";return s;}
+	
+	
+	public ArrayList<OrderItems> getUncookedItemsForOrder(int n){
+		return ord.getUncookedItemsForOrder(n);
+	}
 }

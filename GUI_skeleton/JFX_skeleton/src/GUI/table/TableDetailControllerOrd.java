@@ -97,7 +97,7 @@ public class TableDetailControllerOrd extends BorderPane{
 			return this.seatNumber.get();
 		}
 
-		public String getItemId() {
+		public String getMenuItemId() {
 			return this.menuItemId.get();
 		}
 
@@ -131,29 +131,34 @@ public class TableDetailControllerOrd extends BorderPane{
 	
 	private void displayTableDetails(){
 		
-		menuItemID.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("orderId"));
-		orderItemDescription.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("seatNumber"));
-		orderItemPrice.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("itemId"));
-		orderItemSeat.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("name"));
+		menuItemID.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("menuItemId"));
+		orderItemDescription.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("desc"));
+		orderItemPrice.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("price"));
+		orderItemSeat.setCellValueFactory(new PropertyValueFactory<OrderItemData,String>("seatNumber"));
 		
-		HashMap<Integer, List<OrderItems>> allOrderItems = orderList.getOrderItems();
+//		HashMap<Integer, List<OrderItems>> allOrderItems = orderList.getOrderItems();
+//		
+//		for(Entry<Integer, List<OrderItems>> key: allOrderItems.entrySet()){
+//			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
+//			for(OrderItems num : key.getValue()){
+//				
+//				if (num.getID() == order.getOrderId()){
+//					OrderItems o = new OrderItems(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
+//					tableList.add(new OrderItemData(o));
+//					
+//					
+//				}
+//			}
+//			
+//		}
+		ArrayList<OrderItems> orderItems = orderList.getUncookedItemsForOrder(this.order.getOrderId());
 		
-		for(Entry<Integer, List<OrderItems>> key: allOrderItems.entrySet()){
-			//System.out.println("key: " +key + ": " + "Value: " + orderItems111.get(key));
-			for(OrderItems num : key.getValue()){
-				
-				if (num.getID() == order.getOrderId()){
-					OrderItems o = new OrderItems(num.getOrderItemsId(),num.getSeatNumber(),num.getID(),num.getName(),num.getPrice(),num.getDescription());
-					tableList.add(new OrderItemData(o));
-					
-					
-				}
-			}
-			
+		for (OrderItems oi : orderItems){
+			tableList.add(new OrderItemData(oi));
 		}
+		
 		orderItemTable.setItems(tableList);
 		
-		List<OrderItems> orderItems = allOrderItems.get(this.order.getOrderId());
 		
 		System.out.println("order items: " + orderItems);
 		
@@ -194,5 +199,9 @@ public class TableDetailControllerOrd extends BorderPane{
 	    } else {
 //	    	this.placeOrder.setDisable(false);
 	    }
+	}
+	
+	public void setTable(Table table){
+		this.table = table;
 	}
 }

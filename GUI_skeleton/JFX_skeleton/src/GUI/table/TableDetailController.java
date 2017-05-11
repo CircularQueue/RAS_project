@@ -118,6 +118,7 @@ public class TableDetailController extends BorderPane {
 	@FXML protected void viewOrder(ActionEvent ae){
 		TableDetailControllerOrd orderInfo = new TableDetailControllerOrd(this.stage);
 		orderInfo.setOrder(order);
+		orderInfo.setTable(table);
 		Scene nextScene = new Scene(orderInfo);
 		this.stage.setScene(nextScene);
 	}

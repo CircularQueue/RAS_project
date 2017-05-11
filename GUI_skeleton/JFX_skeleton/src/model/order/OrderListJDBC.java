@@ -398,7 +398,7 @@ public class OrderListJDBC  {
 						
 						OrderItems ord = new OrderItems(id,seatNum,orderItemId,itemName,price,itemDesc);
 						ListOfItems.add(ord);
-						//System.out.println("OrderItems " + id + " was placed into hashmap");
+//						System.out.println("OrderItems " + id + " was placed into hashmap");
 		
 					}
 				} catch (SQLException e) {
@@ -489,6 +489,37 @@ public class OrderListJDBC  {
 		   
 		   return db_connection;
 	   }
+	
+	public ArrayList<OrderItems> getUncookedItemsForOrder(int n){
+		ArrayList<OrderItems> listOfItems = new ArrayList<OrderItems>();
+		Statement stmt = null;
+		 int id = 0;
+		   String uncookedOrds = "SELECT * FROM Order_Items WHERE OrderID = " + n;
+			
+			 try {
+					stmt = conn.createStatement();
+					ResultSet rs = stmt.executeQuery(uncookedOrds);
+					while(rs.next()){
+						id = n;
+						int seatNum= rs.getInt("Seat_Number");
+						int orderItemId = rs.getInt("Menu_Item_Id");
+						String itemName = rs.getString("item_name");
+						double price = rs.getDouble("item_price");
+						String itemDesc = rs.getString("item_description");
+
+						
+						OrderItems ord = new OrderItems(id,seatNum,orderItemId,itemName,price,itemDesc);
+						listOfItems.add(ord);
+						System.out.println("OrderItems " + id + " was placed into hashmap");
+		
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					
+				}
+			 return listOfItems;
+			 	
+	}
 
 }
 

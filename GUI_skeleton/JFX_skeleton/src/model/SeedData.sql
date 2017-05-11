@@ -29,6 +29,6 @@ INSERT INTO Orders (OrderID,ServerID,TableID,OrderStatus,OrderTotal) VALUES (1,1
 
 
 
-INSERT INTO Order_Items(OrderID,Order_Item_Id,Seat_Number,item_name,item_price,item_description) VALUES (1,24,1,'Veggie Burger',22.50,'Pussy Vegan');
-INSERT INTO Order_Items(OrderID,Order_Item_Id,item_name,item_price,item_description) VALUES (1,23,'Burger',22.50,'Big Meat');
-INSERT INTO Order_Items(OrderID,Order_Item_Id,item_name,item_price,item_description) VALUES (1,22,'Fish',22.50,'Tasty seafood');
+INSERT INTO Order_Items(OrderID,Menu_Item_Id,Seat_Number,item_name,item_price,item_description) VALUES (1,24,1,'Veggie Burger',22.50,'Pussy Vegan');
+INSERT INTO Order_Items(OrderID,Menu_Item_Id,item_name,item_price,item_description) VALUES (1,23,'Burger',22.50,'Big Meat');
+INSERT INTO Order_Items(OrderID,Menu_Item_Id,item_name,item_price,item_description) VALUES (1,22,'Fish',22.50,'Tasty seafood');

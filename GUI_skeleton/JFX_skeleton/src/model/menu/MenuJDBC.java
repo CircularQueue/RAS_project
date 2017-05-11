@@ -3,6 +3,8 @@ package model.menu;
 import java.sql.*;
 import java.util.HashMap;
 
+import model.ConnectionJDBC;
+
 /**
  * Class Description: This class will add, remove, update, and search the database
  * @author Benjamin
@@ -21,6 +23,7 @@ public class MenuJDBC {
 	private HashMap<Integer, MenuItem> list;
 	
 	public MenuJDBC() throws ClassNotFoundException, SQLException{
+		conn = ConnectionJDBC.getDB();
 		list = new HashMap<>();
 		populateMenu();
 	}
@@ -34,7 +37,7 @@ public class MenuJDBC {
 	public MenuItem findItem (int id) throws ClassNotFoundException, SQLException{
 		String query = "SELECT * FROM menuitem WHERE item_id = " + id + ";";
 		try{
-			conn=getDBConnection();
+//			conn=getDBConnection();
 			st = conn.createStatement();
 			rs = st.executeQuery(query);
 			while(rs.next()){
@@ -57,7 +60,7 @@ public class MenuJDBC {
 	public MenuItem insertData(MenuItem item) throws ClassNotFoundException, SQLException{
 		String sql = "INSERT INTO menuitem" + "(item_id, item_name, item_price, item_description)" + " VALUES " + "(" + item.getID() + ", \'" + item.getName() + "\', " + item.getPrice() + ", \'" + item.getDescription() + "\');";
 		try{
-			conn = getDBConnection();
+//			conn = getDBConnection();
 			st = conn.createStatement();
 			st.executeUpdate(sql);
 			list.put(item.getID(), item);
@@ -80,7 +83,7 @@ public class MenuJDBC {
 		String sql = "DELETE FROM menuitem WHERE item_id = " + id  + ";";
 		item = findItem(id);
 		try{
-			conn = getDBConnection();
+//			conn = getDBConnection();
 			st = conn.createStatement();
 			st.executeUpdate(sql);
 			list.remove(id);
@@ -102,7 +105,7 @@ public class MenuJDBC {
 	public MenuItem updateData(MenuItem item, int id)throws ClassNotFoundException, SQLException{
 		String sql = "UPDATE menuitem SET item_id = ?, item_name = ?, item_price = ?, item_description = ? WHERE item_id = ?";
 		try{
-			conn = getDBConnection();
+//			conn = getDBConnection();
 			pt=conn.prepareStatement(sql);
 			pt.setInt(1, item.getID());
 			pt.setString(2, item.getName());
@@ -135,7 +138,7 @@ public class MenuJDBC {
 	}
 	
 	public HashMap<Integer, MenuItem> populateMenu() throws SQLException, ClassNotFoundException{
-		conn=getDBConnection();
+//		conn=getDBConnection();
 		pt = conn.prepareStatement("SELECT * FROM menuitem");
 		rs = pt.executeQuery();
 		while(rs.next()){

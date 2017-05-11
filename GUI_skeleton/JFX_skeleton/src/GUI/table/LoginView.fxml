@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<fx:root prefHeight="275.0" prefWidth="206.0" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
    <center>
       <SplitPane dividerPositions="0.2878787878787879" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="138.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="131.0" prefWidth="180.0">
                <children>
                   <Text layoutX="40.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" textAlignment="CENTER" wrappingWidth="78.68292617797852">
                      <font>
@@ -20,10 +20,10 @@
                   </Text>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="158.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="207.0">
                <children>
-                  <Button fx:id="loginBtn" layoutX="50.0" layoutY="110.0" mnemonicParsing="false" onAction="#login" text="Log In" />
-                  <TextField fx:id="loginID" layoutX="-2.0" layoutY="58.0" prefHeight="39.0" prefWidth="163.0" promptText="ID#" />
+                  <Button fx:id="loginBtn" layoutX="75.0" layoutY="110.0" mnemonicParsing="false" onAction="#login" text="Log In" />
+                  <TextField fx:id="loginID" layoutX="21.0" layoutY="56.0" prefHeight="39.0" prefWidth="163.0" promptText="ID#" />
                   <Text fx:id="loginText" layoutX="16.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Employee ID" textAlignment="CENTER" wrappingWidth="131.68292617797852">
                      <font>
                         <Font size="14.0" />

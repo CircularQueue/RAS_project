@@ -69,12 +69,6 @@ public class LoginController extends BorderPane {
 	private void checkEmployeeType(Employee emp){
 		Scene nextScene =null;
 		switch (emp.getEmployeeType().toLowerCase()){
-			case "server":
-				TableLayoutController layout = new TableLayoutController(this.stage);
-				nextScene = new Scene(layout);
-				this.stage.setScene(nextScene);
-				
-				break;
 				
 			case "hostess":
 				//shizuni code
@@ -85,6 +79,17 @@ public class LoginController extends BorderPane {
 				managerMain.setManager(emp);
 				nextScene = new Scene(managerMain);
 				this.stage.setScene(nextScene);
+				break;
+			
+			case "bussboy":
+				
+				break;
+			
+			case "server":
+				TableLayoutController layout = new TableLayoutController(this.stage);
+				nextScene = new Scene(layout);
+				this.stage.setScene(nextScene);
+				
 				break;
 		}
 	}

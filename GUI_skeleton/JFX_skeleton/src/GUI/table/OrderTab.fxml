@@ -33,7 +33,7 @@
                   <TableColumn fx:id="orderItemName" prefWidth="206.0" text="Name" />
                </columns>
             </TableView>
-            <Button fx:id="backToTableBtn" layoutX="27.0" layoutY="343.0" mnemonicParsing="false" onAction="#viewTable" prefHeight="26.0" prefWidth="121.0" text="Return to Layout" />
+            <Button fx:id="backToTableBtn" layoutX="27.0" layoutY="343.0" mnemonicParsing="false" onAction="#viewTable" prefHeight="26.0" prefWidth="121.0" text="Return to Table" />
          </children>
       </Pane>
    </center>
