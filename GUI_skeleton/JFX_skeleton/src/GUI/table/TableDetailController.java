@@ -34,20 +34,8 @@ public class TableDetailController extends BorderPane {
 	@FXML TextArea employee;
 
 	@FXML Button layoutReturnBtn;
-//	
-//	@FXML TextArea orderID;
-//	@FXML TextArea orderStatus;
-	
-//	@FXML TableColumn<OrderItemData, String> menuItemID;
-//	@FXML TableColumn<OrderItemData, String> orderItemDescription;
-//	@FXML TableColumn<OrderItemData, String> orderItemPrice;
-//	@FXML TableColumn<OrderItemData, String> orderItemSeat;
-//	
-//	@FXML Button backToLayoutBtn2;
-//	@FXML Button placeOrder;
-//	
-//	@FXML TableView<OrderItemData> orderItemTable;
-//	ObservableList<OrderItemData> tableList = FXCollections.observableArrayList(); ;
+	@FXML Button orderInfoBtn;
+
 	
 	Stage stage;
 	
@@ -59,7 +47,7 @@ public class TableDetailController extends BorderPane {
 
 	
 	
-	
+	Scene previousScene;
 	
 	
 
@@ -88,7 +76,9 @@ public class TableDetailController extends BorderPane {
         
 	}
 
-	
+	public void setPrevious(Scene prev){
+		this.previousScene = prev;
+	}
 	
 	public void setTable(Table table){
 		this.table = table;
@@ -110,9 +100,14 @@ public class TableDetailController extends BorderPane {
 	}
 	
 	@FXML protected void returnToLayout(ActionEvent ae){
-		TableLayoutController tblLayout = new TableLayoutController(this.stage);
-		Scene previousScene = new Scene(tblLayout);
-		this.stage.setScene(previousScene);
+//		if (this.previousScene != null){
+////			Scene prevScene = new Scene(this.previousScene);
+//			this.stage.setScene(previousScene);
+//		} else {
+//			TableLayoutController tblLayout = new TableLayoutController(this.stage);
+//			Scene layout = new Scene(tblLayout);
+			this.stage.close();
+//		}
 	}
 	
 	@FXML protected void viewOrder(ActionEvent ae){

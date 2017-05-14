@@ -14,13 +14,12 @@ CREATE TABLE Orders (
 );
 
 
-CREATE TABLE menuitem(
-item_id INT NOT NULL PRIMARY KEY,
-item_name VARCHAR(30) NOT NULL,
-item_price DOUBLE NOT NULL,
-item_description VARCHAR(200) NOT NULL
-);
 
+CREATE TABLE menuitem(
+	item_id INT NOT NULL PRIMARY KEY,
+	item_name VARCHAR(30) NOT NULL,
+	item_price DOUBLE NOT NULL,
+	item_description VARCHAR(200) NOT NULL);
 
 CREATE TABLE Order_Items (
 	OrderID int not null,
@@ -63,5 +62,22 @@ CREATE TABLE `Tables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `reservation` (
+  `resv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(20) DEFAULT NULL,
+  `last_name` varchar(20) DEFAULT NULL,
+  `guest_count` int(11) DEFAULT NULL,
+  `res_date` varchar(20) DEFAULT NULL,
+  `res_time` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`resv_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `wait_list` (
+  `guest_id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(20) DEFAULT NULL,
+  `last_name` varchar(20) DEFAULT NULL,
+  `guest_count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`guest_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
  

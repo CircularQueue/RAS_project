@@ -183,6 +183,7 @@ public class TableDetailControllerOrd extends BorderPane{
 	
 	@FXML protected void placeOrder(ActionEvent ae){
 		ServerHomeController shc = new ServerHomeController(this.stage);
+		shc.setTable(this.table);
 		Scene nextScene = new Scene(shc);
 		this.stage.setScene(nextScene);
 	}

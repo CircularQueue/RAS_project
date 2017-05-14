@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import model.table.Table;
 
 /**
  * 
@@ -25,6 +26,8 @@ public class ServerHomeController extends BorderPane{
 	@FXML Button searchOrder;
 	@FXML TextArea textDisplay;
 	@FXML Stage window;
+	
+	Table table;
 	
 	public ServerHomeController(Stage stage){
 		this.stage = stage;
@@ -69,7 +72,7 @@ public class ServerHomeController extends BorderPane{
 	@FXML protected void changeScenePlaceOrder(ActionEvent ae) throws IOException{
 		//instantiate controller here
 		PlaceOrderController cont = new PlaceOrderController(stage);
-		
+		cont.setTable(this.table);
 		Scene scen = new Scene(cont);
 		this.stage.setScene(scen);
 	}
@@ -95,6 +98,10 @@ public class ServerHomeController extends BorderPane{
 	}
 	@FXML protected void quit(ActionEvent ae) throws IOException{
 		System.exit(0);
+	}
+	
+	public void setTable(Table tbl){
+		this.table = tbl;
 	}
 	
 	

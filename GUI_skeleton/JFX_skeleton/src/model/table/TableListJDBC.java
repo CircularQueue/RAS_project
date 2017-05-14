@@ -44,7 +44,7 @@ public class TableListJDBC {
 		PreparedStatement stmtPrep = null;
 		ResultSet rs = null;
 		try {
-			String sqlInsert = "INSERT INTO 'Tables' (Table_Status, employeeID, max_occupancy) VALUES (?,?,?)";
+			String sqlInsert = "INSERT INTO Tables (Table_Status, employeeID, max_occupancy) VALUES (?,?,?)";
 			// insert a new row into database
 			stmtPrep = conn.prepareStatement(sqlInsert,  Statement.RETURN_GENERATED_KEYS);//* FROM Tables WHERE tableID = ?");
 			stmtPrep.setString(1, status);
@@ -68,7 +68,7 @@ public class TableListJDBC {
 		           tbl.setTableID(tableID);
 		        }
 		        else {
-		        	throw new SQLException("Creating user failed, no ID obtained.");
+		        	throw new SQLException("Creating Table failed, no ID obtained.");
 		        }	
 		    }
 		    
@@ -103,7 +103,7 @@ public class TableListJDBC {
 		
 		try {
 			
-			stmtPrep = conn.prepareStatement("DELETE Tables WHERE tableID = ?");// INNER JOIN Employees WHERE Tables.tableID = Employees.employeeID");
+			stmtPrep = conn.prepareStatement("DELETE FROM Tables WHERE tableID = ?");// INNER JOIN Employees WHERE Tables.tableID = Employees.employeeID");
 			stmtPrep.setInt(1, tableID);
 			// execute insert SQL stetement
 			stmtPrep.executeUpdate();

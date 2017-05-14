@@ -35,7 +35,7 @@
             </Text>
             <TextArea fx:id="tableID" layoutX="133.0" layoutY="20.0" prefHeight="35.0" prefWidth="131.0" />
             <Button fx:id="layoutReturnBtn" layoutX="37.0" layoutY="295.0" mnemonicParsing="false" onAction="#returnToLayout" text="Return to Layout" />
-            <Button fx:id="orderInfoBtn" layoutX="228.0" layoutY="295.0" mnemonicParsing="false" onAction="#viewOrder" text="More Server Options" />
+            <Button fx:id="orderInfoBtn" layoutX="228.0" layoutY="295.0" mnemonicParsing="false" onAction="#viewOrder" text="Order Options" />
          </children>
       </Pane>
    </center>

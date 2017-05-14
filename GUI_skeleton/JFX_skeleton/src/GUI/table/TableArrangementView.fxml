@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addTblBtn" layoutX="25.0" layoutY="27.0" mnemonicParsing="false" onAction="#addTable" text="Add Table" />
+            <Button fx:id="removeTblBtn" layoutX="25.0" layoutY="74.0" mnemonicParsing="false" onAction="#removeTable" text="Remove Table" />
+            <Button fx:id="assignTblBtn" layoutX="25.0" layoutY="126.0" mnemonicParsing="false" onAction="#assignTable" text="Assign Table" />
+         </children>
+      </Pane>
+   </center>
+</fx:root>

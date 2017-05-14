@@ -2,6 +2,7 @@ package GUI.table;
 
 import java.io.IOException;
 
+import application.ReservationAndWaitlist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,10 @@ public class LoginController extends BorderPane {
 		Employee empAttempt = this.empManage.findEmployeeInformation(empID);
 		if (empAttempt != null){
 			this.employee = empAttempt;
+			this.employee.setWorkingNow(true);
+			
+			this.empManage.updateEmployee(employee);
+			
 			this.checkEmployeeType(employee);
 		} else {
 			loginText.setText("No employee with that ID could be found");
@@ -71,7 +76,7 @@ public class LoginController extends BorderPane {
 		switch (emp.getEmployeeType().toLowerCase()){
 				
 			case "hostess":
-				//shizuni code
+				ReservationAndWaitlist resWait = new ReservationAndWaitlist();
 				break;
 				
 			case "manager":
@@ -88,6 +93,7 @@ public class LoginController extends BorderPane {
 			case "server":
 				TableLayoutController layout = new TableLayoutController(this.stage);
 				nextScene = new Scene(layout);
+//				layout.establishScene(nextScene);
 				this.stage.setScene(nextScene);
 				
 				break;

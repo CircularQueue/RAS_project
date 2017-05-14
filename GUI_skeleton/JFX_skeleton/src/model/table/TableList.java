@@ -50,7 +50,7 @@ public class TableList {
 	public Table changeTableStatus(int tableID, String status){
 		Table tbl = tableLayout.get(tableID);
 		tbl.updateTableStatus(status);
-//		this.tableDB.
+		this.tableDB.changeTableStatus(tableID, status);
 		return tbl;
 	}
 	
@@ -66,7 +66,7 @@ public class TableList {
 	 * @return Returns the Table object added to the database; it will have an tableID consistent with the entry in the database
 	 */
 	public Table addTable(Table tbl){
-		return null;
+		return this.tableDB.addTable(tbl);
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class TableList {
 	 * @return The removed table
 	 */
 	public Table removeTable(int tableID){
-		return null;
+		return this.tableDB.removeTable(tableID);
 	}
 	
 	/**

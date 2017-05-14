@@ -24,6 +24,7 @@ import model.order.MenuItem;
 import model.order.Order;
 import model.order.OrderItems;
 import model.order.OrderList;
+import model.table.Table;
 /**
  * 
  * @author benjaminxerri
@@ -53,6 +54,7 @@ public class PlaceOrderController extends BorderPane {
 	private int numItems; 
 	private int seatNum;
 
+	Table table;
 	
 	//sets table rows
 	@FXML TableView<MenuItemData> tableUser = new TableView<MenuItemData>();
@@ -103,7 +105,7 @@ public class PlaceOrderController extends BorderPane {
 	        addItem.setOnAction((event) ->{ //lambda function for add item button, active listener for a click, will call addItem function
 	        	addOrderItem();
 	        });
-	    
+	        
 		}
 	
 	/**Add Order Item, Function for adding an order item, takes value from GUI field itemID
@@ -141,8 +143,10 @@ public class PlaceOrderController extends BorderPane {
 		boolean isValidOrder = true;
 		int tableInt = 0;
 		int serverInt = 0;
-		String server = serverId.getText();
-		String table = tableId.getText();
+		String server = new String(""+this.table.getServerSection());
+		this.serverId.setPromptText(server);
+		String table = new String(""+this.table.getTableID());
+		this.tableId.setPromptText(table);
 		try{ //make sure the fiels are valid numbers
 			 serverInt = Integer.parseInt(server);
 			 tableInt = Integer.parseInt(table);
@@ -243,5 +247,15 @@ public static class MenuItemData{
 			public void setName(String name){
 				//this.name=item_id.set(name);
 			}
+	}
+
+	public void setTable(Table tbl){
+		this.table = tbl;
+		String server = new String(""+this.table.getServerSection());
+		this.serverId.setText(server);
+		this.serverId.setEditable(false);
+		String table = new String(""+this.table.getTableID());
+		this.tableId.setText(table);
+		this.tableId.setEditable(false);
 	}
 }

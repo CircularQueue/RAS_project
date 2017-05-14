@@ -47,12 +47,18 @@ public class ManagerController extends BorderPane{
 	}
 	
 	@FXML protected void tableSelect(ActionEvent ae){
-		
+		Stage extraStage = new Stage();
+		TableArrangementController tableController = new TableArrangementController(stage);
+		Scene nextScene = new Scene(tableController);
+//		extraStage.show();
+		extraStage.setScene(nextScene);
+		extraStage.show();
 	}
 	
 	@FXML protected void menuSelect(ActionEvent ae){
 		try {
-			ViewController menuCont = new ViewController(stage);
+			Stage extraStage = new Stage();
+			ViewController menuCont = new ViewController(extraStage);
 //			Scene menuScene = new Scene(menuCont);
 //			this.stage.setScene(menuScene);
 		} catch (ClassNotFoundException e) {
